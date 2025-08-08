@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { getCalApi } from "@calcom/embed-react"
 
 const Contact = () => {
   const sectionRef = useRef(null)
@@ -12,6 +13,12 @@ const Contact = () => {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+
+      // Initialize Cal.com embed
+      ; (async function () {
+        const cal = await getCalApi({ namespace: "30min" })
+        cal("ui", { hideEventTypeDetails: false, layout: "week_view" })
+      })()
 
     // Number animation with lower z-index
     gsap.fromTo(
@@ -88,7 +95,9 @@ const Contact = () => {
           </motion.h2>
 
           <motion.button
-            onClick={scrollToContact}
+            data-cal-namespace="30min"
+            data-cal-link="soban-ahmad003/30min"
+            data-cal-config='{"layout":"week_view"}'
             className="mt-12 inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-12 py-6 rounded-full font-medium text-lg tracking-wider uppercase transition-all duration-300 group"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
