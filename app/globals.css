@@ -89,7 +89,6 @@ body {
   font-weight: 900;
   letter-spacing: -0.05em;
   line-height: 0.9;
-
 }
 
 .section-subtitle {
@@ -383,7 +382,7 @@ textarea:focus,
     padding-left: clamp(3rem, 8vw, 8rem);
     padding-right: clamp(3rem, 8vw, 8rem);
   }
-  
+
   /* Ensure max-width for readability on ultra-wide screens */
   .content-max-width {
     max-width: 1600px;
@@ -424,7 +423,13 @@ section {
 }
 
 /* Remove default margins from headings and paragraphs */
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
 }
 

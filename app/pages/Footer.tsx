@@ -100,7 +100,7 @@ const Footer = () => {
   ]
 
   const socialItems = [
-    { name: "LinkedIn", href: "https://linkedin.com/in/soban-ahmad-malik" },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/soban-ahmad-malik/" },
     { name: "Github", href: "https://github.com/Schwifty101" },
   ]
 
@@ -116,7 +116,7 @@ const Footer = () => {
         <div className="flex justify-between">
           {/* Menu */}
           <div className="w-1/2">
-            <motion.h3 
+            <motion.h3
               className="text-lg font-bold mb-4 text-gray-900 border-b-2 border-gray-300 pb-2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -146,7 +146,7 @@ const Footer = () => {
           <div className="w-1/2 flex justify-between">
             {/* Socials */}
             <div className="w-1/2 px-4">
-              <motion.h3 
+              <motion.h3
                 className="text-lg font-bold mb-4 text-gray-900 border-b-2 border-gray-300 pb-2"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -176,7 +176,7 @@ const Footer = () => {
 
             {/* Resources */}
             <div className="w-1/2">
-              <motion.h3 
+              <motion.h3
                 className="text-lg font-bold mb-4 text-gray-900 border-b-2 border-gray-300 pb-2"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -216,7 +216,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="mb-4 md:mb-0"
           >
-            <div className="font-black mb-2 text-gray-900 text-6xl leading-6 tracking-tighter">© 2025 Soban Ahmad</div>
+            <div className="font-black mb-2 text-gray-900 text-5xl leading-6 tracking-tighter">© 2025 Soban Ahmad</div>
             <div className="text-gray-600 tracking-normal text-6xl font-extrabold">All rights reserved.</div>
           </motion.div>
 
@@ -225,10 +225,10 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
             viewport={{ once: true }}
-            className="text-right"
+            className="text-left"
           >
-            <div className="text-gray-500 uppercase tracking-wider mb-1 font-black text-4xl">Local Time</div>
-            <div className="text-gray-700 font-mono font-light text-xl tracking-widest">{currentTime}</div>
+            <div className="text-gray-500 uppercase tracking-wider mb-1 font-black text-xl text-start">Local Time</div>
+            <div className="text-gray-700 font-mono font-light text-xl tracking-widest text-start">{currentTime}</div>
           </motion.div>
         </div>
       </div>

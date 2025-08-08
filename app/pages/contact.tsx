@@ -44,7 +44,7 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" ref={sectionRef} className="relative bg-black text-white overflow-hidden">
+    <section id="contact" ref={sectionRef} className="relative bg-black text-white overflow-hidden min-h-screen">
       {/* Background elements */}
       <div className="absolute top-20 right-20 w-32 h-32 bg-gray-800 rounded-full opacity-10 z-background" />
       <div className="absolute bottom-40 left-20 w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
@@ -62,7 +62,7 @@ const Contact = () => {
       </motion.div>
 
       {/* Main CTA Section */}
-      <div className="section-padding relative z-content">
+      <div className="section-padding relative z-content min-h-screen">
         <div className="max-w-7xl mx-auto px-4 md:px-8 text-center leading-7">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -89,7 +89,7 @@ const Contact = () => {
 
           <motion.button
             onClick={scrollToContact}
-            className="inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-12 py-6 rounded-full font-medium text-lg tracking-wider uppercase transition-all duration-300 group"
+            className="mt-12 inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-12 py-6 rounded-full font-medium text-lg tracking-wider uppercase transition-all duration-300 group"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
