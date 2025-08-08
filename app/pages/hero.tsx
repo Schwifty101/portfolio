@@ -342,9 +342,9 @@ const Hero = ({ onReady }: HeroProps = {}) => {
             className="lg:col-span-4 flex justify-center items-center order-first lg:order-none"
           >
             <div className="relative h-[15vh] md:h-[50vh] w-full max-w-xs">
-              {/* Placeholder for image - replace with your actual image */}
+              {/* Professional Photo */}
               <motion.div
-                className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl flex items-center justify-center border border-gray-700"
+                className="w-full h-full rounded-2xl shadow-2xl overflow-hidden relative border border-gray-700"
                 whileHover={{
                   scale: 1.015,
                   rotate: 0.5,
@@ -372,26 +372,15 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                   }}
                 />
 
-                <div className="text-gray-500 text-center relative z-10">
-                  <motion.div
-                    className="w-24 h-24 mx-auto mb-4 bg-gray-700 rounded-full flex items-center justify-center"
-                    animate={{
-                      scale: isReady ? [1, 1.05, 1] : 1,
-                      opacity: isReady ? [0.4, 0.6, 0.4] : 0.4,
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: isReady ? Number.POSITIVE_INFINITY : 0,
-                      ease: [0.37, 0, 0.63, 1],
-                      delay: 2.5,
-                    }}
-                  >
-                    <svg className="w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                    </svg>
-                  </motion.div>
-                  <p className="text-sm uppercase tracking-wider">Professional Photo</p>
-                </div>
+                <img
+                  src="/myPhoto.jpg"
+                  alt="Soban Ahmad - Professional Photo"
+                  className="w-full h-full object-cover relative z-10"
+                  style={{
+                    objectPosition: "center center",
+                    filter: "grayscale(100%)"
+                  }}
+                />
               </motion.div>
 
               {/* Optional: Decorative elements around the image */}
