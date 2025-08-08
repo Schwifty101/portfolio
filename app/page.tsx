@@ -10,6 +10,7 @@ import { Experience } from './pages/experience'
 import { Project } from './pages/project' // Ensure this is a named import
 import { Education } from './pages/education'
 import { Contact } from './pages/contact'
+import { Footer } from './pages/Footer'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -21,7 +22,7 @@ export default function Home() {
   return (
     <>
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
-      
+
       <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <Navigation />
         <main className="w-full">
@@ -33,6 +34,7 @@ export default function Home() {
           <Education />
           <Contact />
         </main>
+        <Footer />
       </div>
     </>
   )

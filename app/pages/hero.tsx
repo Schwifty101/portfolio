@@ -264,7 +264,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
               </p>
               <motion.button
                 onClick={scrollToContact}
-                className="group inline-flex items-center space-x-3 bg-gray-800 text-white px-6 lg:px-8 py-3 lg:py-4 rounded-full uppercase transition-all duration-300 relative overflow-hidden hover:bg-gray-700 hover:shadow-lg tracking-tighter text-xl font-medium"
+                className="inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-12 py-6 rounded-full font-medium text-lg tracking-wider uppercase transition-all duration-300 group"
                 whileHover={{
                   scale: 1.03,
                   boxShadow: "0 15px 35px rgba(0,0,0,0.25)",
