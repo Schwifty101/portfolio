@@ -23,7 +23,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
     const readyTimer = setTimeout(() => {
       setIsReady(true)
       onReady?.()
-    }, 200) // Start almost immediately after content becomes visible
+    }, 3200) // Changed to match pasted text timing
 
     return () => clearTimeout(readyTimer)
   }, [onReady])
@@ -56,13 +56,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
 
     gsap.defaults({ ease: "power2.out", duration: 1.2 })
 
-    // Set initial states for all animated elements
-    gsap.set([titleRef.current, leftContentRef.current, rightContentRef.current, imageRef.current, statusRef.current], {
-      opacity: 0,
-      clearProps: "all"
-    })
-
-    const tl = gsap.timeline({ delay: 0.05 })
+    const tl = gsap.timeline({ delay: 0.15 })
 
     tl.fromTo(
       titleRef.current,
@@ -159,7 +153,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
   const scrollToContact = () => {
     const element = document.getElementById("contact")
     if (element) {
-  element.scrollIntoView({ behavior: "smooth", block: "start" })
+      element.scrollIntoView({ behavior: "smooth" })
     }
   }
 
@@ -169,7 +163,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
       ref={heroRef}
       className="min-h-screen w-full flex flex-col justify-center bg-black text-white pt-32 pb-16 relative overflow-hidden"
     >
-      {/* Background elements */}
+      {/* Background elements with animations from pasted text */}
       <AnimatePresence>
         {isReady && (
           <>
@@ -230,11 +224,44 @@ const Hero = ({ onReady }: HeroProps = {}) => {
       </AnimatePresence>
 
       <div className="w-full px-[clamp(1rem,5vw,4rem)] relative z-10">
+        {/* Small intro text with animation from pasted text */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{
+            opacity: isReady ? 1 : 0,
+            y: isReady ? 0 : 10
+          }}
+          transition={{
+            delay: 1.5,
+            duration: 0.9,
+            ease: [0.25, 0.46, 0.45, 0.94]
+          }}
+          className="text-gray-400 mb-0 text-2xl tracking-widest font-thin leading-4"
+        >
+          (Need an unfair advantage?)
+        </motion.div>
+
         {/* Main Title */}
         <div ref={titleRef} className="mb-8 item-center text-center">
           <h1 className="fluid-text-hero font-black leading-none text-white tracking-normal overflow-visible inline-block">
             <span ref={nameRef} className="inline-flex items-baseline whitespace-nowrap will-change-transform">
               <span>SOBAN AHMAD</span>
+              <motion.span
+                className="text-2xl md:text-4xl lg:text-6xl align-top ml-1 lg:ml-2"
+                initial={{ opacity: 0, scale: 0, rotate: -90 }}
+                animate={{
+                  opacity: isReady ? 1 : 0,
+                  scale: isReady ? 1 : 0,
+                  rotate: isReady ? 0 : -90,
+                }}
+                transition={{
+                  duration: 0.9,
+                  delay: 2.2,
+                  ease: [0.68, -0.55, 0.265, 1.55],
+                }}
+              >
+                ©
+              </motion.span>
             </span>
           </h1>
         </div>
@@ -307,16 +334,56 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           >
             <div className="relative h-[15vh] md:h-[50vh] w-full max-w-xs">
               {/* Placeholder for image - replace with your actual image */}
-              <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl flex items-center justify-center border border-gray-700">
-                <div className="text-gray-500 text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 bg-gray-700 rounded-full flex items-center justify-center">
+              <motion.div 
+                className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl flex items-center justify-center border border-gray-700"
+                whileHover={{
+                  scale: 1.015,
+                  rotate: 0.5,
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+                }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+              >
+                {/* Animated border from pasted text */}
+                <motion.div
+                  className="absolute inset-0 rounded-2xl"
+                  style={{
+                    background: "linear-gradient(45deg, transparent, rgba(255,255,255,0.08), transparent)",
+                  }}
+                  animate={{
+                    rotate: isReady ? [0, 360] : 0,
+                  }}
+                  transition={{
+                    duration: 12,
+                    repeat: isReady ? Number.POSITIVE_INFINITY : 0,
+                    ease: "linear",
+                    delay: 2.2,
+                  }}
+                />
+                
+                <div className="text-gray-500 text-center relative z-10">
+                  <motion.div 
+                    className="w-24 h-24 mx-auto mb-4 bg-gray-700 rounded-full flex items-center justify-center"
+                    animate={{
+                      scale: isReady ? [1, 1.05, 1] : 1,
+                      opacity: isReady ? [0.4, 0.6, 0.4] : 0.4,
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: isReady ? Number.POSITIVE_INFINITY : 0,
+                      ease: [0.37, 0, 0.63, 1],
+                      delay: 2.5,
+                    }}
+                  >
                     <svg className="w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                     </svg>
-                  </div>
+                  </motion.div>
                   <p className="text-sm uppercase tracking-wider">Professional Photo</p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Optional: Decorative elements around the image */}
               <motion.div
@@ -397,7 +464,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           </motion.div>
         </motion.div>
       </div>
-      {/* Animated scroll indicator*/}
+      {/* Animated scroll indicator - keeping original from attached file */}
       <motion.div
         ref={statusRef}
         className="hidden md:flex flex-col items-center space-y-2 pt-8"
