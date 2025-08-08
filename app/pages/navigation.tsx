@@ -100,7 +100,7 @@ const Navigation = () => {
 
     const handleMouseEnter = useCallback(() => {
       if (isAnimating) return
-      
+
       setIsAnimating(true)
       if (containerRef.current) {
         const letters = containerRef.current.querySelectorAll(".letter")
@@ -142,9 +142,8 @@ const Navigation = () => {
         {text.split("").map((char, index) => (
           <span
             key={index}
-            className={`letter inline-block transition-colors duration-300 will-change-transform ${
-              isActive ? "text-white" : isScrolled ? "text-gray-300" : "text-gray-400"
-            }`}
+            className={`letter inline-block transition-colors duration-300 will-change-transform ${isActive ? "text-white" : isScrolled ? "text-gray-300" : "text-gray-400"
+              }`}
           >
             {char === " " ? "\u00A0" : char}
           </span>
@@ -209,9 +208,8 @@ const Navigation = () => {
                       <motion.button
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        className={`font-light tracking-wide transition-colors duration-300 text-sm ${
-                          activeSection === item.id ? "text-white" : "text-gray-400 hover:text-gray-200"
-                        }`}
+                        className={`font-light tracking-wide transition-colors duration-300 text-sm ${activeSection === item.id ? "text-white" : "text-gray-400 hover:text-gray-200"
+                          }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         initial={{ opacity: 0, y: -20 }}
@@ -297,65 +295,66 @@ const Navigation = () => {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="ml-auto w-full max-w-2xl h-full bg-black p-[clamp(2rem,5vw,4rem)] flex flex-col justify-between"
+              className="ml-auto w-full max-w-2xl h-full bg-black p-[clamp(2rem,5vw,4rem)] flex flex-col"
             >
 
               {/* Navigation Links */}
-              <nav className="space-y-4 lg:space-y-6 leading-7">
-                {navItems.map((item, index) => (
-                  <motion.button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className="group block text-left font-bold text-3xl lg:text-5xl leading-tight"
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      delay: 0.3 + index * 0.1,
-                      duration: 0.5,
-                      ease: "easeOut"
-                    }}
-                    whileHover="hover"
-                    variants={{
-                      hover: {
-                        x: 20,
-                        transition: {
-                          duration: 0.4,
-                          ease: [0.25, 0.46, 0.45, 0.94],
-                          staggerChildren: 0.1
-                        }
-                      }
-                    }}
-                  >
-                    <motion.span
-                      className="inline-block text-gray-300 leading-7"
+              <div className="flex-1 flex items-center justify-start">
+                <nav className="space-y-1 lg:space-y-2 leading-snug">
+                  {navItems.map((item, index) => (
+                    <motion.button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className="group block text-left font-bold text-3xl lg:text-5xl leading-snug"
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{
+                        delay: 0.3 + index * 0.1,
+                        duration: 0.5,
+                        ease: "easeOut"
+                      }}
+                      whileHover="hover"
                       variants={{
                         hover: {
-                          color: "#ffffff",
-                          x: 8,
-                          transition: { duration: 0.3, ease: "easeOut" }
+                          x: 20,
+                          transition: {
+                            duration: 0.4,
+                            ease: [0.25, 0.46, 0.45, 0.94],
+                            staggerChildren: 0.1
+                          }
                         }
                       }}
                     >
-                      {item.label}
-                    </motion.span>
-                    <motion.span
-                      className="inline-block ml-4 text-2xl lg:text-3xl text-gray-400"
-                      initial={{ opacity: 0, x: -10 }}
-                      variants={{
-                        hover: {
-                          opacity: 1,
-                          x: 0,
-                          color: "#ffffff",
-                          transition: { duration: 0.3, ease: "easeOut", delay: 0.1 }
-                        }
-                      }}
-                    >
-                      →
-                    </motion.span>
-                  </motion.button>
-                ))}
-              </nav>
-
+                      <motion.span
+                        className="inline-block text-gray-300 leading-7"
+                        variants={{
+                          hover: {
+                            color: "#ffffff",
+                            x: 8,
+                            transition: { duration: 0.3, ease: "easeOut" }
+                          }
+                        }}
+                      >
+                        {item.label}
+                      </motion.span>
+                      <motion.span
+                        className="inline-block ml-4 text-2xl lg:text-3xl text-gray-400"
+                        initial={{ opacity: 0, x: -10 }}
+                        variants={{
+                          hover: {
+                            opacity: 1,
+                            x: 0,
+                            color: "#ffffff",
+                            transition: { duration: 0.3, ease: "easeOut", delay: 0.1 }
+                          }
+                        }}
+                      >
+                        →
+                      </motion.span>
+                    </motion.button>
+                  ))}
+                </nav>
+              </div>
               {/* Bottom Section */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
