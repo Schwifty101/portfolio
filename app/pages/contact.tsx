@@ -17,7 +17,7 @@ const Contact = () => {
       // Initialize Cal.com embed
       ; (async function () {
         const cal = await getCalApi({ namespace: "30min" })
-        cal("ui", { hideEventTypeDetails: false, layout: "week_view" })
+        cal("ui", { hideEventTypeDetails: false, layout: "month_view" })
       })()
 
     // Number animation with lower z-index
@@ -97,7 +97,7 @@ const Contact = () => {
           <motion.button
             data-cal-namespace="30min"
             data-cal-link="soban-ahmad003/30min"
-            data-cal-config='{"layout":"week_view"}'
+            data-cal-config='{"layout":"month_view"}'
             className="mt-12 inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-12 py-6 rounded-full font-medium text-lg tracking-wider uppercase transition-all duration-300 group"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}

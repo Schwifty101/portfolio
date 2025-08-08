@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { gsap } from "gsap"
+import { getCalApi } from "@calcom/embed-react"
 
 interface HeroProps {
   onReady?: () => void
@@ -24,6 +25,12 @@ const Hero = ({ onReady }: HeroProps = {}) => {
       setIsReady(true)
       onReady?.()
     }, 3200) // Changed to match pasted text timing
+
+      // Initialize Cal.com embed
+      ; (async function () {
+        const cal = await getCalApi({ namespace: "30min" })
+        cal("ui", { hideEventTypeDetails: false, layout: "month_view" })
+      })()
 
     return () => clearTimeout(readyTimer)
   }, [onReady])
@@ -290,8 +297,10 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                 solutions.
               </p>
               <motion.button
-                onClick={scrollToContact}
-                className="inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-12 py-6 rounded-full font-medium text-lg tracking-wider uppercase transition-all duration-300 group"
+                data-cal-namespace="30min"
+                data-cal-link="soban-ahmad003/30min"
+                data-cal-config='{"layout":"month_view"}'
+                className="mt-12 inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-12 py-6 rounded-full font-medium text-lg tracking-wider uppercase transition-all duration-300 group"
                 whileHover={{
                   scale: 1.03,
                   boxShadow: "0 15px 35px rgba(0,0,0,0.25)",
@@ -334,7 +343,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           >
             <div className="relative h-[15vh] md:h-[50vh] w-full max-w-xs">
               {/* Placeholder for image - replace with your actual image */}
-              <motion.div 
+              <motion.div
                 className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl flex items-center justify-center border border-gray-700"
                 whileHover={{
                   scale: 1.015,
@@ -362,9 +371,9 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                     delay: 2.2,
                   }}
                 />
-                
+
                 <div className="text-gray-500 text-center relative z-10">
-                  <motion.div 
+                  <motion.div
                     className="w-24 h-24 mx-auto mb-4 bg-gray-700 rounded-full flex items-center justify-center"
                     animate={{
                       scale: isReady ? [1, 1.05, 1] : 1,
@@ -493,7 +502,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
             }}
           />
         </motion.div>
-      </motion.div> 
+      </motion.div>
     </section>
   )
 }

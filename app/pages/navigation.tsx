@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import gsap from "gsap"
+import { getCalApi } from "@calcom/embed-react"
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState("hero")
@@ -25,6 +26,12 @@ const Navigation = () => {
     const timer = setTimeout(() => {
       setHasAnimated(true)
     }, 1000)
+
+      // Initialize Cal.com embed
+      ; (async function () {
+        const cal = await getCalApi({ namespace: "30min" })
+        cal("ui", { hideEventTypeDetails: false, layout: "month_view" })
+      })()
 
     const updateTime = () => {
       const now = new Date()
@@ -231,8 +238,10 @@ const Navigation = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <motion.button
-                      onClick={scrollToContact}
-                      className="hidden md:inline-flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full font-light text-sm tracking-wider uppercase transition-all duration-300"
+                      data-cal-namespace="30min"
+                      data-cal-link="soban-ahmad003/30min"
+                      data-cal-config='{"layout":"month_view"}'
+                      className="hidden md:inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full font-medium text-medium tracking-wider uppercase transition-all duration-300 group"                       
                       whileHover={{ scale: 1.05, backgroundColor: "#374151" }}
                       whileTap={{ scale: 0.95 }}
                     >
