@@ -15,58 +15,63 @@ export const Project = () => { // Changed to named export
       id: 1,
       title: "Traffic Sign Classification using CNN",
       description:
-        "98.75% accuracy on 43-class CNN with TensorFlow/Keras. Augmented dataset from 39K to 162K images using advanced data augmentation techniques.",
+        "Built a TensorFlow/Keras CNN achieving 98.75% accuracy across 43 traffic sign classes. Expanded dataset from 39K to 162K images via rotation, shear, and brightness augmentation.",
       tech: ["Python", "TensorFlow", "Keras", "OpenCV", "NumPy"],
       year: "2024",
       category: "Machine Learning",
       impact: "98.75% Accuracy",
       details:
-        "Implemented advanced CNN architecture with dropout layers and batch normalization for robust traffic sign recognition.",
+        "Applied OpenCV preprocessing, batch normalization, and dropout for robust recognition; exported trained model for deployment.",
+      link: "https://github.com/Schwifty101/TrafficSignClassificationCNN",
     },
     {
       id: 2,
       title: "AI-Powered Assessment Platform",
       description:
-        "Leading a 4-person team building a SaaS platform with NestJS, Next.js, and PostgreSQL on AWS with multi-tenant architecture.",
-      tech: ["Next.js", "NestJS", "PostgreSQL", "AWS", "Docker"],
+        "Leading a 4-person team delivering a multi-tenant SaaS assessment platform using NestJS, Next.js, and PostgreSQL on AWS.",
+      tech: ["Next.js", "NestJS", "PostgreSQL", "AWS", "Kubernetes"],
       year: "2025",
       category: "Full-Stack SaaS",
-      impact: "Team Leadership",
+      impact: "Multi-tenant SaaS on AWS",
       details:
-        "Architected scalable microservices with Kubernetes orchestration and implemented real-time collaboration features.",
+        "Architected scalable microservices with Kubernetes orchestration; implemented auth and role-based access with analytics dashboards.",
+      link: "https://github.com/Schwifty101/MultiCommerce-Admin-Dashboard",
     },
     {
       id: 3,
       title: "Chess AI Engine",
       description:
-        "Python-based chess engine using Minimax algorithm with Alpha-Beta pruning and move caching for optimal performance.",
+        "Python chess engine using Minimax with Alpha-Beta pruning and transposition caching for stronger play.",
       tech: ["Python", "Minimax", "Alpha-Beta", "Tkinter", "OOP"],
       year: "2024",
       category: "AI Development",
       impact: "Smart AI Opponent",
-      details: "Implemented advanced game tree search with position evaluation and opening book integration.",
+      details: "Implemented game tree search with custom evaluation, move ordering, and a simple Tkinter UI.",
+      link: "https://github.com/Schwifty101/AI-Chess",
     },
     {
       id: 4,
       title: "E-Commerce Analytics Dashboard",
       description:
-        "Real-time dashboard processing 10K+ daily transactions with interactive visualizations and predictive analytics.",
+        "Real-time dashboard for KPIs with interactive visualizations and streaming updates across high-volume transactions.",
       tech: ["React", "D3.js", "Node.js", "MongoDB", "WebSocket"],
       year: "2024",
       category: "Data Visualization",
-      impact: "10K+ Daily Transactions",
-      details: "Built real-time data pipeline with WebSocket connections and implemented advanced charting with D3.js.",
+      impact: "Live KPI Monitoring",
+      details: "Built a real-time data pipeline with WebSockets and crafted advanced charts in D3.js for drill-down insights.",
+      link: "https://github.com/Schwifty101/IMDB-clone-Backend",
     },
     {
       id: 5,
       title: "Delivery Management System",
       description:
-        "NestJS microservices with PostgreSQL, reducing API latency by 35%. Real-time tracking for 150+ deliveries daily.",
+        "Developed NestJS microservices with PostgreSQL and Redis caching; reduced API latency by 35% and enabled real-time tracking for 150+ deliveries/day.",
       tech: ["NestJS", "PostgreSQL", "Redis", "WebSocket", "Docker"],
       year: "2024",
       category: "Backend Systems",
       impact: "35% Latency Reduction",
-      details: "Optimized database queries and implemented Redis caching for high-performance delivery tracking.",
+      details: "Optimized DB queries, introduced Redis caching, and added WebSocket-based live status updates for dispatch and riders.",
+      link: "https://github.com/Schwifty101/WeatherApp-GeminiAPI",
     },
   ]
 
@@ -289,9 +294,16 @@ export const Project = () => { // Changed to named export
                       </div>
 
                       {/* View Project Link */}
-                      <div className="pt-4 lg:pt-6 flex items-center text-gray-400 hover:text-white transition-colors duration-300 group/link">
-                        <span className="text-sm lg:text-base font-medium tracking-wide">View Project</span>
-                        <span className="ml-2 text-base lg:text-lg">↗</span>
+                      <div className="pt-4 lg:pt-6">
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center text-gray-400 hover:text-white transition-colors duration-300 group/link"
+                        >
+                          <span className="text-sm lg:text-base font-medium tracking-wide">View Project</span>
+                          <span className="ml-2 text-base lg:text-lg">↗</span>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -306,9 +318,8 @@ export const Project = () => { // Changed to named export
           {projects.map((_, index) => (
             <button
               key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentProject === index ? "bg-white scale-125" : "bg-gray-600 hover:bg-gray-500"
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentProject === index ? "bg-white scale-125" : "bg-gray-600 hover:bg-gray-500"
+                }`}
               onClick={() => {
                 projectRefs.current[index]?.scrollIntoView({
                   behavior: "smooth",
