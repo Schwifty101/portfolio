@@ -424,24 +424,25 @@ textarea:focus,
   .z-nav {
     backdrop-filter: blur(20px);
   }
-  
+
   /* Hide decorative background elements on mobile for cleaner look */
   .mobile-hide-bg {
     display: none !important;
   }
-  
+
   /* Improve mobile touch targets */
-  button, a {
+  button,
+  a {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
   }
-  
+
   /* Prevent horizontal scroll issues */
   body {
     overflow-x: hidden;
   }
-  
+
   /* Optimize spacing for touch devices */
   .mobile-touch-spacing {
     padding: 0.75rem 1rem;

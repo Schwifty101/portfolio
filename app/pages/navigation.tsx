@@ -25,7 +25,7 @@ const Navigation = () => {
   useEffect(() => {
     // Always start with hero as active section
     setActiveSection("hero")
-    
+
     const timer = setTimeout(() => {
       setHasAnimated(true)
     }, 1000)
@@ -244,7 +244,7 @@ const Navigation = () => {
                       data-cal-namespace="30min"
                       data-cal-link="soban-ahmad003/30min"
                       data-cal-config='{"layout":"month_view"}'
-                      className="hidden md:inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full font-medium text-medium tracking-wider uppercase transition-all duration-300 group"                       
+                      className="hidden md:inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full font-medium text-medium tracking-wider uppercase transition-all duration-300 group"
                       whileHover={{ scale: 1.05, backgroundColor: "#374151" }}
                       whileTap={{ scale: 0.95 }}
                     >

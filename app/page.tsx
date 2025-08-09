@@ -23,7 +23,7 @@ export default function Home() {
   useEffect(() => {
     // Scroll to top immediately on mount
     window.scrollTo(0, 0)
-    
+
     // Also scroll to hero section specifically after loading is complete
     if (!isLoading) {
       setTimeout(() => {

@@ -125,7 +125,7 @@ const Footer = () => {
             >
               Menu
             </motion.h3>
-            <div className="space-y-1 md:space-y-0">
+            <div className="space-y-0 leading-tight">
               {menuItems.map((item, index) => (
                 <motion.button
                   key={index}
@@ -155,7 +155,7 @@ const Footer = () => {
               >
                 Socials
               </motion.h3>
-              <div className="space-y-1 md:space-y-2">
+              <div className="space-y-0 leading-tight">
                 {socialItems.map((item, index) => (
                   <motion.a
                     key={index}
@@ -185,7 +185,7 @@ const Footer = () => {
               >
                 Resources
               </motion.h3>
-              <div className="space-y-1 md:space-y-2">
+              <div className="space-y-0 leading-tight">
                 {resourceItems.map((item, index) => (
                   <motion.a
                     key={index}
