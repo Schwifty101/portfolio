@@ -341,7 +341,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
             ref={imageRef}
             className="lg:col-span-4 flex justify-center items-center order-first lg:order-none"
           >
-            <div className="relative h-[15vh] md:h-[50vh] w-full max-w-xs">
+            <div className="relative h-[30vh] md:h-[45vh] lg:h-[50vh] w-full max-w-xs md:max-w-sm">
               {/* Professional Photo */}
               <motion.div
                 className="w-full h-full rounded-2xl shadow-2xl overflow-hidden relative border border-gray-700"
@@ -413,12 +413,12 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           </div>
 
           {/* Right Content - Availability */}
-          <div ref={rightContentRef} className="lg:col-span-4 space-y-8 lg:text-right">
-            <div className="space-y-4">
-              <div className="text-gray-500 uppercase font-light text-lg tracking-wide">
+          <div ref={rightContentRef} className="lg:col-span-4 space-y-6 lg:space-y-8 lg:text-right">
+            <div className="space-y-3 lg:space-y-4">
+              <div className="text-gray-500 uppercase font-light text-sm md:text-base lg:text-lg tracking-wide">
                 AVAILABLE FOR FREELANCE WORK
               </div>
-              <div className="text-7xl md:text-8xl tracking-tighter text-white font-thin">
+              <div className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tighter text-white font-thin">
                 <motion.span
                   animate={{
                     color: isReady ? ["#ffffff", "#e5e7eb", "#ffffff"] : "#ffffff",
@@ -432,7 +432,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                 >
                   JAN
                 </motion.span>
-                <span className="text-3xl align-top">&apos;25</span>
+                <span className="text-xl md:text-2xl lg:text-3xl align-top">&apos;25</span>
               </div>
             </div>
           </div>

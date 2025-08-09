@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure page starts at top on refresh */
+html {
+  scroll-restoration: manual;
+}
+
+body {
+  scroll-behavior: smooth;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -414,6 +423,28 @@ textarea:focus,
 @media (max-width: 768px) {
   .z-nav {
     backdrop-filter: blur(20px);
+  }
+  
+  /* Hide decorative background elements on mobile for cleaner look */
+  .mobile-hide-bg {
+    display: none !important;
+  }
+  
+  /* Improve mobile touch targets */
+  button, a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* Prevent horizontal scroll issues */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Optimize spacing for touch devices */
+  .mobile-touch-spacing {
+    padding: 0.75rem 1rem;
   }
 }
 

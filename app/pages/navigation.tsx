@@ -23,6 +23,9 @@ const Navigation = () => {
   ]
 
   useEffect(() => {
+    // Always start with hero as active section
+    setActiveSection("hero")
+    
     const timer = setTimeout(() => {
       setHasAnimated(true)
     }, 1000)
@@ -171,26 +174,26 @@ const Navigation = () => {
         <div className="w-full px-[clamp(1rem,5vw,6rem)] py-6">
           <div className="flex justify-between items-center min-h-[48px]">
 
-            {/* Logo - Fixed position and size */}
+            {/* Logo - Mobile optimized */}
             <motion.div
               className="flex flex-col lg:flex-row lg:items-center lg:space-x-4 space-y-1 lg:space-y-0 flex-shrink-0"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="text-white font-medium text-base tracking-tight lg:text-2xl">
+              <div className="text-white font-medium text-lg md:text-xl lg:text-2xl tracking-tight">
                 {hasAnimated ? (
                   <>
                     Soban A.
-                    <span className="align-top text-lg">©</span>
+                    <span className="align-top text-sm md:text-base lg:text-lg">©</span>
                   </>
                 ) : (
                   <>
                     <AnimatedText text="Soban Ahmad" />
-                    <span className="text-xs lg:text-sm align-top">©</span>
+                    <span className="text-sm md:text-base lg:text-lg align-top">©</span>
                   </>
                 )}
               </div>
-              <div className="text-gray-400 font-light text-sm pl-12">
+              <div className="text-gray-400 font-light text-xs md:text-sm pl-0 md:pl-12 hidden md:block">
                 {hasAnimated ? (
                   "(Software Engineer & Developer)"
                 ) : (
@@ -309,12 +312,12 @@ const Navigation = () => {
 
               {/* Navigation Links */}
               <div className="flex-1 flex items-center justify-start">
-                <nav className="space-y-1 lg:space-y-2 leading-snug">
+                <nav className="space-y-0 leading-none">
                   {navItems.map((item, index) => (
                     <motion.button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className="group block text-left font-bold text-3xl lg:text-5xl leading-snug"
+                      className="group block text-left font-bold text-2xl md:text-3xl lg:text-5xl leading-snug"
                       initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{
@@ -335,7 +338,7 @@ const Navigation = () => {
                       }}
                     >
                       <motion.span
-                        className="inline-block text-gray-300 leading-7"
+                        className="inline-block text-gray-300 leading-snug"
                         variants={{
                           hover: {
                             color: "#ffffff",
@@ -347,7 +350,7 @@ const Navigation = () => {
                         {item.label}
                       </motion.span>
                       <motion.span
-                        className="inline-block ml-4 text-2xl lg:text-3xl text-gray-400"
+                        className="inline-block ml-2 md:ml-4 text-xl md:text-2xl lg:text-3xl text-gray-400"
                         initial={{ opacity: 0, x: -10 }}
                         variants={{
                           hover: {

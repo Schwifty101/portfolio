@@ -53,8 +53,8 @@ const Contact = () => {
   return (
     <section id="contact" ref={sectionRef} className="relative bg-black text-white overflow-hidden min-h-screen">
       {/* Background elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-gray-800 rounded-full opacity-10 z-background" />
-      <div className="absolute bottom-40 left-20 w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
+      <div className="hidden md:block absolute top-20 right-20 w-32 h-32 bg-gray-800 rounded-full opacity-10 z-background" />
+      <div className="hidden md:block absolute bottom-40 left-20 w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
 
       {/* Large section number */}
       <motion.div
@@ -65,7 +65,7 @@ const Contact = () => {
         transition={{ duration: 1.2, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        05
+        06
       </motion.div>
 
       {/* Main CTA Section */}
@@ -76,14 +76,14 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-gray-400 uppercase mb-8 text-2xl font-extralight tracking-[0.3em]"
+            className="text-gray-400 uppercase mb-6 md:mb-8 text-lg md:text-xl lg:text-2xl font-extralight tracking-[0.2em] md:tracking-[0.3em]"
           >
             (Need an unfair advantage?)
           </motion.div>
 
           <motion.h2
             ref={titleRef}
-            className="text-6xl md:text-8xl mb-16 leading-none tracking-wider lg:text-9xl leading-4 font-black text-gray-200"
+            className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl mb-12 md:mb-16 leading-tight md:leading-none tracking-wide md:tracking-wider font-black text-gray-200"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
@@ -98,7 +98,7 @@ const Contact = () => {
             data-cal-namespace="30min"
             data-cal-link="soban-ahmad003/30min"
             data-cal-config='{"layout":"month_view"}'
-            className="mt-12 inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-12 py-6 rounded-full font-medium text-lg tracking-wider uppercase transition-all duration-300 group"
+            className="mt-8 md:mt-12 inline-flex items-center space-x-2 md:space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-8 md:px-12 py-4 md:py-6 rounded-full font-medium text-base md:text-lg tracking-wide md:tracking-wider uppercase transition-all duration-300 group"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -108,7 +108,7 @@ const Contact = () => {
           >
             <span>BOOK A CALL</span>
             <motion.span
-              className="text-xl"
+              className="text-lg md:text-xl"
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
             >
@@ -117,33 +117,33 @@ const Contact = () => {
           </motion.button>
         </div>
 
-        {/* Status Badge */}
+        {/* Status Badge - Hidden on small mobile */}
         <motion.div
-          className="absolute bottom-8 left-8 flex items-center space-x-4 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-lg px-6 py-4"
+          className="hidden sm:flex absolute bottom-6 md:bottom-8 left-4 md:left-8 items-center space-x-3 md:space-x-4 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-lg px-4 md:px-6 py-3 md:py-4"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
-            <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+          <div className="w-6 h-6 md:w-8 md:h-8 bg-gray-700 rounded-full flex items-center justify-center">
+            <div className="w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full animate-pulse"></div>
           </div>
           <div>
-            <div className="text-white text-sm font-medium">Working Globally</div>
+            <div className="text-white text-xs md:text-sm font-medium">Working Globally</div>
             <div className="text-gray-400 text-xs">Available Jan '25</div>
           </div>
         </motion.div>
 
-        {/* Contact Info */}
+        {/* Contact Info - Hidden on small mobile */}
         <motion.div
-          className="absolute bottom-8 right-8 text-right"
+          className="hidden sm:block absolute bottom-6 md:bottom-8 right-4 md:right-8 text-right"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
           viewport={{ once: true }}
         >
           <div className="text-gray-500 text-xs uppercase tracking-wider mb-2">For Further Inquiries</div>
-          <div className="text-gray-300 text-sm">↳ sobanahmad2003@gmail.com</div>
+          <div className="text-gray-300 text-xs md:text-sm">↳ sobanahmad2003@gmail.com</div>
         </motion.div>
       </div>
     </section>

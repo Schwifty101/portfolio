@@ -338,9 +338,16 @@ export const Project = () => { // Changed to named export
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <button className="inline-flex items-center space-x-3 bg-white text-black px-8 py-4 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-gray-200 transition-all duration-300">
-            <span>VIEW ALL PROJECTS</span>
-            <span>↗</span>
+          <button
+            className="mt-6 md:mt-8 inline-flex items-center space-x-1 md:space-x-2 bg-gray-800 hover:bg-gray-700 text-white px-6 md:px-12 py-3 md:py-6 rounded-full font-medium text-sm md:text-base tracking-wide md:tracking-wider uppercase transition-all duration-300 transform hover:scale-105 group"
+          >
+            <a
+              href="https://github.com/Schwifty101"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center transition-colors duration-300 group/link"
+            >VIEW ALL PROJECTS</a>
+            <span className="">↗</span>
           </button>
         </motion.div>
       </div>

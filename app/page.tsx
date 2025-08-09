@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { LoadingScreen } from './pages/loading-screen'
 import { Navigation } from './pages/navigation'
 import { Hero } from './pages/hero'
@@ -18,6 +18,22 @@ export default function Home() {
   const handleLoadingComplete = () => {
     setIsLoading(false)
   }
+
+  // Ensure page starts at top on mount/refresh
+  useEffect(() => {
+    // Scroll to top immediately on mount
+    window.scrollTo(0, 0)
+    
+    // Also scroll to hero section specifically after loading is complete
+    if (!isLoading) {
+      setTimeout(() => {
+        const heroElement = document.getElementById('hero')
+        if (heroElement) {
+          heroElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
+  }, [isLoading])
 
   return (
     <>

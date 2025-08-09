@@ -103,8 +103,8 @@ const Skills = () => {
   return (
     <section id="skills" ref={sectionRef} className="section-padding bg-black text-white relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-gray-800 rounded-full opacity-10 z-background" />
-      <div className="absolute bottom-40 left-20 w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
+      <div className="hidden md:block absolute top-20 right-20 w-32 h-32 bg-gray-800 rounded-full opacity-10 z-background" />
+      <div className="hidden md:block absolute bottom-40 left-20 w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
 
       {/* Large section number */}
       <motion.div

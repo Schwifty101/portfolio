@@ -59,8 +59,8 @@ const About = () => {
   return (
     <section id="about" ref={sectionRef} className="section-padding bg-black text-white relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-gray-800 rounded-full opacity-10 z-background" />
-      <div className="absolute bottom-40 left-20 w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
+      <div className="hidden md:block absolute top-20 right-20 w-32 h-32 bg-gray-800 rounded-full opacity-10 z-background" />
+      <div className="hidden md:block absolute bottom-40 left-20 w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
 
       {/* Large section number */}
       <motion.div
@@ -135,7 +135,7 @@ const About = () => {
           </div>
 
           <motion.div
-            className="grid grid-cols-3 gap-8 pt-16"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 pt-12 md:pt-16"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
@@ -146,8 +146,8 @@ const About = () => {
               { number: "15+", label: "Technologies" },
               { number: "10+", label: "Projects Completed" },
             ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-5xl md:text-6xl font-black text-white mb-2">{stat.number}</div>
+              <div key={index} className="text-center md:text-center">
+                <div className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-2">{stat.number}</div>
                 <div className="text-gray-400 text-sm uppercase tracking-wider">{stat.label}</div>
               </div>
             ))}

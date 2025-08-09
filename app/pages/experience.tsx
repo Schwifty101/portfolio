@@ -82,8 +82,8 @@ const Experience = () => {
   return (
     <section id="experience" ref={sectionRef} className="section-padding bg-gray-50 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-20 right-20 w-24 h-24 bg-gray-200 rounded-full opacity-30 z-background" />
-      <div className="absolute bottom-40 left-20 w-16 h-16 bg-gray-300 rotate-45 opacity-40 z-background" />
+      <div className="hidden md:block absolute top-20 right-20 w-24 h-24 bg-gray-200 rounded-full opacity-30 z-background" />
+      <div className="hidden md:block absolute bottom-40 left-20 w-16 h-16 bg-gray-300 rotate-45 opacity-40 z-background" />
 
       {/* Large section number */}
       <motion.div

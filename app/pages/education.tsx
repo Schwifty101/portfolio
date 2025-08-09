@@ -58,8 +58,8 @@ const Education = () => {
   return (
     <section id="education" ref={sectionRef} className="section-full section-padding bg-black text-white relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-20 right-[clamp(1.5rem,5vw,4rem)] w-24 h-24 bg-gray-800 rounded-full opacity-10 z-background" />
-      <div className="absolute bottom-40 left-[clamp(1.5rem,5vw,4rem)] w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
+      <div className="hidden md:block absolute top-20 right-[clamp(1.5rem,5vw,4rem)] w-24 h-24 bg-gray-800 rounded-full opacity-10 z-background" />
+      <div className="hidden md:block absolute bottom-40 left-[clamp(1.5rem,5vw,4rem)] w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
 
       {/* Large section number */}
       <motion.div

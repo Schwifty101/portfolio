@@ -23,7 +23,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
+      <head>
+        <style>{`
+          html {
+            scroll-restoration: manual;
+          }
+        `}</style>
+      </head>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
         {children}
       </body>
