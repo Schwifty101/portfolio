@@ -72,6 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
       <head>
+        <meta name="google-site-verification" content="uIQeyUBxNeGGsf7pr4S0xQ19v1SqgualDqFQIWExDIg" />
         <link rel="icon" href="/myPhoto.jpg" type="image/x-jpg" />
         <style>{`
           html {
