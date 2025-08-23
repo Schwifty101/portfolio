@@ -10,11 +10,58 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Soban Ahmad - Software Engineer & Developer',
-  description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.',
-  keywords: 'software engineer, full-stack developer, React, Next.js, Node.js, AI, machine learning',
-  authors: [{ name: 'Soban Ahmad' }],
-  generator: 'v0.dev'
+  title: {
+    default: 'Soban Ahmad - Software Engineer & Developer',
+    template: '%s | Soban Ahmad'
+  },
+  description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture. Explore my projects and technical expertise.',
+  keywords: ['software engineer', 'full-stack developer', 'React', 'Next.js', 'Node.js', 'TypeScript', 'AI', 'machine learning', 'web development', 'portfolio', 'JavaScript', 'Python', 'cloud architecture'],
+  authors: [{ name: 'Soban Ahmad', url: 'https://sobanahmad.vercel.app' }],
+  creator: 'Soban Ahmad',
+  publisher: 'Soban Ahmad',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://sobanahmad.vercel.app'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://sobanahmad.vercel.app',
+    title: 'Soban Ahmad - Software Engineer & Developer',
+    description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.',
+    siteName: 'Soban Ahmad Portfolio',
+    images: [
+      {
+        url: '/myPhoto.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Soban Ahmad - Software Engineer Portfolio',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Soban Ahmad - Software Engineer & Developer',
+    description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.',
+    images: ['/myPhoto.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: '/myPhoto.jpg',
 }
 
 export default function RootLayout({
@@ -25,20 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
       <head>
-        <title>Soban Ahmad - Software Engineer & Developer</title>
-        <meta name="title" content="Soban Ahmad - Software Engineer & Developer" />
-        <meta name="description" content="Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sobanahmad.vercel.app/" />
-        <meta property="og:title" content="Soban Ahmad - Software Engineer & Developer" />
-        <meta property="og:description" content="Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture." />
-        <meta property="og:image" content="https://replug.io/images/example.png" />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://sobanahmad.vercel.app/" />
-        <meta property="twitter:title" content="Soban Ahmad - Software Engineer & Developer" />
-        <meta property="twitter:description" content="Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture." />
-        <meta property="twitter:image" content="https://replug.io/images/example.png" />
-        <link rel="icon" href="/myPhoto.jpg" type="image/jpg" />
+        <link rel="icon" href="/myPhoto.jpg" type="image/x-jpg" />
         <style>{`
           html {
             scroll-restoration: manual;
