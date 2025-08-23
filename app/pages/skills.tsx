@@ -55,7 +55,7 @@ const Skills = () => {
       skills: [
         { name: "React.js", level: "Advanced" },
         { name: "Next.js", level: "Advanced" },
-        { name: "Tailwind CSS", level: "Advanced" },
+        { name: "Tailwind", level: "Advanced" },
         { name: "GSAP", level: "Intermediate" },
         { name: "Three.js", level: "Beginner" },
         { name: "ShadCN UI", level: "Advanced" },
@@ -69,7 +69,7 @@ const Skills = () => {
         { name: "Express.js", level: "Advanced" },
         { name: "REST APIs", level: "Advanced" },
         { name: "GraphQL", level: "Intermediate" },
-        { name: "Microservices", level: "Intermediate" },
+        { name: "MSA", level: "Intermediate" },
       ],
     },
     {
@@ -86,7 +86,7 @@ const Skills = () => {
     {
       title: "Machine Learning",
       skills: [
-        { name: "TensorFlow", level: "Intermediate" },
+        { name: "TF", level: "Intermediate" },
         { name: "Keras", level: "Intermediate" },
         { name: "Scikit-learn", level: "Intermediate" },
         { name: "OpenCV", level: "Beginner" },

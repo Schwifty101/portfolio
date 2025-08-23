@@ -288,6 +288,19 @@ textarea:focus,
   margin-right: auto;
 }
 
+/* CSS fallback for hero title scaling when JS is disabled */
+@media (max-width: 320px) {
+  .fluid-text-hero {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 390px) {
+  .fluid-text-hero {
+    font-size: clamp(3rem, 10vw, 4.5rem);
+  }
+}
+
 .fluid-text-section {
   font-size: clamp(2.5rem, 8vw, 5rem);
   line-height: 1.1;
@@ -365,7 +378,7 @@ textarea:focus,
   /* Compact mobile spacing */
   .section-padding {
     padding-top: clamp(3rem, 10vw, 5rem);
-    padding-bottom: clamp(3rem, 10vw, 5rem);
+    padding-bottom: clamp(2rem, 8vw, 4rem);
     padding-left: clamp(1rem, 4vw, 2rem);
     padding-right: clamp(1rem, 4vw, 2rem);
   }
@@ -374,6 +387,16 @@ textarea:focus,
   .card-base {
     padding: clamp(1.5rem, 5vw, 2.5rem);
     margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  /* Remove extra padding in project section on mobile */
+  .mobile-section-gap {
+    margin-bottom: clamp(2rem, 6vh, 3rem) !important;
+  }
+
+  /* Tighter spacing for mobile hero section */
+  .mobile-hero-compact {
+    gap: clamp(1rem, 4vw, 2rem);
   }
 }
 
@@ -446,6 +469,17 @@ textarea:focus,
   /* Optimize spacing for touch devices */
   .mobile-touch-spacing {
     padding: 0.75rem 1rem;
+  }
+
+  /* Ensure contact section spans full viewport on mobile */
+  #contact {
+    min-height: 100vh;
+    min-height: 100dvh; /* Use dynamic viewport height for mobile */
+  }
+
+  /* Adjust contact section number positioning for mobile */
+  #contact .absolute {
+    position: absolute;
   }
 }
 

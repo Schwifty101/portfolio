@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import gsap from "gsap"
 import { getCalApi } from "@calcom/embed-react"
@@ -12,7 +12,7 @@ const Navigation = () => {
   const [currentTime, setCurrentTime] = useState("")
   const [hasAnimated, setHasAnimated] = useState(false)
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: "hero", label: "Home" },
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
@@ -20,7 +20,7 @@ const Navigation = () => {
     { id: "project", label: "Projects" },
     { id: "education", label: "Education" },
     { id: "contact", label: "Contact" },
-  ]
+  ], [])
 
   useEffect(() => {
     // Always start with hero as active section
@@ -73,7 +73,7 @@ const Navigation = () => {
       clearInterval(timeInterval)
       clearTimeout(timer)
     }
-  }, [])
+  }, [navItems])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -83,13 +83,6 @@ const Navigation = () => {
     }
   }
 
-  const scrollToContact = () => {
-    const element = document.getElementById("contact")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-      setIsMenuOpen(false)
-    }
-  }
 
   const AnimatedText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
     return (
@@ -395,7 +388,7 @@ const Navigation = () => {
                 </div>
 
                 {/* Bottom Right - Globe Icon and Availability */}
-                <div className="text-right space-y-4">
+                <div className="text-right space-y-4 hidden sm:block">
                   <div className="flex items-center justify-end space-x-3">
                     <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center">
                       <div className="w-3 h-3 border border-gray-400 rounded-full"></div>
@@ -403,7 +396,7 @@ const Navigation = () => {
                     <span className="text-gray-500 uppercase text-sm tracking-wider">Working Globally</span>
                   </div>
                   <div className="text-gray-500 uppercase text-sm tracking-wider">
-                    Available Jan '25
+                    Available Jan &apos;25
                   </div>
                 </div>
               </motion.div>

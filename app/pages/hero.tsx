@@ -44,12 +44,13 @@ const Hero = ({ onReady }: HeroProps = {}) => {
     const ro = new ResizeObserver(() => {
       // Reset scale to measure natural width
       nameEl.style.transform = "scale(1)"
-      nameEl.style.transformOrigin = "center center"
+      nameEl.style.transformOrigin = "left center"
       const containerWidth = container.clientWidth
       const nameWidth = nameEl.scrollWidth
       if (nameWidth > 0 && containerWidth > 0) {
         // Fit-to-width. Allow upscaling a bit to maximize presence, capped for safety.
         const scale = Math.min(2, Math.max(0.5, containerWidth / nameWidth))
+        nameEl.style.transformOrigin = "left center"
         nameEl.style.transform = `scale(${scale})`
       }
     })
@@ -60,6 +61,11 @@ const Hero = ({ onReady }: HeroProps = {}) => {
 
   useEffect(() => {
     if (!isReady) return
+
+    // Check if all required refs are available
+    if (!titleRef.current || !leftContentRef.current || !rightContentRef.current || !imageRef.current || !statusRef.current) {
+      return
+    }
 
     gsap.defaults({ ease: "power2.out", duration: 1.2 })
 
@@ -157,25 +163,19 @@ const Hero = ({ onReady }: HeroProps = {}) => {
     }
   }, [isReady])
 
-  const scrollToContact = () => {
-    const element = document.getElementById("contact")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
 
   return (
     <section
       id="hero"
       ref={heroRef}
-      className="min-h-screen w-full flex flex-col justify-center bg-black text-white pt-32 pb-16 relative overflow-hidden"
+      className="min-h-screen w-full flex flex-col justify-center bg-black text-white pt-20 lg:pt-24 pb-16 relative overflow-hidden"
     >
       {/* Background elements with animations from pasted text */}
       <AnimatePresence>
         {isReady && (
           <>
             <motion.div
-              className="absolute top-20 right-[5%] w-32 h-32 bg-gradient-to-br from-gray-700 to-gray-800 rounded-full opacity-20"
+              className="absolute top-20 right-[5%] w-32 h-32 bg-gradient-to-br from-gray-700 to-gray-800 rounded-full opacity-20 mobile-hide-bg"
               initial={{ opacity: 0, scale: 0.7 }}
               animate={{
                 opacity: 0.15,
@@ -193,7 +193,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
               }}
             />
             <motion.div
-              className="absolute bottom-40 right-[10%] w-16 h-16 bg-gradient-to-br from-gray-600 to-gray-700 rotate-45 opacity-30"
+              className="absolute bottom-40 right-[10%] w-16 h-16 bg-gradient-to-br from-gray-600 to-gray-700 rotate-45 opacity-30 mobile-hide-bg"
               initial={{ opacity: 0, scale: 0.7, rotate: 45 }}
               animate={{
                 opacity: 0.25,
@@ -211,7 +211,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
               }}
             />
             <motion.div
-              className="absolute top-1/2 right-[2%] w-8 h-8 bg-gray-600 rounded-full opacity-40"
+              className="absolute top-1/2 right-[2%] w-8 h-8 bg-gray-600 rounded-full opacity-40 mobile-hide-bg"
               initial={{ opacity: 0, y: 0 }}
               animate={{
                 opacity: [0, 0.3, 0.6, 0.3],
@@ -243,14 +243,17 @@ const Hero = ({ onReady }: HeroProps = {}) => {
             duration: 0.9,
             ease: [0.25, 0.46, 0.45, 0.94]
           }}
-          className="text-gray-400 mb-0 text-2xl tracking-widest font-thin leading-4"
+          className="text-gray-400 mb-0 text-2xl tracking-widest font-light leading-normal pb-2"
         >
           (Need an unfair advantage?)
         </motion.div>
 
         {/* Main Title */}
-        <div ref={titleRef} className="mb-8 item-center text-center">
-          <h1 className="fluid-text-hero font-black leading-none text-white tracking-normal overflow-visible inline-block">
+        <div ref={fitContainerRef} className="mb-8">
+          <h1 ref={titleRef}
+            className="fluid-text-hero font-black leading-none text-white tracking-normal block w-full text-left"
+            style={{ fontSize: "clamp(3rem, 12vw, 8rem)" }}
+          >
             <span ref={nameRef} className="inline-flex items-baseline whitespace-nowrap will-change-transform">
               <span>SOBAN AHMAD</span>
               <motion.span
@@ -274,9 +277,9 @@ const Hero = ({ onReady }: HeroProps = {}) => {
         </div>
 
         {/* Three Column Layout - Full Width */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8 xl:gap-12 items-start">
           {/* Left Content */}
-          <div ref={leftContentRef} className="lg:col-span-4 mobile-compact">
+          <div ref={leftContentRef} className="lg:col-span-4 space-y-4 lg:space-y-6">
             <motion.div
               className="text-gray-400 text-xl lg:text-4xl"
               animate={{
@@ -291,7 +294,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
             >
               ↘
             </motion.div>
-            <div className="space-y-8 pt-8">
+            <div className="space-y-4 md:space-y-6 lg:space-y-8 pt-4 md:pt-6 lg:pt-8">
               <p className="fluid-text-body text-gray-300 leading-relaxed font-light max-w-sm">
                 I help growing brands and startups gain an unfair advantage through premium, results driven software
                 solutions.
@@ -300,7 +303,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                 data-cal-namespace="30min"
                 data-cal-link="soban-ahmad003/30min"
                 data-cal-config='{"layout":"month_view"}'
-                className="mt-12 inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-12 py-6 rounded-full font-medium text-lg tracking-wider uppercase transition-all duration-300 group"
+                className="mt-6 md:mt-8 lg:mt-12 inline-flex items-center space-x-2 md:space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-8 md:px-10 lg:px-12 py-4 md:py-5 lg:py-6 rounded-full font-medium text-base md:text-lg tracking-wider uppercase transition-all duration-300 group"
                 whileHover={{
                   scale: 1.03,
                   boxShadow: "0 15px 35px rgba(0,0,0,0.25)",
@@ -413,9 +416,9 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           </div>
 
           {/* Right Content - Availability */}
-          <div ref={rightContentRef} className="lg:col-span-4 space-y-6 lg:space-y-8 lg:text-right">
+          <div ref={rightContentRef} className="lg:col-span-4 space-y-4 md:space-y-6 lg:space-y-8 lg:text-right">
             <div className="space-y-3 lg:space-y-4">
-              <div className="text-gray-500 uppercase font-light text-sm md:text-base lg:text-lg tracking-wide">
+              <div className="text-gray-500 pt-4 md:pt-8 lg:pt-16 uppercase font-light text-sm md:text-base lg:text-lg tracking-wide">
                 AVAILABLE FOR FREELANCE WORK
               </div>
               <div className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tighter text-white font-thin">
@@ -450,7 +453,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
             duration: 1.0,
             ease: [0.25, 0.46, 0.45, 0.94]
           }}
-          className="absolute bottom-8 right-[clamp(1rem,5vw,4rem)] text-right"
+          className="absolute bottom-0 right-[clamp(1rem,5vw,4rem)] text-right hidden sm:block"
         >
           <div className="text-gray-500 uppercase tracking-wider mb-2 text-sm">For Further Inquiries</div>
           <motion.div

@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 export const Project = () => { // Changed to named export
   const [currentProject, setCurrentProject] = useState(0)
   const [numberPosition, setNumberPosition] = useState(0)
+  const [isLgScreen, setIsLgScreen] = useState(false)
   const projectRefs = useRef<(HTMLDivElement | null)[]>([])
   const numberRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -75,8 +76,24 @@ export const Project = () => { // Changed to named export
     },
   ]
 
-  // Optimized scroll handling with throttling
+  // Check for large screen breakpoint
   useEffect(() => {
+    const checkScreenSize = () => {
+      setIsLgScreen(window.innerWidth >= 1024)
+    }
+    
+    checkScreenSize()
+    const mediaQuery = window.matchMedia('(min-width: 1024px)')
+    const handleChange = () => checkScreenSize()
+    
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
+
+  // Optimized scroll handling with throttling (only on large screens)
+  useEffect(() => {
+    if (!isLgScreen) return
+    
     let ticking = false
     let lastScrollY = window.scrollY
 
@@ -136,7 +153,7 @@ export const Project = () => { // Changed to named export
     handleScroll() // Initial calculation
 
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [isLgScreen])
 
   // Animation variants for just the changing number
   const numberVariants = {
@@ -200,135 +217,209 @@ export const Project = () => { // Changed to named export
         </div>
       </div>
 
-      {/* Two Column Layout */}
+      {/* Conditional Layout Based on Screen Size */}
       <div ref={containerRef} className="container-fluid">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-y-8 lg:gap-y-0 min-h-screen">
-          {/* Left Column - Project Numbers (Hidden on Mobile) */}
-          <div className="lg:sticky lg:top-32 lg:h-fit relative lg:col-span-1 overflow-hidden project-counter-mobile-hide">
-            <div className="flex items-center justify-center h-[60vh] relative">
-              <div
-                ref={numberRef}
-                className="relative w-full flex items-end justify-center"
-                style={{
-                  transform: `translateY(${numberPosition}px)`,
-                  transition: "transform 0.025s ease-out",
-                }}
-              >
-                <div className="text-[6rem] md:text-[8rem] lg:text-[10rem] font-black text-gray-900 leading-none opacity-80 select-none text-center flex items-start">
-                  <span>0</span>
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={currentProject}
-                      variants={numberVariants}
-                      initial="initial"
-                      animate="animate"
-                      exit="exit"
-                    >
-                      {currentProject + 1}
-                    </motion.span>
-                  </AnimatePresence>
-                  <span>.</span>
-                </div>
+        {isLgScreen ? (
+          // Large screen: Two Column Layout with counter
+          <div className="grid grid-cols-4 gap-y-0 min-h-screen">
+            {/* Left Column - Project Numbers */}
+            <div className="sticky top-32 h-fit relative col-span-1 overflow-hidden">
+              <div className="flex items-center justify-center h-[60vh] relative">
+                <div
+                  ref={numberRef}
+                  className="relative w-full flex items-end justify-center"
+                  style={{
+                    transform: `translateY(${numberPosition}px)`,
+                    transition: "transform 0.025s ease-out",
+                  }}
+                >
+                  <div className="text-[6rem] md:text-[8rem] lg:text-[10rem] font-black text-gray-900 leading-none opacity-80 select-none text-center flex items-start">
+                    <span>0</span>
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={currentProject}
+                        variants={numberVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                      >
+                        {currentProject + 1}
+                      </motion.span>
+                    </AnimatePresence>
+                    <span>.</span>
+                  </div>
 
-                {/* Project Counter */}
-                <div className="absolute bottom-0 left-10 text-gray-500 text-sm font-mono">
-                  {String(currentProject + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                  {/* Project Counter */}
+                  <div className="absolute bottom-0 left-10 text-gray-500 text-sm font-mono">
+                    {String(currentProject + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right Column - Project Cards (Full width on mobile) */}
-          <div className="mobile-compact lg:col-span-3 flex flex-col items-center lg:items-end">
-            <div className="w-full lg:w-4/5 mobile-compact">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  ref={(el) => {
-                    projectRefs.current[index] = el
-                  }}
-                  className="group cursor-pointer mobile-section-gap"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl lg:rounded-2xl card-padding-fluid hover:border-gray-600 transition-all duration-500 hover:shadow-2xl">
-                    {/* Project Header */}
-                    <div className="flex justify-between items-start mb-4 lg:mb-6">
-                      <div className="text-gray-500 text-sm font-mono">{String(index + 1).padStart(2, "0")}</div>
-                      <div className="text-right">
-                        <div className="text-gray-400 text-sm">{project.year}</div>
-                        <div className="text-gray-500 text-xs uppercase tracking-wider mt-1">{project.category}</div>
-                      </div>
-                    </div>
-
-                    {/* Project Content */}
-                    <div className="mobile-compact">
-                      <div className="mobile-compact">
-                        <h3 className="fluid-text-section font-bold text-white group-hover:text-gray-300 transition-colors duration-300">
-                          {project.title}
-                        </h3>
-
-                        <div className="flex items-center space-x-3 lg:space-x-4">
-                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                          <span className="text-green-400 text-sm font-medium">{project.impact}</span>
+            {/* Right Column - Project Cards */}
+            <div className="col-span-3 flex flex-col items-end">
+              <div className="w-4/5">
+                {projects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    ref={(el) => {
+                      projectRefs.current[index] = el
+                    }}
+                    className="group cursor-pointer mobile-section-gap"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl lg:rounded-2xl card-padding-fluid hover:border-gray-600 transition-all duration-500 hover:shadow-2xl">
+                      {/* Project Header */}
+                      <div className="flex justify-between items-start mb-4 lg:mb-6">
+                        <div className="text-gray-500 text-sm font-mono">{String(index + 1).padStart(2, "0")}</div>
+                        <div className="text-right">
+                          <div className="text-gray-400 text-sm">{project.year}</div>
+                          <div className="text-gray-500 text-xs uppercase tracking-wider mt-1">{project.category}</div>
                         </div>
                       </div>
 
-                      <p className="text-gray-400 leading-relaxed fluid-text-body">{project.description}</p>
+                      {/* Project Content */}
+                      <div className="space-y-4 lg:space-y-6">
+                        <div className="space-y-3">
+                          <h3 className="text-2xl lg:text-4xl xl:text-5xl font-bold text-white group-hover:text-gray-300 transition-colors duration-300">
+                            {project.title}
+                          </h3>
 
-                      <p className="text-gray-500 leading-relaxed text-sm lg:text-base">{project.details}</p>
+                          <div className="flex items-center space-x-3 lg:space-x-4">
+                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <span className="text-green-400 text-sm font-medium">{project.impact}</span>
+                          </div>
+                        </div>
 
-                      {/* Tech Stack */}
-                      <div className="flex flex-wrap gap-2 pt-3 lg:pt-4">
-                        {project.tech.map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-3 py-1.5 lg:px-4 lg:py-2 bg-gray-800 text-gray-300 text-xs lg:text-sm rounded-full font-light hover:bg-gray-700 transition-colors duration-300"
+                        <p className="text-gray-400 leading-relaxed text-base lg:text-lg">{project.description}</p>
+
+                        <p className="text-gray-500 leading-relaxed text-sm lg:text-base">{project.details}</p>
+
+                        {/* Tech Stack */}
+                        <div className="flex flex-wrap gap-2 pt-3 lg:pt-4">
+                          {project.tech.map((tech, techIndex) => (
+                            <span
+                              key={techIndex}
+                              className="px-3 py-1.5 lg:px-4 lg:py-2 bg-gray-800 text-gray-300 text-xs lg:text-sm rounded-full font-light hover:bg-gray-700 transition-colors duration-300"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* View Project Link */}
+                        <div className="pt-4 lg:pt-6">
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center text-gray-400 hover:text-white transition-colors duration-300 group/link"
                           >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* View Project Link */}
-                      <div className="pt-4 lg:pt-6">
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center text-gray-400 hover:text-white transition-colors duration-300 group/link"
-                        >
-                          <span className="text-sm lg:text-base font-medium tracking-wide">View Project</span>
-                          <span className="ml-2 text-base lg:text-lg">↗</span>
-                        </a>
+                            <span className="text-sm lg:text-base font-medium tracking-wide">View Project</span>
+                            <span className="ml-2 text-base lg:text-lg">↗</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          // Mobile/Tablet: Single column layout with cards only
+          <div className="space-y-8 md:space-y-12">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                className="group cursor-pointer"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl card-padding-fluid hover:border-gray-600 transition-all duration-500 hover:shadow-2xl">
+                  {/* Project Header */}
+                  <div className="flex justify-between items-start mb-4 md:mb-6">
+                    <div className="text-gray-500 text-sm font-mono">{String(index + 1).padStart(2, "0")}</div>
+                    <div className="text-right">
+                      <div className="text-gray-400 text-sm">{project.year}</div>
+                      <div className="text-gray-500 text-xs uppercase tracking-wider mt-1">{project.category}</div>
+                    </div>
+                  </div>
 
-        {/* Navigation Dots */}
-        <div className="flex justify-center space-x-4 py-20">
-          {projects.map((_, index) => (
-            <button
-              key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentProject === index ? "bg-white scale-125" : "bg-gray-600 hover:bg-gray-500"
-                }`}
-              onClick={() => {
-                projectRefs.current[index]?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "center",
-                })
-              }}
-            />
-          ))}
-        </div>
+                  {/* Project Content */}
+                  <div className="space-y-4 md:space-y-6">
+                    <div className="space-y-3">
+                      <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-gray-300 transition-colors duration-300">
+                        {project.title}
+                      </h3>
+
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        <span className="text-green-400 text-sm font-medium">{project.impact}</span>
+                      </div>
+                    </div>
+
+                    <p className="text-gray-400 leading-relaxed text-base">{project.description}</p>
+
+                    <p className="text-gray-500 leading-relaxed text-sm">{project.details}</p>
+
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2 pt-3">
+                      {project.tech.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1.5 bg-gray-800 text-gray-300 text-xs rounded-full font-light hover:bg-gray-700 transition-colors duration-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* View Project Link */}
+                    <div className="pt-4">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-gray-400 hover:text-white transition-colors duration-300 group/link"
+                      >
+                        <span className="text-sm font-medium tracking-wide">View Project</span>
+                        <span className="ml-2 text-base">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* Navigation Dots - Only show on large screens */}
+        {isLgScreen && (
+          <div className="flex justify-center space-x-4 py-20">
+            {projects.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${currentProject === index ? "bg-white scale-125" : "bg-gray-600 hover:bg-gray-500"
+                  }`}
+                onClick={() => {
+                  projectRefs.current[index]?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  })
+                }}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Call to Action */}
         <motion.div
