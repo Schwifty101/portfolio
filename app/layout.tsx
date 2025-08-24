@@ -61,7 +61,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: '/myPhoto.jpg',
+  icons: '/favicon.jpg',
 }
 
 export default function RootLayout({
@@ -73,7 +73,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
       <head>
         <meta name="google-site-verification" content="uIQeyUBxNeGGsf7pr4S0xQ19v1SqgualDqFQIWExDIg" />
-        <link rel="icon" href="/myPhoto.jpg" type="image/x-jpg" />
+        <link rel="icon" href="/favicon.jpg" type="image/x-jpg" />
         <style>{`
           html {
             scroll-restoration: manual;
