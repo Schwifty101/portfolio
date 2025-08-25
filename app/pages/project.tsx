@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { ArrowUpRight } from 'lucide-react'
 
 export const Project = () => { // Changed to named export
   const [currentProject, setCurrentProject] = useState(0)
@@ -333,7 +334,7 @@ export const Project = () => { // Changed to named export
                             className="flex items-center text-gray-400 hover:text-white transition-colors duration-300 group/link"
                           >
                             <span className="text-sm lg:text-base font-medium tracking-wide">View Project</span>
-                            <span className="ml-2 text-base lg:text-lg">↗</span>
+                            <span className="ml-2 text-base lg:text-lg"><ArrowUpRight className="w-4 h-4" /></span>
                           </a>
                         </div>
                       </div>
@@ -404,7 +405,7 @@ export const Project = () => { // Changed to named export
                         className="flex items-center text-gray-400 hover:text-white transition-colors duration-300 group/link"
                       >
                         <span className="text-sm font-medium tracking-wide">View Project</span>
-                        <span className="ml-2 text-base">↗</span>
+                        <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
                       </a>
                     </div>
                   </div>
@@ -450,7 +451,7 @@ export const Project = () => { // Changed to named export
               rel="noopener noreferrer"
               className="flex items-center transition-colors duration-300 group/link"
             >VIEW ALL PROJECTS</a>
-            <span className="">↗</span>
+            <span className=""><ArrowUpRight className="w-4 h-4" /></span>
           </button>
         </motion.div>
       </div>

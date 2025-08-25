@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { getCalApi } from "@calcom/embed-react"
+import { ArrowUpRight } from 'lucide-react'
 
 const Contact = () => {
   const sectionRef = useRef(null)
@@ -105,7 +106,7 @@ const Contact = () => {
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
             >
-              ↗
+              <ArrowUpRight className="w-4 h-4" />
             </motion.span>
           </motion.button>
 

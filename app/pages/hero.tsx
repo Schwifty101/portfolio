@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { ArrowDownRight } from 'lucide-react'
 import { gsap } from "gsap"
 import { getCalApi } from "@calcom/embed-react"
 
@@ -333,7 +334,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                     ease: [0.37, 0, 0.63, 1],
                   }}
                 >
-                  ↗
+                  <ArrowDownRight className="w-4 h-4" />
                 </motion.span>
               </motion.button>
             </div>

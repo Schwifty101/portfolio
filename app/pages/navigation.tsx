@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { ArrowUpRight } from 'lucide-react'
 import gsap from "gsap"
 import { getCalApi } from "@calcom/embed-react"
 
@@ -242,7 +243,7 @@ const Navigation = () => {
                       whileTap={{ scale: 0.95 }}
                     >
                       <span>BOOK A CALL</span>
-                      <span>↗</span>
+                      <span><ArrowUpRight className="w-4 h-4" /></span>
                     </motion.button>
 
                     {/* Hamburger Menu */}

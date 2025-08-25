@@ -61,7 +61,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: '/favicon.jpg',
+  icons: {
+    icon: '/favicon.JPG',
+    shortcut: '/favicon.JPG',
+    apple: '/apple-touch-icon.JPG',
+  },
 }
 
 export default function RootLayout({
@@ -73,7 +77,9 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
       <head>
         <meta name="google-site-verification" content="uIQeyUBxNeGGsf7pr4S0xQ19v1SqgualDqFQIWExDIg" />
-        <link rel="icon" href="/favicon.jpg" type="image/x-jpg" />
+        <link rel="icon" href="/favicon.JPG" type="image/jpeg" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.JPG" />
+        <link rel="shortcut icon" href="/favicon.JPG" type="image/jpeg" />
         <style>{`
           html {
             scroll-restoration: manual;
