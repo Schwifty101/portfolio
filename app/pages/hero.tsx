@@ -20,6 +20,14 @@ const Hero = ({ onReady }: HeroProps = {}) => {
   const fitContainerRef = useRef<HTMLDivElement | null>(null)
   const nameRef = useRef<HTMLSpanElement | null>(null)
   const [isReady, setIsReady] = useState(false)
+  const [currentDate, setCurrentDate] = useState(() => {
+    const now = new Date()
+    const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    return {
+      month: monthNames[now.getMonth()],
+      year: `'${now.getFullYear().toString().slice(-2)}`
+    }
+  })
 
   useEffect(() => {
     const readyTimer = setTimeout(() => {
@@ -420,7 +428,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           <div ref={rightContentRef} className="lg:col-span-4 space-y-4 md:space-y-6 lg:space-y-8 lg:text-right">
             <div className="space-y-3 lg:space-y-4">
               <div className="text-gray-500 pt-4 md:pt-8 lg:pt-16 uppercase font-light text-sm md:text-base lg:text-lg tracking-wide">
-                AVAILABLE FOR FREELANCE WORK
+                AVAILABLE FOR WORK
               </div>
               <div className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tighter text-white font-thin">
                 <motion.span
@@ -434,9 +442,9 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                     delay: 2.3,
                   }}
                 >
-                  JAN
+                  {currentDate.month}
                 </motion.span>
-                <span className="text-xl md:text-2xl lg:text-3xl align-top">&apos;25</span>
+                <span className="text-xl md:text-2xl lg:text-3xl align-top">{currentDate.year}</span>
               </div>
             </div>
           </div>
