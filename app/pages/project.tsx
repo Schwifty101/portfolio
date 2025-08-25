@@ -16,62 +16,74 @@ export const Project = () => { // Changed to named export
       id: 1,
       title: "Traffic Sign Classification using CNN",
       description:
-        "Built a TensorFlow/Keras CNN achieving 98.75% accuracy across 43 traffic sign classes. Expanded dataset from 39K to 162K images via rotation, shear, and brightness augmentation.",
-      tech: ["Python", "TensorFlow", "Keras", "OpenCV", "NumPy"],
+        "Built a deep learning system achieving 98.75% accuracy in recognizing 43 different traffic sign types. Expanded training data from 39K to 162K images using advanced data augmentation techniques.",
+      tech: ["Python", "TensorFlow", "Keras", "OpenCV", "CNN"],
       year: "2024",
       category: "Machine Learning",
       impact: "98.75% Accuracy",
       details:
-        "Applied OpenCV preprocessing, batch normalization, and dropout for robust recognition; exported trained model for deployment.",
+        "Implemented convolutional neural network with image preprocessing, data augmentation, and model optimization techniques for robust traffic sign detection.",
       link: "https://github.com/Schwifty101/TrafficSignClassificationCNN",
     },
     {
       id: 2,
       title: "AI-Powered Assessment Platform",
       description:
-        "Leading a 4-person team delivering a multi-tenant SaaS assessment platform using NestJS, Next.js, and PostgreSQL on AWS.",
-      tech: ["Next.js", "NestJS", "PostgreSQL", "AWS", "Kubernetes"],
+        "Leading a 4-person team building a comprehensive SaaS assessment platform for the Asian tech market. Features multi-tenant architecture, AI-powered plagiarism detection, and integrated proctoring.",
+      tech: ["Next.js", "NestJS", "PostgreSQL", "AWS", "Kubernetes", "OpenAI GPT-4"],
       year: "2025",
       category: "Full-Stack SaaS",
-      impact: "Multi-tenant SaaS on AWS",
+      impact: "Multi-tenant SaaS Platform",
       details:
-        "Architected scalable microservices with Kubernetes orchestration; implemented auth and role-based access with analytics dashboards.",
-      link: "https://github.com/Schwifty101/MultiCommerce-Admin-Dashboard",
+        "Architected scalable microservices with Kubernetes deployment, Auth0 integration, Judge0 code execution, and role-based access control with AI-powered features.",
+      link: "https://github.com/Schwifty101/AI-Assessment-Platform",
     },
     {
       id: 3,
       title: "Chess AI Engine",
       description:
-        "Python chess engine using Minimax with Alpha-Beta pruning and transposition caching for stronger play.",
-      tech: ["Python", "Minimax", "Alpha-Beta", "Tkinter", "OOP"],
+        "Intelligent chess engine using advanced game theory algorithms with move optimization and tactical analysis. Features adaptive difficulty and position evaluation.",
+      tech: ["Python", "Minimax Algorithm", "Alpha-Beta Pruning", "Tkinter", "Game Theory"],
       year: "2024",
-      category: "AI Development",
+      category: "AI & Game Development",
       impact: "Smart AI Opponent",
-      details: "Implemented game tree search with custom evaluation, move ordering, and a simple Tkinter UI.",
+      details: "Implemented Minimax algorithm with Alpha-Beta pruning, move caching, and adaptive depth search. Built intuitive GUI with tactical analysis features.",
       link: "https://github.com/Schwifty101/AI-Chess",
     },
     {
       id: 4,
-      title: "E-Commerce Analytics Dashboard",
+      title: "IMDB Backend Clone",
       description:
-        "Real-time dashboard for KPIs with interactive visualizations and streaming updates across high-volume transactions.",
-      tech: ["React", "D3.js", "Node.js", "MongoDB", "WebSocket"],
+        "Scalable movie database API with comprehensive CRUD operations, advanced filtering, and search functionality. Built with proper documentation and testing.",
+      tech: ["Node.js", "Express", "MySQL", "PostgreSQL", "Swagger", "REST API"],
       year: "2024",
-      category: "Data Visualization",
-      impact: "Live KPI Monitoring",
-      details: "Built a real-time data pipeline with WebSockets and crafted advanced charts in D3.js for drill-down insights.",
+      category: "Backend Development",
+      impact: "Scalable REST API",
+      details: "Developed robust backend with database optimization, comprehensive API documentation using Swagger, and efficient search algorithms.",
       link: "https://github.com/Schwifty101/IMDB-clone-Backend",
     },
     {
       id: 5,
-      title: "Delivery Management System",
+      title: "Multi-Commerce Admin Dashboard",
       description:
-        "Developed NestJS microservices with PostgreSQL and Redis caching; reduced API latency by 35% and enabled real-time tracking for 150+ deliveries/day.",
-      tech: ["NestJS", "PostgreSQL", "Redis", "WebSocket", "Docker"],
+        "Full-stack e-commerce management system with AWS integration, user authentication, and comprehensive order management. Built for scalability and performance.",
+      tech: ["React.js", "Node.js", "MongoDB", "AWS", "ShadCN UI", "Authentication"],
       year: "2024",
-      category: "Backend Systems",
-      impact: "35% Latency Reduction",
-      details: "Optimized DB queries, introduced Redis caching, and added WebSocket-based live status updates for dispatch and riders.",
+      category: "Full-Stack Development",
+      impact: "Complete E-commerce Solution",
+      details: "MERN stack dashboard with cloud integration, secure authentication, inventory management, and modern UI components for optimal user experience.",
+      link: "https://github.com/Schwifty101/MultiCommerce-Admin-Dashboard",
+    },
+    {
+      id: 6,
+      title: "Weather Forecast Chatbot",
+      description:
+        "AI-powered weather assistant integrating Google's Gemini AI with real-time weather data. Optimized for fast response times and natural conversation flow.",
+      tech: ["Python", "Gemini AI", "OpenWeather API", "REST API", "Linux CLI"],
+      year: "2024",
+      category: "AI Integration",
+      impact: "AI-Powered Weather Assistant",
+      details: "Built conversational weather bot using Gemini AI integration with OpenWeather API, featuring RESTful design and optimized response latency.",
       link: "https://github.com/Schwifty101/WeatherApp-GeminiAPI",
     },
   ]
@@ -81,11 +93,11 @@ export const Project = () => { // Changed to named export
     const checkScreenSize = () => {
       setIsLgScreen(window.innerWidth >= 1024)
     }
-    
+
     checkScreenSize()
     const mediaQuery = window.matchMedia('(min-width: 1024px)')
     const handleChange = () => checkScreenSize()
-    
+
     mediaQuery.addEventListener('change', handleChange)
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
@@ -93,7 +105,7 @@ export const Project = () => { // Changed to named export
   // Optimized scroll handling with throttling (only on large screens)
   useEffect(() => {
     if (!isLgScreen) return
-    
+
     let ticking = false
     let lastScrollY = window.scrollY
 
