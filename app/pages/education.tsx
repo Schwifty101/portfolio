@@ -49,10 +49,10 @@ const Education = () => {
   ]
 
   const certifications = [
-    "AWS Certified Solutions Architect",
-    "Google Cloud Professional Developer",
-    "TensorFlow Developer Certificate",
-    "React Advanced Patterns Certification",
+    "Google Project Management Certificate",
+    "Udemy Web Development Bootcamp",
+    "Udemy Digital Marketing Certificate",
+    "LearnOBots Robotics & Arduino Certificate"
   ]
 
   return (
