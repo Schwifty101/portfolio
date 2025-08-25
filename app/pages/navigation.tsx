@@ -12,6 +12,14 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentTime, setCurrentTime] = useState("")
   const [hasAnimated, setHasAnimated] = useState(false)
+  const [currentDate, setCurrentDate] = useState(() => {
+    const now = new Date()
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return {
+      month: monthNames[now.getMonth()],
+      year: `'${now.getFullYear().toString().slice(-2)}`
+    }
+  })
 
   const navItems = useMemo(() => [
     { id: "hero", label: "Home" },
@@ -397,7 +405,7 @@ const Navigation = () => {
                     <span className="text-gray-500 uppercase text-sm tracking-wider">Working Globally</span>
                   </div>
                   <div className="text-gray-500 uppercase text-sm tracking-wider">
-                    Available Jan &apos;25
+                    Available {currentDate.month} {currentDate.year}
                   </div>
                 </div>
               </motion.div>

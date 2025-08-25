@@ -131,7 +131,6 @@ const Contact = () => {
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               </div>
               <div className="text-center">
-                <div className="text-white text-sm font-medium">Available Jan &apos;25</div>
                 <div className="text-gray-400 text-xs">Working Globally</div>
               </div>
             </div>
@@ -152,7 +151,6 @@ const Contact = () => {
         </div>
         <div>
           <div className="text-white text-xs md:text-sm font-medium">Working Globally</div>
-          <div className="text-gray-400 text-xs">Available Jan &apos;25</div>
         </div>
       </motion.div>
 
