@@ -236,7 +236,7 @@ const Navigation = () => {
                   >
                     <motion.button
                       data-cal-namespace="30min"
-                      data-cal-link="soban-ahmad003/30min"
+                      data-cal-link="soban-ahmad/30min"
                       data-cal-config='{"layout":"month_view"}'
                       className="hidden md:inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full font-medium text-medium tracking-wider uppercase transition-all duration-300 group"
                       whileHover={{ scale: 1.05, backgroundColor: "#374151" }}

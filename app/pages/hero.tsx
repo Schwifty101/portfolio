@@ -302,7 +302,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
               </p>
               <motion.button
                 data-cal-namespace="30min"
-                data-cal-link="soban-ahmad003/30min"
+                data-cal-link="soban-ahmad/30min"
                 data-cal-config='{"layout":"month_view"}'
                 className="mt-6 md:mt-8 lg:mt-12 inline-flex items-center space-x-2 md:space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-8 md:px-10 lg:px-12 py-4 md:py-5 lg:py-6 rounded-full font-medium text-base md:text-lg tracking-wider uppercase transition-all duration-300 group"
                 whileHover={{

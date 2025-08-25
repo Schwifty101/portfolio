@@ -90,7 +90,7 @@ const Contact = () => {
 
           <motion.button
             data-cal-namespace="30min"
-            data-cal-link="soban-ahmad003/30min"
+            data-cal-link="soban-ahmad/30min"
             data-cal-config='{"layout":"month_view"}'
             className="mt-6 md:mt-12 inline-flex items-center space-x-2 md:space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-8 md:px-12 py-4 md:py-6 rounded-full font-medium text-base md:text-lg tracking-wide md:tracking-wider uppercase transition-all duration-300 group min-h-[44px]"
             initial={{ opacity: 0, y: 50 }}
