@@ -71,15 +71,14 @@ const Footer = () => {
     // Time update for Islamabad, Pakistan (PKT - UTC+5)
     const updateTime = () => {
       const now = new Date()
-      const islamabadTime = new Date(now.getTime() + 5 * 60 * 60 * 1000) // UTC+5
-      setCurrentTime(
-        islamabadTime.toLocaleTimeString("en-US", {
-          hour12: true,
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        }) + ", ISB",
-      )
+      const islamabadTime = now.toLocaleTimeString("en-US", {
+        hour12: true,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZone: "Asia/Karachi",
+      })
+      setCurrentTime(islamabadTime + ", ISB")
     }
     updateTime()
     const timeInterval = setInterval(updateTime, 1000)

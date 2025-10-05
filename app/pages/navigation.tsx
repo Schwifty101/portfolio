@@ -47,14 +47,14 @@ const Navigation = () => {
 
     const updateTime = () => {
       const now = new Date()
-      setCurrentTime(
-        now.toLocaleTimeString("en-US", {
-          hour12: true,
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        }) + ", ISB",
-      )
+      const islamabadTime = now.toLocaleTimeString("en-US", {
+        hour12: true,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZone: "Asia/Karachi",
+      })
+      setCurrentTime(islamabadTime + ", ISB")
     }
     updateTime()
     const timeInterval = setInterval(updateTime, 1000)
