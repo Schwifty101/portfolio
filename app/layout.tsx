@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture. Explore my projects and technical expertise.',
   keywords: ['software engineer', 'full-stack developer', 'React', 'Next.js', 'Node.js', 'TypeScript', 'AI', 'machine learning', 'web development', 'portfolio', 'JavaScript', 'Python', 'cloud architecture'],
-  authors: [{ name: 'Soban Ahmad', url: 'https://sobanahmad.vercel.app' }],
+  authors: [{ name: 'Soban Ahmad', url: 'https://sobanahmad.dev' }],
   creator: 'Soban Ahmad',
   publisher: 'Soban Ahmad',
   formatDetection: {
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://sobanahmad.vercel.app'),
+  metadataBase: new URL('https://sobanahmad.dev'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://sobanahmad.vercel.app',
+    url: 'https://sobanahmad.dev',
     title: 'Soban Ahmad - Software Engineer & Developer',
     description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.',
     siteName: 'Soban Ahmad Portfolio',
@@ -76,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
       <head>
-        <meta name="google-site-verification" content="uIQeyUBxNeGGsf7pr4S0xQ19v1SqgualDqFQIWExDIg" />
+        <meta name="google-site-verification" content="3vRG8sFEkda-o8fvds2MUaj9wvTXlLrrW_8mz6vuAyM" />
         <link rel="icon" href="/favicon.JPG" type="image/jpeg" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.JPG" />
         <link rel="shortcut icon" href="/favicon.JPG" type="image/jpeg" />

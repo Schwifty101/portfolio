@@ -1,4 +1,17 @@
 {
   "buildCommand": "npm run build",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "sobanahmad.vercel.app"
+        }
+      ],
+      "destination": "https://sobanahmad.dev/$1",
+      "permanent": true
+    }
+  ]
 }
