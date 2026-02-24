@@ -3,6 +3,11 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowUpRight } from 'lucide-react'
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 export const Project = () => { // Changed to named export
   const [currentProject, setCurrentProject] = useState(0)
@@ -11,6 +16,8 @@ export const Project = () => { // Changed to named export
   const projectRefs = useRef<(HTMLDivElement | null)[]>([])
   const numberRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const leftColumnRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
 
   const projects = [
     {
@@ -102,6 +109,28 @@ export const Project = () => { // Changed to named export
     mediaQuery.addEventListener('change', handleChange)
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
+
+  // Pin the left column using ScrollTrigger (works with ScrollSmoother)
+  useEffect(() => {
+    if (!isLgScreen || !leftColumnRef.current || !gridRef.current) return
+
+    // Small delay to let ScrollSmoother settle
+    const timer = requestAnimationFrame(() => {
+      const trigger = ScrollTrigger.create({
+        trigger: gridRef.current,
+        start: "top top+=128",
+        end: () => `+=${gridRef.current!.offsetHeight - leftColumnRef.current!.offsetHeight}`,
+        pin: leftColumnRef.current!,
+        pinSpacing: false,
+      })
+
+      ScrollTrigger.refresh()
+
+      return () => trigger.kill()
+    })
+
+    return () => cancelAnimationFrame(timer)
+  }, [isLgScreen])
 
   // Optimized scroll handling with throttling (only on large screens)
   useEffect(() => {
@@ -234,9 +263,9 @@ export const Project = () => { // Changed to named export
       <div ref={containerRef} className="container-fluid">
         {isLgScreen ? (
           // Large screen: Two Column Layout with counter
-          <div className="grid grid-cols-4 gap-y-0 min-h-screen">
+          <div ref={gridRef} className="grid grid-cols-4 gap-y-0 min-h-screen">
             {/* Left Column - Project Numbers */}
-            <div className="sticky top-32 h-fit relative col-span-1 overflow-hidden">
+            <div ref={leftColumnRef} className="h-fit relative col-span-1 overflow-hidden">
               <div className="flex items-center justify-center h-[60vh] relative">
                 <div
                   ref={numberRef}
@@ -424,10 +453,14 @@ export const Project = () => { // Changed to named export
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${currentProject === index ? "bg-white scale-125" : "bg-gray-600 hover:bg-gray-500"
                   }`}
                 onClick={() => {
-                  projectRefs.current[index]?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                  })
+                  const el = projectRefs.current[index]
+                  if (el) {
+                    gsap.to(window, {
+                      duration: 1,
+                      scrollTo: { y: el, offsetY: window.innerHeight / 3 },
+                      ease: "power2.inOut"
+                    })
+                  }
                 }}
               />
             ))}
