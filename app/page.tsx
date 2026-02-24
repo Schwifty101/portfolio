@@ -11,6 +11,7 @@ import { Project } from './pages/project' // Ensure this is a named import
 import { Education } from './pages/education'
 import { Contact } from './pages/contact'
 import { Footer } from './pages/Footer'
+import { SmoothScrollProvider } from '@/components/SmoothScrollProvider'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -21,25 +22,14 @@ export default function Home() {
 
   // Ensure page starts at top on mount/refresh
   useEffect(() => {
-    // Scroll to top immediately on mount
     window.scrollTo(0, 0)
-
-    // Also scroll to hero section specifically after loading is complete
-    if (!isLoading) {
-      setTimeout(() => {
-        const heroElement = document.getElementById('hero')
-        if (heroElement) {
-          heroElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
-      }, 100)
-    }
-  }, [isLoading])
+  }, [])
 
   return (
     <>
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
 
-      <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+      <SmoothScrollProvider isReady={!isLoading}>
         <Navigation />
         <main className="w-full">
           <Hero />
@@ -51,7 +41,7 @@ export default function Home() {
           <Contact />
         </main>
         <Footer />
-      </div>
+      </SmoothScrollProvider>
     </>
   )
 }

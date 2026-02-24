@@ -3,6 +3,9 @@
 import { motion } from "framer-motion"
 import { useEffect, useState, useCallback, useRef } from "react"
 import { gsap } from "gsap"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"
+
+gsap.registerPlugin(ScrollToPlugin)
 
 const SlotMachineText = ({ text, className = "" }: { text: string; className?: string }) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -58,10 +61,11 @@ const SlotMachineText = ({ text, className = "" }: { text: string; className?: s
 }
 
 const scrollToSection = (sectionId: string) => {
-  const element = document.getElementById(sectionId)
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" })
-  }
+  gsap.to(window, {
+    duration: 1,
+    scrollTo: { y: `#${sectionId}`, offsetY: 0 },
+    ease: "power2.inOut"
+  })
 }
 
 const Footer = () => {

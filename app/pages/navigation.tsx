@@ -4,6 +4,9 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowUpRight } from 'lucide-react'
 import gsap from "gsap"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"
+
+gsap.registerPlugin(ScrollToPlugin)
 import { getCalApi } from "@calcom/embed-react"
 
 const Navigation = () => {
@@ -85,11 +88,12 @@ const Navigation = () => {
   }, [navItems])
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-      setIsMenuOpen(false)
-    }
+    setIsMenuOpen(false)
+    gsap.to(window, {
+      duration: 1,
+      scrollTo: { y: `#${sectionId}`, offsetY: 0 },
+      ease: "power2.inOut"
+    })
   }
 
 

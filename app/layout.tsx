@@ -74,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
+    <html lang="en">
       <head>
         <meta name="google-site-verification" content="3vRG8sFEkda-o8fvds2MUaj9wvTXlLrrW_8mz6vuAyM" />
         <link rel="icon" href="/favicon.JPG" type="image/jpeg" />
