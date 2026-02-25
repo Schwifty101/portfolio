@@ -29,8 +29,8 @@ export default function Home() {
     <>
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
 
+      <Navigation />
       <SmoothScrollProvider isReady={!isLoading}>
-        <Navigation />
         <main className="w-full">
           <Hero />
           <About />
