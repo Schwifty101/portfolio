@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { JsonLd } from '@/components/JsonLd'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,10 +38,10 @@ export const metadata: Metadata = {
     siteName: 'Soban Ahmad Portfolio',
     images: [
       {
-        url: '/myPhoto.jpg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Soban Ahmad - Software Engineer Portfolio',
+        alt: 'Soban Ahmad - Software Engineer & Developer',
       },
     ],
   },
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Soban Ahmad - Software Engineer & Developer',
     description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.',
-    images: ['/myPhoto.jpg'],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -80,6 +81,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.JPG" type="image/jpeg" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.JPG" />
         <link rel="shortcut icon" href="/favicon.JPG" type="image/jpeg" />
+        <link rel="preconnect" href="https://app.cal.com" />
         <style>{`
           html {
             scroll-restoration: manual;
@@ -87,6 +89,35 @@ export default function RootLayout({
         `}</style>
       </head>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
+        <JsonLd />
+        <noscript>
+          <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: 'system-ui, sans-serif' }}>
+            <h1>Soban Ahmad - Software Engineer &amp; Developer</h1>
+            <p>Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.</p>
+            <h2>Skills</h2>
+            <p>React, Next.js, Node.js, TypeScript, Python, JavaScript, Cloud Architecture, Machine Learning, AI</p>
+            <h2>Experience</h2>
+            <ul>
+              <li>Team Lead – AI-Powered Assessment Platform</li>
+              <li>PK Delivery Management Intern</li>
+              <li>Fullstack &amp; QA Intern</li>
+              <li>Frontend Development Intern</li>
+            </ul>
+            <h2>Projects</h2>
+            <ul>
+              <li>Traffic Sign Classification using CNN</li>
+              <li>AI-Powered Assessment Platform</li>
+              <li>Chess AI Engine</li>
+              <li>IMDB Backend Clone</li>
+              <li>Multi-Commerce Admin Dashboard</li>
+              <li>Weather Forecast Chatbot</li>
+            </ul>
+            <h2>Education</h2>
+            <p>Bachelor of Science in Software Engineering</p>
+            <h2>Contact</h2>
+            <p>Visit <a href="https://sobanahmad.dev">sobanahmad.dev</a> | <a href="https://www.linkedin.com/in/soban-ahmad-malik/">LinkedIn</a> | <a href="https://github.com/Schwifty101">GitHub</a></p>
+          </div>
+        </noscript>
         {children}
       </body>
     </html>

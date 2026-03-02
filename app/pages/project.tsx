@@ -236,7 +236,7 @@ export const Project = () => { // Changed to named export
             (Featured Projects)
           </motion.div>
 
-          <motion.h1
+          <motion.h2
             className="text-6xl md:text-8xl font-black tracking-tighter text-white mb-8"
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -244,7 +244,7 @@ export const Project = () => { // Changed to named export
             viewport={{ once: true }}
           >
             SELECTED WORKS
-          </motion.h1>
+          </motion.h2>
 
           <motion.p
             className="text-xl text-gray-300 leading-relaxed font-light max-w-2xl"
@@ -450,6 +450,7 @@ export const Project = () => { // Changed to named export
             {projects.map((_, index) => (
               <button
                 key={index}
+                aria-label={`Go to project ${index + 1}: ${projects[index].title}`}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${currentProject === index ? "bg-white scale-125" : "bg-gray-600 hover:bg-gray-500"
                   }`}
                 onClick={() => {

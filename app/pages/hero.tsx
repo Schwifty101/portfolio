@@ -20,14 +20,16 @@ const Hero = ({ onReady }: HeroProps = {}) => {
   const fitContainerRef = useRef<HTMLDivElement | null>(null)
   const nameRef = useRef<HTMLSpanElement | null>(null)
   const [isReady, setIsReady] = useState(false)
-  const [currentDate, setCurrentDate] = useState(() => {
+  const [currentDate, setCurrentDate] = useState({ month: '', year: '' })
+
+  useEffect(() => {
     const now = new Date()
     const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-    return {
+    setCurrentDate({
       month: monthNames[now.getMonth()],
       year: `'${now.getFullYear().toString().slice(-2)}`
-    }
-  })
+    })
+  }, [])
 
   useEffect(() => {
     const readyTimer = setTimeout(() => {
@@ -385,9 +387,13 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                 />
 
                 <img
-                  src="/myPhoto.jpg"
+                  src="/myPhoto-optimized.jpg"
                   alt="Soban Ahmad - Professional Photo"
                   className="w-full h-full object-cover relative z-10"
+                  width={557}
+                  height={742}
+                  fetchPriority="high"
+                  decoding="async"
                   style={{
                     objectPosition: "center center",
                     filter: "grayscale(100%)"
@@ -427,7 +433,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           {/* Right Content - Availability */}
           <div ref={rightContentRef} className="lg:col-span-4 space-y-4 md:space-y-6 lg:space-y-8 lg:text-right">
             <div className="space-y-3 lg:space-y-4">
-              <div className="text-gray-500 pt-4 md:pt-8 lg:pt-16 uppercase font-light text-sm md:text-base lg:text-lg tracking-wide">
+              <div className="text-gray-400 pt-4 md:pt-8 lg:pt-16 uppercase font-light text-sm md:text-base lg:text-lg tracking-wide">
                 AVAILABLE FOR WORK
               </div>
               <div className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tighter text-white font-thin">

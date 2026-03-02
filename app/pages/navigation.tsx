@@ -15,14 +15,7 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentTime, setCurrentTime] = useState("")
   const [hasAnimated, setHasAnimated] = useState(false)
-  const [currentDate, setCurrentDate] = useState(() => {
-    const now = new Date()
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    return {
-      month: monthNames[now.getMonth()],
-      year: `'${now.getFullYear().toString().slice(-2)}`
-    }
-  })
+  const [currentDate, setCurrentDate] = useState({ month: '', year: '' })
 
   const navItems = useMemo(() => [
     { id: "hero", label: "Home" },
@@ -58,6 +51,12 @@ const Navigation = () => {
         timeZone: "Asia/Karachi",
       })
       setCurrentTime(islamabadTime + ", ISB")
+
+      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      setCurrentDate({
+        month: monthNames[now.getMonth()],
+        year: `'${now.getFullYear().toString().slice(-2)}`
+      })
     }
     updateTime()
     const timeInterval = setInterval(updateTime, 1000)
@@ -264,6 +263,7 @@ const Navigation = () => {
                       className="w-12 h-12 bg-gray-200 hover:bg-white rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
+                      aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                     >
                       <div className="w-5 h-5 flex flex-col justify-center space-y-1">
                         <motion.div
