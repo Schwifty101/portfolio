@@ -122,7 +122,7 @@ const Contact = () => {
             {/* Mobile contact info */}
             <div className="text-center space-y-3">
               <div className="text-gray-500 text-xs uppercase tracking-wider">For Further Inquiries</div>
-              <div className="text-gray-300 text-sm">sobanahmad2003@gmail.com</div>
+              <div className="text-gray-300 text-sm">soban@sobanahmad.dev</div>
             </div>
 
             {/* Mobile availability status */}
@@ -163,7 +163,7 @@ const Contact = () => {
         viewport={{ once: true }}
       >
         <div className="text-gray-500 text-xs uppercase tracking-wider mb-2">For Further Inquiries</div>
-        <div className="text-gray-300 text-xs md:text-sm hover:text-white transition-colors duration-300 cursor-pointer">↳ sobanahmad2003@gmail.com</div>
+        <div className="text-gray-300 text-xs md:text-sm hover:text-white transition-colors duration-300 cursor-pointer">↳ soban@sobanahmad.dev</div>
       </motion.div>
     </section>
   )

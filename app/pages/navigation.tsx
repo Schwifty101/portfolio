@@ -387,7 +387,7 @@ const Navigation = () => {
                       Email Address
                     </div>
                     <div className="text-gray-300 text-lg">
-                      sobanahmad2003@gmail.com
+                      soban@sobanahmad.dev
                     </div>
                   </div>
                   <div>

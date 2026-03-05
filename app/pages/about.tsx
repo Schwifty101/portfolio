@@ -134,24 +134,7 @@ const About = () => {
             ))}
           </div>
 
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 pt-12 md:pt-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            {[
-              { number: "1+", label: "Years Experience" },
-              { number: "15+", label: "Technologies" },
-              { number: "10+", label: "Projects Completed" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center md:text-center">
-                <div className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-2">{stat.number}</div>
-                <div className="text-gray-400 text-sm uppercase tracking-wider">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
+
         </div>
       </div>
     </section>

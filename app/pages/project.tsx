@@ -22,77 +22,85 @@ export const Project = () => { // Changed to named export
   const projects = [
     {
       id: 1,
-      title: "Traffic Sign Classification using CNN",
-      description:
-        "Built a deep learning system achieving 98.75% accuracy in recognizing 43 different traffic sign types. Expanded training data from 39K to 162K images using advanced data augmentation techniques.",
-      tech: ["Python", "TensorFlow", "Keras", "OpenCV", "CNN"],
-      year: "2024",
-      category: "Machine Learning",
-      impact: "98.75% Accuracy",
-      details:
-        "Implemented convolutional neural network with image preprocessing, data augmentation, and model optimization techniques for robust traffic sign detection.",
-      link: "https://github.com/Schwifty101/TrafficSignClassificationCNN",
+      title: "AR&CO Law Associates — Full-Stack Platform",
+      description: "Full-stack platform built for AR&CO Law Associates, a premier law firm in Islamabad. Delivered a custom frontend with scroll animations, a client portal with authentication and dashboard, an admin dashboard for managing consultations and users, and integrated payment gateways covering consultation booking, monthly retainer and one-time service payments.",
+      tech: ["Next.js", "NestJS", "PostgreSQL", "AWS"],
+      year: "2025",
+      category: "Full-Stack Platform",
+      impact: "Client Project",
+      details: "Delivered a custom frontend, client portal with authentication, admin dashboard, and integrated payment gateways for consultation booking.",
+      link: "https://ar-co-web.vercel.app",
+      liveLink: "https://ar-co-web.vercel.app",
     },
     {
       id: 2,
       title: "AI-Powered Assessment Platform",
-      description:
-        "Leading a 4-person team building a comprehensive SaaS assessment platform for the Asian tech market. Features multi-tenant architecture, AI-powered plagiarism detection, and integrated proctoring.",
+      description: "Leading a 4-person team building a comprehensive SaaS assessment platform for the Asian tech market. Features multi-tenant architecture, AI-powered plagiarism detection, and integrated proctoring.",
       tech: ["Next.js", "NestJS", "PostgreSQL", "AWS", "Kubernetes", "OpenAI GPT-4"],
       year: "2025",
       category: "Full-Stack SaaS",
       impact: "Multi-tenant SaaS Platform",
-      details:
-        "Architected scalable microservices with Kubernetes deployment, Auth0 integration, Judge0 code execution, and role-based access control with AI-powered features.",
+      details: "Architected scalable microservices with Kubernetes deployment, Auth0 integration, Judge0 code execution, and role-based access control with AI-powered features.",
       link: "https://github.com/Schwifty101/AI-Assessment-Platform",
     },
     {
       id: 3,
-      title: "Chess AI Engine",
-      description:
-        "Intelligent chess engine using advanced game theory algorithms with move optimization and tactical analysis. Features adaptive difficulty and position evaluation.",
-      tech: ["Python", "Minimax Algorithm", "Alpha-Beta Pruning", "Tkinter", "Game Theory"],
-      year: "2024",
-      category: "AI & Game Development",
-      impact: "Smart AI Opponent",
-      details: "Implemented Minimax algorithm with Alpha-Beta pruning, move caching, and adaptive depth search. Built intuitive GUI with tactical analysis features.",
-      link: "https://github.com/Schwifty101/AI-Chess",
-    },
-    {
-      id: 4,
-      title: "IMDB Backend Clone",
-      description:
-        "Scalable movie database API with comprehensive CRUD operations, advanced filtering, and search functionality. Built with proper documentation and testing.",
-      tech: ["Node.js", "Express", "MySQL", "PostgreSQL", "Swagger", "REST API"],
-      year: "2024",
-      category: "Backend Development",
-      impact: "Scalable REST API",
-      details: "Developed robust backend with database optimization, comprehensive API documentation using Swagger, and efficient search algorithms.",
-      link: "https://github.com/Schwifty101/IMDB-clone-Backend",
-    },
-    {
-      id: 5,
       title: "Multi-Commerce Admin Dashboard",
-      description:
-        "Full-stack e-commerce management system with AWS integration, user authentication, and comprehensive order management. Built for scalability and performance.",
+      description: "Full-stack e-commerce management system with AWS integration, user authentication, and comprehensive order management. Built for scalability and performance.",
       tech: ["React.js", "Node.js", "MongoDB", "AWS", "ShadCN UI", "Authentication"],
       year: "2024",
       category: "Full-Stack Development",
       impact: "Complete E-commerce Solution",
       details: "MERN stack dashboard with cloud integration, secure authentication, inventory management, and modern UI components for optimal user experience.",
       link: "https://github.com/Schwifty101/MultiCommerce-Admin-Dashboard",
+      liveLink: "#",
+    },
+    {
+      id: 4,
+      title: "Traffic Sign Classification using CNN",
+      description: "Built a deep learning system achieving 98.75% accuracy in recognizing 43 different traffic sign types. Expanded training data from 39K to 162K images using advanced data augmentation techniques.",
+      tech: ["Python", "TensorFlow", "Keras", "OpenCV", "CNN"],
+      year: "2024",
+      category: "Machine Learning",
+      impact: "98.75% Accuracy",
+      details: "Implemented convolutional neural network with image preprocessing, data augmentation, and model optimization techniques for robust traffic sign detection.",
+      link: "https://github.com/Schwifty101/TrafficSignClassificationCNN",
+    },
+    {
+      id: 5,
+      title: "IMDB Backend Clone",
+      description: "Scalable movie database API with comprehensive CRUD operations, advanced filtering, and search functionality. Built with proper documentation and testing.",
+      tech: ["Node.js", "Express", "MySQL", "PostgreSQL", "Swagger", "REST API"],
+      year: "2024",
+      category: "Backend Development",
+      impact: "Scalable REST API",
+      details: "Developed robust backend with database optimization, comprehensive API documentation using Swagger, and efficient search algorithms.",
+      link: "https://github.com/Schwifty101/IMDB-clone-Backend",
+      liveLink: "#",
     },
     {
       id: 6,
+      title: "Chess AI Engine",
+      description: "Intelligent chess engine using advanced game theory algorithms with move optimization and tactical analysis. Features adaptive difficulty and position evaluation.",
+      tech: ["Python", "Minimax Algorithm", "Alpha-Beta Pruning", "Tkinter", "Game Theory"],
+      year: "2024",
+      category: "AI & Game Development",
+      impact: "Smart AI Opponent",
+      details: "Implemented Minimax algorithm with Alpha-Beta pruning, move caching, and adaptive depth search. Built intuitive GUI with tactical analysis features.",
+      link: "https://github.com/Schwifty101/AI-Chess",
+      liveLink: "#",
+    },
+    {
+      id: 7,
       title: "Weather Forecast Chatbot",
-      description:
-        "AI-powered weather assistant integrating Google's Gemini AI with real-time weather data. Optimized for fast response times and natural conversation flow.",
+      description: "AI-powered weather assistant integrating Google's Gemini AI with real-time weather data. Optimized for fast response times and natural conversation flow.",
       tech: ["Python", "Gemini AI", "OpenWeather API", "REST API", "Linux CLI"],
       year: "2024",
       category: "AI Integration",
       impact: "AI-Powered Weather Assistant",
       details: "Built conversational weather bot using Gemini AI integration with OpenWeather API, featuring RESTful design and optimized response latency.",
       link: "https://github.com/Schwifty101/WeatherApp-GeminiAPI",
+      liveLink: "#",
     },
   ]
 
@@ -355,7 +363,18 @@ export const Project = () => { // Changed to named export
                         </div>
 
                         {/* View Project Link */}
-                        <div className="pt-4 lg:pt-6">
+                        <div className="pt-4 lg:pt-6 flex items-center gap-4 lg:gap-6 flex-wrap">
+                          {project.liveLink && (
+                            <a
+                              href={project.liveLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center bg-white text-black px-4 lg:px-6 py-2 lg:py-2.5 rounded-full hover:bg-gray-200 transition-colors duration-300 group/livelink"
+                            >
+                              <span className="text-sm lg:text-base font-semibold tracking-wide">Live Demo</span>
+                              <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
+                            </a>
+                          )}
                           <a
                             href={project.link}
                             target="_blank"
@@ -426,7 +445,18 @@ export const Project = () => { // Changed to named export
                     </div>
 
                     {/* View Project Link */}
-                    <div className="pt-4">
+                    <div className="pt-4 flex items-center gap-4 flex-wrap">
+                      {project.liveLink && (
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-300 group/livelink"
+                        >
+                          <span className="text-sm font-semibold tracking-wide">Live Demo</span>
+                          <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
+                        </a>
+                      )}
                       <a
                         href={project.link}
                         target="_blank"

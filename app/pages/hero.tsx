@@ -387,7 +387,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                 />
 
                 <img
-                  src="/myPhoto-optimized.jpg"
+                  src="/my_photo2.jpeg"
                   alt="Soban Ahmad - Professional Photo"
                   className="w-full h-full object-cover relative z-10"
                   width={557}
@@ -476,7 +476,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            ↳ sobanahmad2003@gmail.com
+            ↳ soban@sobanahmad.dev
           </motion.div>
         </motion.div>
       </div>

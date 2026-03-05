@@ -6,7 +6,7 @@ export function JsonLd() {
         url: "https://sobanahmad.dev",
         jobTitle: "Software Engineer",
         description:
-            "Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.",
+            "Full-stack developer. I turn business problems into production-ready software.",
         sameAs: [
             "https://www.linkedin.com/in/soban-ahmad-malik/",
             "https://github.com/Schwifty101",
@@ -35,7 +35,7 @@ export function JsonLd() {
         name: "Soban Ahmad Portfolio",
         url: "https://sobanahmad.dev",
         description:
-            "Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.",
+            "Portfolio of Soban Ahmad - Full-stack developer. I turn business problems into production-ready software.",
         author: {
             "@type": "Person",
             name: "Soban Ahmad",

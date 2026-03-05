@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: 'Soban Ahmad - Software Engineer & Developer',
     template: '%s | Soban Ahmad'
   },
-  description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture. Explore my projects and technical expertise.',
+  description: 'Portfolio of Soban Ahmad - Full-stack developer. I turn business problems into production-ready software. Explore my projects and technical expertise.',
   keywords: ['software engineer', 'full-stack developer', 'React', 'Next.js', 'Node.js', 'TypeScript', 'AI', 'machine learning', 'web development', 'portfolio', 'JavaScript', 'Python', 'cloud architecture'],
   authors: [{ name: 'Soban Ahmad', url: 'https://sobanahmad.dev' }],
   creator: 'Soban Ahmad',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://sobanahmad.dev',
     title: 'Soban Ahmad - Software Engineer & Developer',
-    description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.',
+    description: 'Portfolio of Soban Ahmad - Full-stack developer. I turn business problems into production-ready software.',
     siteName: 'Soban Ahmad Portfolio',
     images: [
       {
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Soban Ahmad - Software Engineer & Developer',
-    description: 'Portfolio of Soban Ahmad - Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.',
+    description: 'Portfolio of Soban Ahmad - Full-stack developer. I turn business problems into production-ready software.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -93,7 +93,7 @@ export default function RootLayout({
         <noscript>
           <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: 'system-ui, sans-serif' }}>
             <h1>Soban Ahmad - Software Engineer &amp; Developer</h1>
-            <p>Full-stack developer specializing in modern web applications, AI/ML solutions, and cloud architecture.</p>
+            <p>Full-stack developer. I turn business problems into production-ready software.</p>
             <h2>Skills</h2>
             <p>React, Next.js, Node.js, TypeScript, Python, JavaScript, Cloud Architecture, Machine Learning, AI</p>
             <h2>Experience</h2>
