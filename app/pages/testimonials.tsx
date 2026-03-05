@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Quote } from 'lucide-react'
+import Image from 'next/image'
 
 const Testimonials = () => {
     const sectionRef = useRef(null)
@@ -24,12 +25,14 @@ const Testimonials = () => {
             name: "Shoaib Razzaq",
             role: "Founding Partner, AR&CO Law Associates",
             content: "We are lawyers, not tech people, and the thought of moving the entire firm online was quite daunting for us. Soban handled everything and made the process straightforward. Our clients can now book their own consultations and make payments without us having to manage it all manually over the phone. It has genuinely changed the way we run things.",
+            image: "/Shoaib_Razaq.webp"
         },
         {
             id: 2,
             name: "Rizwan",
             role: "Founder, The New Home",
             content: "The quality of our work has always spoken for itself in person, but translating that onto a website is not as simple as it sounds. Soban understood exactly what we were looking for. The site he built presents our portfolio of ceilings and flooring the way it deserves to be shown. New clients actually mention it when they first reach out to us.",
+            image: "/raja_shehbaz.webp"
         }
     ]
 
@@ -77,9 +80,19 @@ const Testimonials = () => {
                                 </p>
 
                                 <div className="flex items-center space-x-4">
-                                    <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 font-bold uppercase">
-                                        {testimonial.name.charAt(0)}
-                                    </div>
+                                    {testimonial.image ? (
+                                        <Image
+                                            src={testimonial.image}
+                                            alt={testimonial.name}
+                                            width={48}
+                                            height={48}
+                                            className="w-12 h-12 rounded-full object-cover"
+                                        />
+                                    ) : (
+                                        <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 font-bold uppercase">
+                                            {testimonial.name.charAt(0)}
+                                        </div>
+                                    )}
                                     <div>
                                         <div className="text-white font-semibold text-lg">{testimonial.name}</div>
                                         <div className="text-gray-500 text-sm">{testimonial.role}</div>
