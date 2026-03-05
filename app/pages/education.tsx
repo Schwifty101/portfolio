@@ -83,7 +83,7 @@ const Education = () => {
               viewport={{ once: true }}
               className="text-gray-400 text-sm uppercase tracking-[0.2em]"
             >
-              (Education & Certifications)
+              (Credentials)
             </motion.div>
 
             <motion.h2
@@ -93,7 +93,7 @@ const Education = () => {
               transition={{ duration: 1.2, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              Academic Foundation
+              Credentials
             </motion.h2>
 
             <motion.p
@@ -103,7 +103,7 @@ const Education = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              Strong academic background in computer science with continuous learning through professional certifications and industry-recognized credentials.
+              Industry-recognized certifications and a strong academic background backing up practical expertise.
             </motion.p>
           </div>
 

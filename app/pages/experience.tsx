@@ -108,7 +108,7 @@ const Experience = () => {
               viewport={{ once: true }}
               className="text-gray-500 text-sm uppercase tracking-[0.2em]"
             >
-              (Professional Experience)
+              (Experience)
             </motion.div>
 
             <motion.h2
@@ -119,7 +119,7 @@ const Experience = () => {
               transition={{ duration: 1.2, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              Work Experience
+              Experience
             </motion.h2>
 
             <motion.p

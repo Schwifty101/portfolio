@@ -128,7 +128,7 @@ const Skills = () => {
             viewport={{ once: true }}
             className="text-gray-400 text-sm uppercase tracking-[0.2em] mb-8"
           >
-            (Technical Skills)
+            (Capabilities)
           </motion.div>
 
           <motion.h2
@@ -139,7 +139,7 @@ const Skills = () => {
             transition={{ duration: 1.2, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            Technology Stack
+            Capabilities
           </motion.h2>
 
           <motion.p

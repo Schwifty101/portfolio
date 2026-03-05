@@ -8,6 +8,7 @@ import { About } from './pages/about'
 import { Skills } from './pages/skills'
 import { Experience } from './pages/experience'
 import { Project } from './pages/project' // Ensure this is a named import
+import { Testimonials } from './pages/testimonials'
 import { Education } from './pages/education'
 import { Contact } from './pages/contact'
 import { Footer } from './pages/Footer'
@@ -36,6 +37,7 @@ export default function Home() {
           <About />
           <Skills />
           <Experience />
+          <Testimonials />
           <Project />
           <Education />
           <Contact />

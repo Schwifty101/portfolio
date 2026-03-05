@@ -19,11 +19,10 @@ const Navigation = () => {
 
   const navItems = useMemo(() => [
     { id: "hero", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "experience", label: "Works" },
-    { id: "project", label: "Projects" },
-    { id: "education", label: "Education" },
+    { id: "about", label: "Services" },
+    { id: "experience", label: "Experience" },
+    { id: "testimonials", label: "Testimonials" },
+    { id: "project", label: "Case Studies" },
     { id: "contact", label: "Contact" },
   ], [])
 

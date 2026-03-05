@@ -31,6 +31,11 @@ export const Project = () => { // Changed to named export
       details: "Delivered a custom frontend, client portal with authentication, admin dashboard, and integrated payment gateways for consultation booking.",
       link: "https://ar-co-web.vercel.app",
       liveLink: "https://ar-co-web.vercel.app",
+      caseStudy: {
+        problem: "AR&CO, a premier law firm, relied on manual processes for consultation bookings and retainer payments. They lacked a centralized digital presence to onboard clients efficiently, manage legal documents securely, and process multi-tier payments.",
+        solution: "Architected a full-stack platform featuring a public-facing dynamic frontend, an authenticated client portal, and a powerful admin dashboard. Integrated Stripe for hybrid payment flows (one-time bookings vs. monthly subscription retainers).",
+        results: ["Automated 100% of consultation bookings", "Enabled secure document sharing", "Established a premium digital brand identity"]
+      }
     },
     {
       id: 2,
@@ -42,6 +47,11 @@ export const Project = () => { // Changed to named export
       impact: "Multi-tenant SaaS Platform",
       details: "Architected scalable microservices with Kubernetes deployment, Auth0 integration, Judge0 code execution, and role-based access control with AI-powered features.",
       link: "https://github.com/Schwifty101/AI-Assessment-Platform",
+      caseStudy: {
+        problem: "Tech recruiters in the Asian market faced high drop-off rates due to clunky assessment tools, while dealing with increasingly sophisticated candidate plagiarism that traditional tools couldn't catch.",
+        solution: "Built a microservices-based SaaS platform with Kubernetes. Integrated Judge0 for secure remote code execution and implemented an AI agent using GPT-4 to analyze coding patterns and flag AI-generated submissions.",
+        results: ["Multi-tenant architecture supporting discrete agency silos", "Seamless remote code execution", "Advanced AI anti-cheat mechanisms"]
+      }
     },
     {
       id: 3,
@@ -53,7 +63,11 @@ export const Project = () => { // Changed to named export
       impact: "Complete E-commerce Solution",
       details: "MERN stack dashboard with cloud integration, secure authentication, inventory management, and modern UI components for optimal user experience.",
       link: "https://github.com/Schwifty101/MultiCommerce-Admin-Dashboard",
-      liveLink: "#",
+      caseStudy: {
+        problem: "Managing multiple storefronts required fragmented tools, leading to inventory desync, delayed order processing, and a lack of centralized oversight.",
+        solution: "Developed a centralized MERN stack admin dashboard with AWS cloud integration, providing unified real-time inventory management and secure multi-role authentication.",
+        results: ["Centralized multi-channel inventory control", "Scalable cloud integration for peak traffic", "Streamlined order management workflow"]
+      }
     },
     {
       id: 4,
@@ -65,43 +79,12 @@ export const Project = () => { // Changed to named export
       impact: "98.75% Accuracy",
       details: "Implemented convolutional neural network with image preprocessing, data augmentation, and model optimization techniques for robust traffic sign detection.",
       link: "https://github.com/Schwifty101/TrafficSignClassificationCNN",
-    },
-    {
-      id: 5,
-      title: "IMDB Backend Clone",
-      description: "Scalable movie database API with comprehensive CRUD operations, advanced filtering, and search functionality. Built with proper documentation and testing.",
-      tech: ["Node.js", "Express", "MySQL", "PostgreSQL", "Swagger", "REST API"],
-      year: "2024",
-      category: "Backend Development",
-      impact: "Scalable REST API",
-      details: "Developed robust backend with database optimization, comprehensive API documentation using Swagger, and efficient search algorithms.",
-      link: "https://github.com/Schwifty101/IMDB-clone-Backend",
-      liveLink: "#",
-    },
-    {
-      id: 6,
-      title: "Chess AI Engine",
-      description: "Intelligent chess engine using advanced game theory algorithms with move optimization and tactical analysis. Features adaptive difficulty and position evaluation.",
-      tech: ["Python", "Minimax Algorithm", "Alpha-Beta Pruning", "Tkinter", "Game Theory"],
-      year: "2024",
-      category: "AI & Game Development",
-      impact: "Smart AI Opponent",
-      details: "Implemented Minimax algorithm with Alpha-Beta pruning, move caching, and adaptive depth search. Built intuitive GUI with tactical analysis features.",
-      link: "https://github.com/Schwifty101/AI-Chess",
-      liveLink: "#",
-    },
-    {
-      id: 7,
-      title: "Weather Forecast Chatbot",
-      description: "AI-powered weather assistant integrating Google's Gemini AI with real-time weather data. Optimized for fast response times and natural conversation flow.",
-      tech: ["Python", "Gemini AI", "OpenWeather API", "REST API", "Linux CLI"],
-      year: "2024",
-      category: "AI Integration",
-      impact: "AI-Powered Weather Assistant",
-      details: "Built conversational weather bot using Gemini AI integration with OpenWeather API, featuring RESTful design and optimized response latency.",
-      link: "https://github.com/Schwifty101/WeatherApp-GeminiAPI",
-      liveLink: "#",
-    },
+      caseStudy: {
+        problem: "Autonomous driving systems struggle to reliably parse traffic signs under varying lighting, weather, and motion blur conditions, impacting safety.",
+        solution: "Engineered a custom Convolutional Neural Network (CNN) in TensorFlow. Implemented robust data augmentation strategies to expand the dataset from 39K to 162K images, effectively teaching the model to handle edge cases.",
+        results: ["Achieved 98.75% classification accuracy", "Robust detection across 43 different sign classifications", "Pre-processed data for rapid real-time inference"]
+      }
+    }
   ]
 
   // Check for large screen breakpoint
@@ -122,13 +105,13 @@ export const Project = () => { // Changed to named export
   useEffect(() => {
     if (!isLgScreen || !leftColumnRef.current || !gridRef.current) return
 
-    // Small delay to let ScrollSmoother settle
     const timer = requestAnimationFrame(() => {
       const trigger = ScrollTrigger.create({
-        trigger: gridRef.current,
+        trigger: leftColumnRef.current,
         start: "top top+=128",
-        end: () => `+=${gridRef.current!.offsetHeight - leftColumnRef.current!.offsetHeight}`,
-        pin: leftColumnRef.current!,
+        endTrigger: gridRef.current,
+        end: () => `bottom top+=${128 + (leftColumnRef.current?.offsetHeight || 0)}`,
+        pin: true,
         pinSpacing: false,
       })
 
@@ -174,7 +157,7 @@ export const Project = () => { // Changed to named export
       )
 
       // Map scroll progress to number position
-      const maxMovement = window.innerHeight * 0.3
+      const maxMovement = window.innerHeight * 0.15
       const calculatedPosition = scrollProgress * maxMovement - maxMovement / 2
       setNumberPosition(calculatedPosition)
 
@@ -182,7 +165,7 @@ export const Project = () => { // Changed to named export
       let visibleProject = 0
       let minDistance = Number.POSITIVE_INFINITY
 
-      projectRefs.current.forEach((ref, index) => {
+      projectRefs.current.slice(0, projects.length).forEach((ref, index) => {
         if (!ref) return
 
         const rect = ref.getBoundingClientRect()
@@ -241,7 +224,7 @@ export const Project = () => { // Changed to named export
             viewport={{ once: true }}
             className="text-gray-400 text-sm uppercase tracking-[0.2em] mb-8"
           >
-            (Featured Projects)
+            (Case Studies)
           </motion.div>
 
           <motion.h2
@@ -251,7 +234,7 @@ export const Project = () => { // Changed to named export
             transition={{ duration: 1.2, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            SELECTED WORKS
+            CASE STUDIES
           </motion.h2>
 
           <motion.p
@@ -261,8 +244,7 @@ export const Project = () => { // Changed to named export
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            A curated collection of projects showcasing technical expertise, innovation, and real-world impact across
-            various domains.
+            A curated collection of client solutions showcasing strategic problem solving and bottom-line impact.
           </motion.p>
         </div>
       </div>
@@ -362,6 +344,40 @@ export const Project = () => { // Changed to named export
                           ))}
                         </div>
 
+                        {/* Case Study Details */}
+                        {project.caseStudy && (
+                          <div className="mt-8 p-6 bg-gray-950/50 rounded-xl border border-gray-800 space-y-6">
+                            <div>
+                              <h4 className="text-gray-300 font-semibold mb-2 flex items-center">
+                                <span className="w-1.5 h-1.5 bg-red-500 rounded-full mr-2"></span>
+                                The Problem
+                              </h4>
+                              <p className="text-gray-400 text-sm lg:text-base leading-relaxed">{project.caseStudy.problem}</p>
+                            </div>
+                            <div>
+                              <h4 className="text-gray-300 font-semibold mb-2 flex items-center">
+                                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
+                                The Solution
+                              </h4>
+                              <p className="text-gray-400 text-sm lg:text-base leading-relaxed">{project.caseStudy.solution}</p>
+                            </div>
+                            <div>
+                              <h4 className="text-gray-300 font-semibold mb-2 flex items-center">
+                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
+                                The Impact
+                              </h4>
+                              <ul className="space-y-2">
+                                {project.caseStudy.results.map((result, i) => (
+                                  <li key={i} className="text-gray-400 text-sm lg:text-base flex items-start">
+                                    <span className="text-green-500 mr-2">✓</span>
+                                    {result}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        )}
+
                         {/* View Project Link */}
                         <div className="pt-4 lg:pt-6 flex items-center gap-4 lg:gap-6 flex-wrap">
                           {project.liveLink && (
@@ -443,6 +459,40 @@ export const Project = () => { // Changed to named export
                         </span>
                       ))}
                     </div>
+
+                    {/* Case Study Details */}
+                    {project.caseStudy && (
+                      <div className="mt-6 p-4 md:p-6 bg-gray-950/50 rounded-xl border border-gray-800 space-y-5">
+                        <div>
+                          <h4 className="text-gray-300 font-semibold text-sm md:text-base mb-2 flex items-center">
+                            <span className="w-1.5 h-1.5 bg-red-500 rounded-full mr-2"></span>
+                            The Problem
+                          </h4>
+                          <p className="text-gray-400 text-sm md:text-base leading-relaxed">{project.caseStudy.problem}</p>
+                        </div>
+                        <div>
+                          <h4 className="text-gray-300 font-semibold text-sm md:text-base mb-2 flex items-center">
+                            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
+                            The Solution
+                          </h4>
+                          <p className="text-gray-400 text-sm md:text-base leading-relaxed">{project.caseStudy.solution}</p>
+                        </div>
+                        <div>
+                          <h4 className="text-gray-300 font-semibold text-sm md:text-base mb-2 flex items-center">
+                            <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
+                            The Impact
+                          </h4>
+                          <ul className="space-y-2">
+                            {project.caseStudy.results.map((result, i) => (
+                              <li key={i} className="text-gray-400 text-sm md:text-base flex items-start">
+                                <span className="text-green-500 mr-2 mt-0.5">✓</span>
+                                <span className="flex-1">{result}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
 
                     {/* View Project Link */}
                     <div className="pt-4 flex items-center gap-4 flex-wrap">

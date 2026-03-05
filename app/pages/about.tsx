@@ -38,21 +38,21 @@ const About = () => {
   const services = [
     {
       number: "01",
-      title: "Full-Stack Development",
+      title: "Custom Web & SaaS Development",
       description:
-        "Building scalable web applications using modern technologies like React, Next.js, Node.js, and cloud platforms.",
+        "Architecting high-performance, scalable web applications that solve complex business logic and provide seamless user experiences.",
     },
     {
       number: "02",
-      title: "Machine Learning & AI",
+      title: "AI Integration & Automation",
       description:
-        "Developing intelligent solutions using Python, TensorFlow, and various ML algorithms for real-world applications.",
+        "Leveraging LLMs and machine learning to build intelligent features that save time, automate workflows, and drive competitive advantages.",
     },
     {
       number: "03",
-      title: "Cloud Architecture",
+      title: "Cloud Architecture & Scaling",
       description:
-        "Designing and implementing robust cloud solutions on AWS and Azure with focus on scalability and performance.",
+        "Designing resilient, secure, and cost-efficient cloud infrastructures to ensure your platform handles growth effortlessly.",
     },
   ]
 
@@ -84,7 +84,7 @@ const About = () => {
               viewport={{ once: true }}
               className="text-gray-400 text-sm uppercase tracking-[0.2em]"
             >
-              (About)
+              (Services)
             </motion.div>
 
             <motion.h2
@@ -95,7 +95,7 @@ const About = () => {
               transition={{ duration: 1.2, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              Software Engineering
+              Services & Solutions
             </motion.h2>
 
             <motion.p
@@ -105,8 +105,7 @@ const About = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              A passionate developer with expertise in building scalable, modern applications that drive real business
-              results.
+              I partner with forward-thinking brands and startups to architect software that doesn't just work—it drives growth, automates operations, and scales effortlessly.
             </motion.p>
           </div>
 

@@ -387,7 +387,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                 />
 
                 <img
-                  src="/my_photo2.jpeg"
+                  src="/myPhoto-optimized.jpg"
                   alt="Soban Ahmad - Professional Photo"
                   className="w-full h-full object-cover relative z-10"
                   width={557}
