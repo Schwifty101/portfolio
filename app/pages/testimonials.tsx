@@ -21,15 +21,15 @@ const Testimonials = () => {
     const testimonials = [
         {
             id: 1,
-            name: "Client Name",
-            role: "Partner, AR&CO Law Associates",
-            content: "Soban didn't just write code; he understood our business bottleneck and architected a digital platform that completely automated our manual consultation workflow. Professional, deeply strategic, and an absolute standout engineer.",
+            name: "Shoaib Razzaq",
+            role: "Founding Partner, AR&CO Law Associates",
+            content: "We are lawyers, not tech people, and the thought of moving the entire firm online was quite daunting for us. Soban handled everything and made the process straightforward. Our clients can now book their own consultations and make payments without us having to manage it all manually over the phone. It has genuinely changed the way we run things.",
         },
         {
             id: 2,
-            name: "Project Stakeholder",
-            role: "Director of Product, AI SaaS Platform",
-            content: "Leading the development of our assessment platform, Soban demonstrated exception capability in full-stack architecture. He seamlessly bridged the gap between complex AI integrations and intuitive user experiences.",
+            name: "Rizwan",
+            role: "Founder, The New Home",
+            content: "The quality of our work has always spoken for itself in person, but translating that onto a website is not as simple as it sounds. Soban understood exactly what we were looking for. The site he built presents our portfolio of ceilings and flooring the way it deserves to be shown. New clients actually mention it when they first reach out to us.",
         }
     ]
 
