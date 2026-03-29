@@ -66,6 +66,7 @@ const About = () => {
           start: "top top",
           end: "+=300%",
           pin: true,
+          pinType: "transform",
           pinSpacing: true,
           scrub: 0.8,
           anticipatePin: 1,
