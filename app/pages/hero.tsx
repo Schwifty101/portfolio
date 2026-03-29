@@ -195,7 +195,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
     <section
       id="hero"
       ref={heroRef}
-      className="min-h-screen w-full flex flex-col justify-center bg-black text-white pt-24 lg:pt-28 pb-16 relative overflow-hidden border-b border-[#1a1a1a]"
+      className="min-h-screen w-full flex flex-col justify-center bg-black text-white pt-32 lg:pt-28 pb-16 relative overflow-hidden border-b border-[#1a1a1a]"
     >
       <div className="w-full px-[clamp(1rem,5vw,4rem)] relative z-10">
         <motion.div
@@ -341,12 +341,12 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           <div ref={rightContentRef} className="lg:col-span-4 space-y-4 md:space-y-6 lg:space-y-8 lg:text-right">
             <div style={{ 
               paddingTop: '32px', 
-              textAlign: 'right',
               display: 'flex',
               flexDirection: 'column',
               gap: '8px',
-              alignItems: 'flex-end',
-            }}>
+            }}
+              className="items-start lg:items-end"
+            >
               <p style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '11px',
@@ -365,9 +365,10 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                 <div key={val} style={{ 
                   display: 'flex', 
                   alignItems: 'baseline',
-                  justifyContent: 'flex-end',
                   gap: '8px',
-                }}>
+                }}
+                className="justify-start lg:justify-end"
+              >
                   <span style={{
                     fontFamily: 'var(--font-barlow)',
                     fontWeight: 900,

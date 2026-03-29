@@ -50,16 +50,17 @@ const About = () => {
   const progressRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Only run pinned GSAP animation on desktop (≥ 1024px)
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches
+    if (!isDesktop) return
+
     gsap.registerPlugin(ScrollTrigger)
 
     const ctx = gsap.context(() => {
       // Set all items invisible at start
-      gsap.set(itemRefs.current, {
-        opacity: 0,
-        y: 40,
-      })
+      gsap.set(itemRefs.current, { opacity: 0, y: 40 })
+      gsap.set(headerRef.current, { opacity: 0, y: 30 })
 
-      // Build the scrubbed timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -94,17 +95,11 @@ const About = () => {
         tl.fromTo(
           item,
           { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out",
-          },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
           "+=0.3"
         )
       })
 
-      // Hold at end before unpinning
       tl.to({}, { duration: 0.5 })
     }, sectionRef)
 
@@ -117,18 +112,19 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen bg-[#0d0d0d] text-white relative overflow-visible flex flex-col justify-center border-b border-[#1a1a1a]"
+      className="bg-[#0d0d0d] text-white relative overflow-visible flex flex-col justify-center border-b border-[#1a1a1a] lg:min-h-screen"
       style={{ willChange: "transform" }}
     >
       {/* Ambient background text */}
-      <div className="absolute top-[15%] left-[-2%] opacity-[0.02] pointer-events-none z-0 select-none">
+      <div className="absolute top-[15%] left-[-2%] opacity-[0.02] pointer-events-none z-0 select-none hidden lg:block">
         <h2 className="font-barlow font-black text-[25vw] leading-[0.8] whitespace-nowrap">
           STORY
         </h2>
       </div>
 
-      {/* Scroll progress indicator */}
+      {/* Scroll progress indicator — desktop only */}
       <div
+        className="hidden lg:block"
         style={{
           position: "absolute",
           right: "32px",
@@ -152,16 +148,77 @@ const About = () => {
         />
       </div>
 
-      <div className="container-full relative z-10 w-full max-w-screen">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-stretch">
+      <div className="container-full py-16 lg:py-0 relative z-10 w-full max-w-screen">
+        {/* ── Mobile layout: header on top, services stacked below ── */}
+        <div className="lg:hidden">
+          {/* Mobile header */}
+          <div className="mb-10">
+            <div className="mb-3 flex items-center">
+              <span className="eyebrow-bar"></span>
+              <span className="eyebrow-label text-[#c8f060]">The Narrative</span>
+            </div>
+            <h2
+              className="font-barlow font-black text-[#f0f0ea] uppercase tracking-tighter"
+              style={{ fontSize: "clamp(2.8rem, 10vw, 4rem)", lineHeight: "0.85" }}
+            >
+              BEYOND
+              <br />
+              <span className="text-[#333333]">THE</span>
+              <br />
+              CODE.
+            </h2>
+            <p className="mt-5 text-[#aaaaaa] text-sm leading-[1.7]">
+              [engineering] and shipping digital platforms, client portals, SaaS systems, payment
+              infrastructure — for founders who have a real problem and need someone who will
+              actually solve it.
+            </p>
+          </div>
 
-          {/* Left Column — static header */}
+          {/* Mobile service rows */}
+          <div>
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, ease: "easeOut", delay: index * 0.08 }}
+                className="border-b border-[#1a1a1a] py-6"
+              >
+                <div className="flex items-start gap-4 mb-3">
+                  <span className="font-mono-custom text-[11px] text-[#555555] tracking-[4px] mt-1 shrink-0">
+                    {service.num}
+                  </span>
+                  <h3 className="font-barlow font-bold text-lg uppercase tracking-wide text-[#f0f0ea]">
+                    {service.title}
+                  </h3>
+                </div>
+                <p className="text-[#aaaaaa] text-sm leading-[1.65] mb-3 pl-9">
+                  {service.description}
+                </p>
+                <div className="flex flex-wrap gap-2 pl-9">
+                  {service.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-mono-custom text-[10px] tracking-[2px] text-[#555] border border-[#222] px-3 py-1 uppercase"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Desktop layout: two-column pinned scroll ── */}
+        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-8 items-stretch">
+          {/* Left Column */}
           <div ref={headerRef} className="lg:col-span-4 lg:sticky lg:top-24 flex flex-col justify-end pb-4">
             <div className="mb-3 flex items-center">
               <span className="eyebrow-bar"></span>
               <span className="eyebrow-label text-[#c8f060]">The Narrative</span>
             </div>
-
             <h2
               className="font-barlow font-black text-[#f0f0ea] uppercase tracking-tighter"
               style={{ fontSize: "clamp(2.4rem, 4vw, 4.2rem)", lineHeight: "0.85" }}
@@ -172,15 +229,14 @@ const About = () => {
               <br />
               CODE.
             </h2>
-
             <p className="mt-4 text-[#aaaaaa] text-sm leading-[1.7]">
               [engineering] and shipping digital platforms, client portals, SaaS systems, payment
-              infrastructure — for founders who have a real problem and need someone who will actually
-              solve it.
+              infrastructure — for founders who have a real problem and need someone who will
+              actually solve it.
             </p>
           </div>
 
-          {/* Right Column — service narratives */}
+          {/* Right Column */}
           <div className="lg:col-span-8 space-y-0">
             {services.map((service, index) => (
               <motion.div
@@ -193,7 +249,6 @@ const About = () => {
                 transition={{ duration: 0.3 }}
               >
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6 pt-4">
-                  {/* Number + Title */}
                   <div className="md:col-span-5 flex items-start gap-6">
                     <span className="font-mono-custom text-[11px] text-[#555555] tracking-[4px] mt-1">
                       {service.num}
@@ -202,8 +257,6 @@ const About = () => {
                       {service.title}
                     </h3>
                   </div>
-
-                  {/* Description */}
                   <div className="md:col-span-7">
                     <p className="text-[#aaaaaa] text-sm leading-[1.65]">{service.description}</p>
                     <div className="mt-2 flex flex-wrap gap-2">
@@ -221,7 +274,6 @@ const About = () => {
               </motion.div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

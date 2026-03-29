@@ -182,7 +182,7 @@ const Navigation = () => {
 
               <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden w-11 h-11 bg-[#111111] border border-[#1a1a1a] flex items-center justify-center transition-all duration-300 flex-shrink-0"
+                className="md:hidden w-11 h-11 bg-[#111111] border border-[#1a1a1a] flex items-center justify-center transition-all duration-300 flex-shrink-0 mr-2"
                 style={{ borderRadius: 0 }}
                 whileTap={{ scale: 0.9 }}
                 aria-label="Open menu"
