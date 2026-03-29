@@ -1,40 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useRef } from "react"
 
 const Experience = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
-  const numberRef = useRef(null)
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
-
-    // Number animation with lower z-index
-    gsap.fromTo(
-      numberRef.current,
-      { opacity: 0, scale: 0.5 },
-      {
-        opacity: 0.8, // Increased opacity for visibility
-        scale: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          end: "bottom 30%",
-          toggleActions: "play none none reverse",
-        },
-      },
-    )
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
-  }, [])
 
   const experiences = [
     {
@@ -80,40 +51,26 @@ const Experience = () => {
   ]
 
   return (
-    <section id="experience" ref={sectionRef} className="section-padding bg-gray-50 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="hidden md:block absolute top-20 right-20 w-24 h-24 bg-gray-200 rounded-full opacity-30 z-background" />
-      <div className="hidden md:block absolute bottom-40 left-20 w-16 h-16 bg-gray-300 rotate-45 opacity-40 z-background" />
-
-      {/* Large section number */}
-      <motion.div
-        ref={numberRef}
-        className="absolute top-20 left-8 text-[12rem] md:text-[16rem] lg:text-[20rem] font-black text-gray-200 leading-none z-10 pointer-events-none"
-        initial={{ opacity: 0, scale: 0.5 }}
-        whileInView={{ opacity: 0.8, scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        viewport={{ once: true }}
-      >
-        03
-      </motion.div>
+    <section id="experience" ref={sectionRef} className="section-padding bg-[#0d0d0d] text-[#f0f0ea] relative overflow-hidden border-b border-[#1a1a1a]">
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-20">
         <div className="space-y-16 lg:space-y-24">
           {/* Header */}
           <div className="space-y-6 lg:space-y-8">
             <motion.div
+              className="eyebrow-label"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-gray-500 text-sm uppercase tracking-[0.2em]"
             >
-              (Experience)
+              <span className="eyebrow-bar" />
+              EXPERIENCE
             </motion.div>
 
             <motion.h2
               ref={titleRef}
-              className="section-title text-gray-900"
+              className="section-title font-barlow font-black uppercase text-[#f0f0ea]"
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
@@ -123,7 +80,7 @@ const Experience = () => {
             </motion.h2>
 
             <motion.p
-              className="section-subtitle text-gray-600 max-w-3xl"
+              className="text-[15px] leading-relaxed text-[#aaaaaa] max-w-3xl"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -138,7 +95,7 @@ const Experience = () => {
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                className="border-b border-gray-300 pb-8 lg:pb-12 group cursor-pointer"
+                className="border-b border-[#1a1a1a] pb-8 lg:pb-12 group cursor-pointer"
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, ease: "backOut", delay: 0.1 + index * 0.15 }}
@@ -148,25 +105,28 @@ const Experience = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
                   {/* Timeline & Status */}
                   <div className="lg:col-span-3 space-y-4">
-                    <div className="text-xs uppercase tracking-[0.15em] font-medium text-gray-500">{exp.period}</div>
+                    <div className="font-mono-custom text-[11px] tracking-[2px] uppercase text-[#555555]">{exp.period}</div>
                     {exp.current && (
-                      <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-500 text-white uppercase tracking-[0.1em]">
+                      <div 
+                        className="inline-flex items-center px-3 py-1 bg-[#c8f060] text-[#0a0a0a] font-barlow font-black text-[11px] tracking-[2px] uppercase"
+                        style={{ borderRadius: 0 }}
+                      >
                         Current
                       </div>
                     )}
-                    <div className="text-sm font-light text-gray-600 border-l-2 border-gray-300 pl-4">{exp.impact}</div>
+                    <div className="font-mono-custom text-[11px] tracking-[2px] uppercase text-[#555555] border-l-2 border-[#c8f060] pl-4">{exp.impact}</div>
                   </div>
 
                   {/* Content */}
                   <div className="lg:col-span-9 space-y-4 lg:space-y-6">
                     <div className="space-y-2">
-                      <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-gray-700 transition-colors duration-300">
+                      <h3 className="text-2xl lg:text-3xl font-barlow font-black uppercase text-[#f0f0ea] group-hover:text-[#c8f060] transition-colors duration-300">
                         {exp.title}
                       </h3>
-                      <div className="text-gray-600 font-light text-lg">{exp.company}</div> {/* Fixed missing closing tag */}
+                      <div className="font-mono-custom text-[13px] tracking-[2px] uppercase text-[#555555]">{exp.company}</div> {/* Fixed missing closing tag */}
                     </div>
 
-                    <p className="text-gray-700 leading-relaxed font-light text-base lg:text-lg max-w-3xl">
+                    <p className="text-[15px] leading-relaxed text-[#aaaaaa] max-w-3xl">
                       {exp.description}
                     </p>
 
@@ -175,7 +135,8 @@ const Experience = () => {
                       {exp.technologies.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded-full font-light hover:bg-gray-300 transition-colors duration-300"
+                          className="px-3 py-1 bg-[#111111] border border-[#1a1a1a] text-[#555555] font-mono-custom text-[11px] tracking-[2px] uppercase hover:border-[#c8f060] hover:text-[#f0f0ea] transition-colors duration-300"
+                          style={{ borderRadius: 0 }}
                         >
                           {tech}
                         </span>

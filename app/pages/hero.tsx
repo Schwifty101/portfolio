@@ -21,6 +21,22 @@ const Hero = ({ onReady }: HeroProps = {}) => {
   const nameRef = useRef<HTMLSpanElement | null>(null)
   const [isReady, setIsReady] = useState(false)
   const [currentDate, setCurrentDate] = useState({ month: '', year: '' })
+  const [currentTime, setCurrentTime] = useState('')
+
+  useEffect(() => {
+    const update = () => {
+      const t = new Date().toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Asia/Karachi',
+      })
+      setCurrentTime(t)
+    }
+    update()
+    const id = setInterval(update, 1000)
+    return () => clearInterval(id)
+  }, [])
 
   useEffect(() => {
     const now = new Date()
@@ -179,110 +195,39 @@ const Hero = ({ onReady }: HeroProps = {}) => {
     <section
       id="hero"
       ref={heroRef}
-      className="min-h-screen w-full flex flex-col justify-center bg-black text-white pt-20 lg:pt-24 pb-16 relative overflow-hidden"
+      className="min-h-screen w-full flex flex-col justify-center bg-black text-white pt-24 lg:pt-28 pb-16 relative overflow-hidden border-b border-[#1a1a1a]"
     >
-      {/* Background elements with animations from pasted text */}
-      <AnimatePresence>
-        {isReady && (
-          <>
-            <motion.div
-              className="absolute top-20 right-[5%] w-32 h-32 bg-gradient-to-br from-gray-700 to-gray-800 rounded-full opacity-20 mobile-hide-bg"
-              initial={{ opacity: 0, scale: 0.7 }}
-              animate={{
-                opacity: 0.15,
-                scale: 1,
-                rotate: [0, 180, 360],
-              }}
-              transition={{
-                opacity: { duration: 1.2, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
-                scale: { duration: 1.2, delay: 0.8, ease: [0.68, -0.55, 0.265, 1.55] },
-                rotate: {
-                  duration: 25,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "linear"
-                },
-              }}
-            />
-            <motion.div
-              className="absolute bottom-40 right-[10%] w-16 h-16 bg-gradient-to-br from-gray-600 to-gray-700 rotate-45 opacity-30 mobile-hide-bg"
-              initial={{ opacity: 0, scale: 0.7, rotate: 45 }}
-              animate={{
-                opacity: 0.25,
-                scale: 1,
-                rotate: [45, 225, 45],
-              }}
-              transition={{
-                opacity: { duration: 1.1, delay: 1.0, ease: [0.25, 0.46, 0.45, 0.94] },
-                scale: { duration: 1.1, delay: 1.0, ease: [0.68, -0.55, 0.265, 1.55] },
-                rotate: {
-                  duration: 18,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: [0.37, 0, 0.63, 1]
-                },
-              }}
-            />
-            <motion.div
-              className="absolute top-1/2 right-[2%] w-8 h-8 bg-gray-600 rounded-full opacity-40 mobile-hide-bg"
-              initial={{ opacity: 0, y: 0 }}
-              animate={{
-                opacity: [0, 0.3, 0.6, 0.3],
-                y: [-15, 15, -15],
-              }}
-              transition={{
-                opacity: { duration: 1.8, delay: 1.3, ease: [0.25, 0.46, 0.45, 0.94] },
-                y: {
-                  duration: 6,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: [0.37, 0, 0.63, 1]
-                },
-              }}
-            />
-          </>
-        )}
-      </AnimatePresence>
-
       <div className="w-full px-[clamp(1rem,5vw,4rem)] relative z-10">
-        {/* Small intro text with animation from pasted text */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{
-            opacity: isReady ? 1 : 0,
-            y: isReady ? 0 : 10
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isReady ? 1 : 0 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px',
+            marginBottom: '32px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            fontWeight: 700,
+            letterSpacing: '3px',
+            textTransform: 'uppercase',
+            color: '#c8f060',
           }}
-          transition={{
-            delay: 1.5,
-            duration: 0.9,
-            ease: [0.25, 0.46, 0.45, 0.94]
-          }}
-          className="text-gray-400 mb-0 text-2xl tracking-widest font-light leading-normal pb-2"
         >
-          (Need an unfair advantage?)
+          <span>{currentTime} ISB</span>
+          <span style={{ color: '#c8f060' }}>—</span>
+          <span>Booking projects for Q3 &apos;25</span>
         </motion.div>
 
         {/* Main Title */}
         <div ref={fitContainerRef} className="mb-8">
           <h1 ref={titleRef}
-            className="fluid-text-hero font-black leading-none text-white tracking-normal block w-full text-left"
+            className="fluid-text-hero font-barlow font-black leading-none text-white tracking-normal block w-full text-left"
             style={{ fontSize: "clamp(3rem, 12vw, 8rem)" }}
           >
             <span ref={nameRef} className="inline-flex items-baseline whitespace-nowrap will-change-transform">
               <span>SOBAN AHMAD</span>
-              <motion.span
-                className="text-2xl md:text-4xl lg:text-6xl align-top ml-1 lg:ml-2"
-                initial={{ opacity: 0, scale: 0, rotate: -90 }}
-                animate={{
-                  opacity: isReady ? 1 : 0,
-                  scale: isReady ? 1 : 0,
-                  rotate: isReady ? 0 : -90,
-                }}
-                transition={{
-                  duration: 0.9,
-                  delay: 2.2,
-                  ease: [0.68, -0.55, 0.265, 1.55],
-                }}
-              >
-                ©
-              </motion.span>
             </span>
           </h1>
         </div>
@@ -291,33 +236,55 @@ const Hero = ({ onReady }: HeroProps = {}) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8 xl:gap-12 items-start">
           {/* Left Content */}
           <div ref={leftContentRef} className="lg:col-span-4 space-y-4 lg:space-y-6">
-            <motion.div
-              className="text-gray-400 text-xl lg:text-4xl"
-              animate={{
-                rotate: isReady ? [0, -3, 0] : 0,
-              }}
-              transition={{
-                duration: 2,
-                repeat: isReady ? Number.POSITIVE_INFINITY : 0,
-                delay: 1.8,
-                ease: [0.37, 0, 0.63, 1],
-              }}
-            >
-              <ArrowDownRight className="w-10 h-10" />
-            </motion.div>
-            <div className="space-y-4 md:space-y-6 lg:space-y-8 pt-4 md:pt-6 lg:pt-8">
-              <p className="fluid-text-body text-gray-300 leading-relaxed font-light max-w-sm">
-                I help growing brands and startups gain an unfair advantage through premium, results driven software
-                solutions.
+            <div style={{ paddingTop: '32px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+              <p style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                color: '#444444',
+                marginBottom: '0',
+              }}>
+                (Transforming Ideas into digital realities)
               </p>
+
+              <p style={{
+                fontSize: '18px',
+                lineHeight: '1.7',
+                color: '#aaaaaa',
+                maxWidth: '320px',
+              }}>
+                <span style={{ color: '#c8f060' }}>[thinking]</span>, structuring and shipping digital platforms 
+                for founders who already know what they want built — 
+                and need someone who can actually build it.
+              </p>
+
               <motion.button
                 data-cal-namespace="30min"
                 data-cal-link="soban-ahmad/30min"
                 data-cal-config='{"layout":"month_view"}'
-                className="mt-6 md:mt-8 lg:mt-12 inline-flex items-center space-x-2 md:space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-8 md:px-10 lg:px-12 py-4 md:py-5 lg:py-6 rounded-full font-medium text-base md:text-lg tracking-wider uppercase transition-all duration-300 group"
-                whileHover={{
-                  scale: 1.03,
-                  boxShadow: "0 15px 35px rgba(0,0,0,0.25)",
+                style={{
+                  borderRadius: 0,
+                  background: '#c8f060',
+                  color: '#0a0a0a',
+                  fontFamily: 'var(--font-barlow)',
+                  fontWeight: 900,
+                  fontSize: '13px',
+                  letterSpacing: '3px',
+                  textTransform: 'uppercase',
+                  padding: '16px 32px',
+                  border: '1px solid #c8f060',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  alignSelf: 'flex-start',
+                  transition: 'all 0.2s ease',
+                }}
+                whileHover={{ 
+                  backgroundColor: 'transparent',
+                  color: '#c8f060',
                 }}
                 whileTap={{ scale: 0.98 }}
                 initial={{ opacity: 0, y: 10 }}
@@ -325,27 +292,10 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                   opacity: isReady ? 1 : 0,
                   y: isReady ? 0 : 10
                 }}
-                transition={{
-                  delay: 2.0,
-                  duration: 0.8,
-                  ease: [0.25, 0.46, 0.45, 0.94]
-                }}
+                transition={{ delay: 0.02, duration: 0.02 }}
               >
-                <span className="relative z-10">BOOK A CALL</span>
-                <motion.span
-                  className="text-base lg:text-lg relative z-10"
-                  animate={{
-                    x: isReady ? [0, 2, 0] : 0,
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: isReady ? Number.POSITIVE_INFINITY : 0,
-                    delay: 2.8,
-                    ease: [0.37, 0, 0.63, 1],
-                  }}
-                >
-                  <ArrowUpRight className="w-4 h-4" />
-                </motion.span>
+                <span>BOOK A CALL</span>
+                <ArrowUpRight style={{ width: '14px', height: '14px' }} />
               </motion.button>
             </div>
           </div>
@@ -358,7 +308,8 @@ const Hero = ({ onReady }: HeroProps = {}) => {
             <div className="relative h-[30vh] md:h-[45vh] lg:h-[50vh] w-full max-w-xs md:max-w-sm">
               {/* Professional Photo */}
               <motion.div
-                className="w-full h-full rounded-2xl shadow-2xl overflow-hidden relative border border-gray-700"
+                className="w-full h-full overflow-hidden relative shadow-2xl"
+                style={{ borderRadius: 0, border: "1px solid #1a1a1a" }}
                 whileHover={{
                   scale: 1.015,
                   rotate: 0.5,
@@ -369,23 +320,6 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                   ease: [0.25, 0.46, 0.45, 0.94]
                 }}
               >
-                {/* Animated border from pasted text */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl"
-                  style={{
-                    background: "linear-gradient(45deg, transparent, rgba(255,255,255,0.08), transparent)",
-                  }}
-                  animate={{
-                    rotate: isReady ? [0, 360] : 0,
-                  }}
-                  transition={{
-                    duration: 12,
-                    repeat: isReady ? Number.POSITIVE_INFINITY : 0,
-                    ease: "linear",
-                    delay: 2.2,
-                  }}
-                />
-
                 <img
                   src="/myPhoto-optimized.jpg"
                   alt="Soban Ahmad - Professional Photo"
@@ -400,58 +334,57 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                   }}
                 />
               </motion.div>
-
-              {/* Optional: Decorative elements around the image */}
-              <motion.div
-                className="absolute -top-4 -right-4 w-8 h-8 bg-gray-600 rounded-full opacity-30"
-                animate={{
-                  scale: isReady ? [1, 1.2, 1] : 1,
-                  opacity: isReady ? [0.3, 0.6, 0.3] : 0.3,
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: isReady ? Number.POSITIVE_INFINITY : 0,
-                  delay: 2.5,
-                  ease: [0.37, 0, 0.63, 1],
-                }}
-              />
-              <motion.div
-                className="absolute -bottom-6 -left-6 w-12 h-12 border-2 border-gray-600 rounded-full opacity-20"
-                animate={{
-                  rotate: isReady ? [0, 360] : 0,
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: isReady ? Number.POSITIVE_INFINITY : 0,
-                  ease: "linear",
-                  delay: 3,
-                }}
-              />
             </div>
           </div>
 
           {/* Right Content - Availability */}
           <div ref={rightContentRef} className="lg:col-span-4 space-y-4 md:space-y-6 lg:space-y-8 lg:text-right">
-            <div className="space-y-3 lg:space-y-4">
-              <div className="text-gray-400 pt-4 md:pt-8 lg:pt-16 uppercase font-light text-sm md:text-base lg:text-lg tracking-wide">
-                AVAILABLE FOR WORK
-              </div>
-              <div className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tighter text-white font-thin">
-                <motion.span
-                  animate={{
-                    color: isReady ? ["#ffffff", "#e5e7eb", "#ffffff"] : "#ffffff",
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: isReady ? Number.POSITIVE_INFINITY : 0,
-                    ease: [0.37, 0, 0.63, 1],
-                    delay: 2.3,
-                  }}
-                >
-                  {currentDate.month}
-                </motion.span>
-                <span className="text-xl md:text-2xl lg:text-3xl align-top">{currentDate.year}</span>
-              </div>
+            <div style={{ 
+              paddingTop: '32px', 
+              textAlign: 'right',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+              alignItems: 'flex-end',
+            }}>
+              <p style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                color: '#444444',
+                marginBottom: '12px',
+              }}>
+                (selected outcomes)
+              </p>
+              {[
+                ['$2M+', 'client revenue'],
+                ['8 wks','avg. delivery'],
+              ].map(([val, label]) => (
+                <div key={val} style={{ 
+                  display: 'flex', 
+                  alignItems: 'baseline',
+                  justifyContent: 'flex-end',
+                  gap: '8px',
+                }}>
+                  <span style={{
+                    fontFamily: 'var(--font-barlow)',
+                    fontWeight: 900,
+                    fontSize: '28px',
+                    color: '#f0f0ea',
+                    lineHeight: 1,
+                  }}>{val}</span>
+                  <span style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
+                    color: '#444444',
+                  }}>{label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -470,14 +403,21 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           }}
           className="absolute bottom-0 right-[clamp(1rem,5vw,4rem)] text-right hidden sm:block"
         >
-          <div className="text-gray-500 uppercase tracking-wider mb-2 text-sm">For Further Inquiries</div>
-          <motion.div
-            className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer text-base"
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            fontWeight: 700,
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            color: '#444444',
+            cursor: 'pointer',
+            transition: 'color 0.2s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.color='#c8f060'}
+          onMouseLeave={e => e.currentTarget.style.color='#444444'}
           >
-            ↳ soban@sobanahmad.dev
-          </motion.div>
+            soban@sobanahmad.dev
+          </div>
         </motion.div>
       </div>
       {/* Animated scroll indicator - keeping original from attached file */}
@@ -486,9 +426,10 @@ const Hero = ({ onReady }: HeroProps = {}) => {
         className="hidden md:flex flex-col items-center space-y-2 pt-8"
       >
         <motion.div
-          className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center"
+          className="w-6 h-10 border-2 rounded-full flex justify-center"
+          style={{ borderColor: "#1a1a1a" }}
           animate={{
-            borderColor: isReady ? ["#4b5563", "#9ca3af", "#4b5563"] : "#4b5563",
+            borderColor: isReady ? ["#1a1a1a", "#c8f060", "#1a1a1a"] : "#1a1a1a",
           }}
           transition={{
             duration: 3,
@@ -497,7 +438,8 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           }}
         >
           <motion.div
-            className="w-1 h-2 bg-gray-400 rounded-full mt-2"
+            className="w-1 h-2 bg-[#c8f060] mt-2"
+            style={{ borderRadius: 0 }}
             animate={{
               y: isReady ? [0, 16, 0] : 0,
               opacity: isReady ? [1, 0.3, 1] : 1,

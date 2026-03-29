@@ -51,7 +51,7 @@ const SlotMachineText = ({ text, className = "" }: { text: string; className?: s
       {text.split("").map((char, index) => (
         <span
           key={index}
-          className="letter inline-block transition-colors duration-300 will-change-transform"
+          className="letter inline-block transition-colors duration-300 will-change-transform text-[#555555] group-hover:text-[#f0f0ea]"
         >
           {char === " " ? "\u00A0" : char}
         </span>
@@ -93,13 +93,12 @@ const Footer = () => {
   }, [])
 
   const menuItems = [
-    { name: "Home", href: "hero" },
-    { name: "About", href: "about" },
-    { name: "Skills", href: "skills" },
-    { name: "Works", href: "experience" },
-    { name: "Projects", href: "project" },
-    { name: "Education", href: "education" },
-    { name: "Contact", href: "contact" },
+    { name: "Home",         href: "hero" },
+    { name: "Services",     href: "about" },
+    { name: "Experience",   href: "experience" },
+    { name: "Testimonials", href: "testimonials" },
+    { name: "Work",         href: "project" },
+    { name: "Contact",      href: "contact" },
   ]
 
   const socialItems = [
@@ -114,26 +113,90 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="bg-gray-100 text-gray-900 relative z-content">
-      <div className="max-w-7xl px-4 border-0 mx-auto my-0 py-12 pb-8">
+    <footer className="bg-[#0a0a0a] border-t border-[#1a1a1a] text-[#f0f0ea] relative z-content">
+      <div className="w-full px-4 border-0 mx-auto my-0 py-12 pb-8">
+        <div style={{
+          borderTop: '1px solid #1a1a1a',
+          borderBottom: '1px solid #1a1a1a',
+          overflow: 'hidden',
+          padding: '14px 0',
+          margin: '0 -16px 48px -16px',
+        }}>
+          <div className="marquee-track">
+            {[
+              'AR&CO LAW ASSOCIATES',
+              'THE NEW HOME ARCHITECTURES',
+              'AI ASSESSMENT PLATFORM',
+              'SECURE MESSAGING SYSTEM',
+              'MULTI-COMMERCE DASHBOARD',
+              'SYSTEMS LIMITED',
+              'AR&CO LAW ASSOCIATES',
+              'THE NEW HOME ARCHITECTURES',
+              'AI ASSESSMENT PLATFORM',
+              'SECURE MESSAGING SYSTEM',
+              'MULTI-COMMERCE DASHBOARD',
+              'SYSTEMS LIMITED',
+            ].map((name, i) => (
+              <span
+                key={i}
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '3px',
+                  textTransform: 'uppercase',
+                  color: i % 2 === 0 ? '#333333' : '#1a1a1a',
+                  paddingRight: '48px',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
+                }}
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          style={{
+            fontFamily: 'var(--font-barlow)',
+            fontWeight: 900,
+            fontSize: 'clamp(48px, 10vw, 96px)',
+            lineHeight: 0.9,
+            letterSpacing: '-2px',
+            textTransform: 'uppercase',
+            color: '#111111',
+            marginBottom: '48px',
+            userSelect: 'none',
+          }}
+        >
+          SOBAN
+          <span style={{ color: '#c8f060' }}>.</span>
+          DEV
+        </motion.div>
+
         <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-0">
           {/* Menu */}
           <div className="w-full md:w-1/2">
             <motion.h3
-              className="text-lg font-bold mb-4 text-gray-900 border-b-2 border-gray-300 pb-2"
+              className="font-barlow font-black text-[11px] tracking-[3px] uppercase text-[#444444] mb-4 border-b border-[#1a1a1a] pb-2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              Menu
+              Navigate
             </motion.h3>
             <div className="space-y-0 leading-tight">
               {menuItems.map((item, index) => (
                 <motion.button
                   key={index}
                   onClick={() => scrollToSection(item.href)}
-                  className="block font-light text-gray-600 hover:text-gray-900 transition-colors duration-300 text-left py-1"
+                  className="block font-light text-[#555555] transition-colors duration-300 text-left py-1 group"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 + index * 0.05 }}
@@ -150,13 +213,13 @@ const Footer = () => {
             {/* Socials */}
             <div className="w-full md:w-1/2 md:px-4">
               <motion.h3
-                className="text-lg font-bold mb-4 text-gray-900 border-b-2 border-gray-300 pb-2"
+                className="font-barlow font-black text-[11px] tracking-[3px] uppercase text-[#444444] mb-4 border-b border-[#1a1a1a] pb-2"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                Socials
+                Follow
               </motion.h3>
               <div className="space-y-0 leading-tight">
                 {socialItems.map((item, index) => (
@@ -165,7 +228,7 @@ const Footer = () => {
                     href={item.href}
                     target={item.href.startsWith("http") ? "_blank" : "_self"}
                     rel={item.href.startsWith("http") ? "noopener noreferrer" : ""}
-                    className="block font-light text-gray-600 hover:text-gray-900 transition-colors duration-300 py-1"
+                    className="block font-light text-[#555555] transition-colors duration-300 py-1 group"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
@@ -180,13 +243,13 @@ const Footer = () => {
             {/* Resources */}
             <div className="w-full md:w-1/2">
               <motion.h3
-                className="text-lg font-bold mb-4 text-gray-900 border-b-2 border-gray-300 pb-2"
+                className="font-barlow font-black text-[11px] tracking-[3px] uppercase text-[#444444] mb-4 border-b border-[#1a1a1a] pb-2"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
                 viewport={{ once: true }}
               >
-                Resources
+                Download
               </motion.h3>
               <div className="space-y-0 leading-tight">
                 {resourceItems.map((item, index) => (
@@ -196,7 +259,7 @@ const Footer = () => {
                     download={item.name === "Download Resume" ? "Resume_SobanAhmad.pdf" : undefined}
                     target={item.href.startsWith("#") ? "_self" : "_blank"}
                     rel={item.href.startsWith("http") ? "noopener noreferrer" : ""}
-                    className="block font-light text-gray-600 hover:text-gray-900 transition-colors duration-300 py-1"
+                    className="block font-light text-[#555555] transition-colors duration-300 py-1 group"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
@@ -211,28 +274,68 @@ const Footer = () => {
         </div>
 
         {/* Bottom Footer */}
-        <div className="flex flex-col border-t border-gray-300 justify-between md:flex-row items-start pb-0 pt-8 md:pt-16 gap-6 md:gap-0">
+        {/* Bottom Footer */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-t border-[#1a1a1a] pt-8 gap-6 md:gap-0">
+
+          {/* Left — identity */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
             viewport={{ once: true }}
-            className="mb-0"
           >
-            <div className="font-black mb-2 text-gray-900 text-2xl md:text-3xl lg:text-5xl leading-tight tracking-tighter">© 2025 Soban Ahmad</div>
-            <div className="text-gray-600 tracking-normal text-sm md:text-base lg:text-lg font-normal">All rights reserved.</div>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              fontWeight: 700,
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              color: '#333333',
+              marginBottom: '8px',
+            }}>
+              © 2025 Soban Ahmad
+            </div>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              fontWeight: 700,
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+              color: '#1a1a1a',
+            }}>
+              (Engineering + building — Silicon Studio)
+            </div>
           </motion.div>
 
+          {/* Right — time */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
             viewport={{ once: true }}
-            className="text-left md:text-right"
+            style={{ textAlign: 'right' }}
           >
-            <div className="text-gray-500 uppercase tracking-wider mb-1 font-bold text-sm md:text-base lg:text-xl">Local Time</div>
-            <div className="text-gray-700 font-mono font-light text-base md:text-lg lg:text-xl tracking-wide">{currentTime}</div>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '10px',
+              fontWeight: 700,
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              color: '#333333',
+              marginBottom: '4px',
+            }}>
+              Local Time
+            </div>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '13px',
+              color: '#444444',
+              letterSpacing: '1px',
+            }}>
+              {currentTime}
+            </div>
           </motion.div>
+
         </div>
       </div>
     </footer>

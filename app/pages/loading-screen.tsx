@@ -62,12 +62,29 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
       }}
     >
       <div className="text-center relative">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          style={{ 
+            marginBottom: '48px', 
+            fontFamily: 'var(--font-barlow)',
+            fontWeight: 900,
+            fontSize: '18px',
+            letterSpacing: '4px',
+            textTransform: 'uppercase',
+            color: '#f0f0ea'
+          }}
+        >
+          SOBAN<span style={{color:'#c8f060'}}>.</span>DEV
+        </motion.div>
+
         {/* Main Counter */}
         <div className="mb-8 relative">
           <motion.div
-            className="text-8xl md:text-9xl font-black tracking-tighter text-white relative z-10"
+            className="text-8xl md:text-9xl font-barlow font-black tracking-tighter text-white relative z-10"
             animate={{
-              scale: isExiting ? [1, 1.1, 1] : [1, 1.02, 1],
+              scale: isExiting ? [1, 1.1, 1] : 1,
             }}
             transition={{
               duration: isExiting ? 0.6 : 1,
@@ -95,7 +112,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
 
         {/* Loading Text */}
         <motion.div
-          className="text-sm text-gray-400 uppercase tracking-[0.2em] mt-4"
+          className="font-mono-custom text-[11px] tracking-[4px] uppercase text-[#555555] mt-4"
           animate={{
             opacity: isExiting ? [1, 0] : [0.5, 1, 0.5],
           }}
@@ -109,9 +126,10 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         </motion.div>
 
         {/* Enhanced Progress Bar */}
-        <div className="w-64 h-1 bg-gray-800 mx-auto rounded-full overflow-hidden mt-8">
+        <div className="w-64 h-px bg-[#111111] mx-auto overflow-hidden mt-8" style={{borderRadius: 0}}>
           <motion.div
-            className="h-full bg-gradient-to-r from-white via-gray-300 to-white rounded-full"
+            className="h-full bg-[#c8f060]"
+            style={{borderRadius: 0}}
             initial={{ width: "0%" }}
             animate={{
               width: `${counter}%`,
@@ -131,7 +149,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
             animate={{ opacity: 1, scale: 1 }}
             className="absolute -bottom-16 left-1/2 transform -translate-x-1/2"
           >
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <div className="w-2 h-2 bg-[#c8f060] rounded-full animate-pulse" />
           </motion.div>
         )}
       </div>

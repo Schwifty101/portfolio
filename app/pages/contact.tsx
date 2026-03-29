@@ -2,97 +2,63 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { getCalApi } from "@calcom/embed-react"
 import { ArrowUpRight } from 'lucide-react'
 
 const Contact = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
-  const numberRef = useRef(null)
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
-
-      // Initialize Cal.com embed
-      ; (async function () {
-        const cal = await getCalApi({ namespace: "30min" })
-        cal("ui", { hideEventTypeDetails: false, layout: "month_view" })
-      })()
-
-    // Number animation with lower z-index
-    gsap.fromTo(
-      numberRef.current,
-      { opacity: 0, scale: 0.5 },
-      {
-        opacity: 0.8,
-        scale: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          end: "bottom 30%",
-          toggleActions: "play none none reverse",
-        },
-      },
-    )
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
+    // Initialize Cal.com embed
+    ; (async function () {
+      const cal = await getCalApi({ namespace: "30min" })
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" })
+    })()
   }, [])
 
   return (
-    <section id="contact" ref={sectionRef} className="relative bg-black text-white overflow-hidden min-h-screen flex flex-col">
-      {/* Background elements */}
-      <div className="hidden md:block absolute top-20 right-20 w-32 h-32 bg-gray-800 rounded-full opacity-10 z-background" />
-      <div className="hidden md:block absolute bottom-40 left-20 w-16 h-16 bg-gray-700 rotate-45 opacity-20 z-background" />
-
-      {/* Large section number */}
-      <motion.div
-        ref={numberRef}
-        className="absolute top-48 md:top-20 left-4 md:left-8 text-[8rem] md:text-[16rem] lg:text-[20rem] font-black text-gray-800 leading-none z-10 pointer-events-none"
-        initial={{ opacity: 0, scale: 0.5 }}
-        whileInView={{ opacity: 0.8, scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        viewport={{ once: true }}
-      >
-        06
-      </motion.div>
+    <section id="contact" ref={sectionRef} className="relative bg-[#0a0a0a] border-b border-[#1a1a1a] text-white overflow-hidden min-h-screen flex flex-col">
 
       {/* Main CTA Section - Now takes full screen */}
       <div className="flex-1 flex flex-col justify-center relative z-content px-4 md:px-8 py-8 md:py-16">
         <div className="max-w-7xl mx-auto w-full text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-gray-400 uppercase mb-4 md:mb-8 text-sm md:text-xl lg:text-2xl font-light tracking-[0.2em] md:tracking-[0.3em]"
-          >
-            (Need an unfair advantage?)
-          </motion.div>
-
           <motion.h2
             ref={titleRef}
-            className="section-title text-white mb-8 md:mb-16 leading-tight md:leading-none tracking-wide md:tracking-wider font-black"
+            className="section-title font-barlow font-black tracking-[-2px] text-[#f0f0ea] mb-8 md:mb-16 leading-tight md:leading-none uppercase"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            LET&apos;S MAKE
-            <br />
-            IT HAPPEN
+            LET&apos;S TALK.
           </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            style={{
+              fontSize: '15px',
+              lineHeight: '1.7',
+              color: '#555555',
+              maxWidth: '400px',
+              margin: '0 auto 40px',
+              textAlign: 'center',
+            }}
+          >
+            A 15-minute call is usually enough to know if 
+            there is a fit. No slides, no pitch — just a 
+            conversation about what you are building.
+          </motion.p>
 
           <motion.button
             data-cal-namespace="30min"
             data-cal-link="soban-ahmad/30min"
             data-cal-config='{"layout":"month_view"}'
-            className="mt-6 md:mt-12 inline-flex items-center space-x-2 md:space-x-3 bg-gray-800 hover:bg-gray-700 text-white px-8 md:px-12 py-4 md:py-6 rounded-full font-medium text-base md:text-lg tracking-wide md:tracking-wider uppercase transition-all duration-300 group min-h-[44px]"
+            className="mt-6 md:mt-12 inline-flex items-center space-x-2 md:space-x-3 bg-[#c8f060] text-[#0a0a0a] font-barlow font-black text-[13px] tracking-[3px] uppercase px-10 py-4 transition-all duration-200 hover:bg-transparent border border-transparent hover:border-[#c8f060] hover:text-[#c8f060] group min-h-[44px]"
+            style={{ borderRadius: 0 }}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -100,7 +66,7 @@ const Contact = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span>BOOK A CALL</span>
+            <span>BOOK 15 MINUTES</span>
             <motion.span
               className="text-lg md:text-xl"
               animate={{ x: [0, 5, 0] }}
@@ -121,17 +87,19 @@ const Contact = () => {
 
             {/* Mobile contact info */}
             <div className="text-center space-y-3">
-              <div className="text-gray-500 text-xs uppercase tracking-wider">For Further Inquiries</div>
-              <div className="text-gray-300 text-sm">soban@sobanahmad.dev</div>
+              <div className="font-mono-custom text-[13px] text-[#aaaaaa] hover:text-[#c8f060] transition-colors duration-200 cursor-pointer">soban@sobanahmad.dev</div>
             </div>
 
             {/* Mobile availability status */}
-            <div className="flex items-center justify-center space-x-2 bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-lg px-4 py-3 mx-auto w-1/2">
-              <div className="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center">
+            <div 
+              className="flex items-center justify-center space-x-2 bg-[#111111] border border-[#1a1a1a] px-4 py-3 mx-auto w-max"
+              style={{ borderRadius: 0 }}
+            >
+              <div className="w-6 h-6 bg-[#222222] flex items-center justify-center" style={{ borderRadius: 0 }}>
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               </div>
               <div className="text-center">
-                <div className="text-gray-400 text-xs">Working Globally</div>
+                <div className="font-mono-custom text-[11px] tracking-[2px] uppercase text-[#555555]">Working Globally</div>
               </div>
             </div>
           </motion.div>
@@ -140,30 +108,30 @@ const Contact = () => {
 
       {/* Desktop Status Badge */}
       <motion.div
-        className="hidden md:flex absolute bottom-6 md:bottom-8 left-4 md:left-8 items-center space-x-3 md:space-x-4 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-lg px-4 md:px-6 py-3 md:py-4"
+        className="hidden md:flex absolute bottom-6 md:bottom-8 left-4 md:left-8 items-center space-x-3 md:space-x-4 bg-[#111111] border border-[#1a1a1a] px-4 md:px-6 py-3 md:py-4"
+        style={{ borderRadius: 0 }}
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="w-6 h-6 md:w-8 md:h-8 bg-gray-700 rounded-full flex items-center justify-center">
+        <div className="w-6 h-6 md:w-8 md:h-8 bg-[#222222] flex items-center justify-center" style={{ borderRadius: 0 }}>
           <div className="w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full animate-pulse"></div>
         </div>
         <div>
-          <div className="text-white text-xs md:text-sm font-medium">Working Globally</div>
+          <div className="font-mono-custom text-[11px] tracking-[2px] uppercase text-[#555555]">Working Globally</div>
         </div>
       </motion.div>
 
       {/* Desktop Contact Info */}
       <motion.div
-        className="hidden md:block absolute bottom-6 md:bottom-8 right-4 md:right-8 text-right"
+        className="hidden md:block absolute bottom-6 md:bottom-8 right-4 md:right-8 text-right font-mono-custom text-[13px] text-[#aaaaaa] hover:text-[#c8f060] transition-colors duration-200 cursor-pointer"
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="text-gray-500 text-xs uppercase tracking-wider mb-2">For Further Inquiries</div>
-        <div className="text-gray-300 text-xs md:text-sm hover:text-white transition-colors duration-300 cursor-pointer">↳ soban@sobanahmad.dev</div>
+        soban@sobanahmad.dev
       </motion.div>
     </section>
   )

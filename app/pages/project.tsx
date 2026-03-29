@@ -19,72 +19,120 @@ export const Project = () => { // Changed to named export
   const leftColumnRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
 
+  const tierConfig: Record<string, { label: string; color: string; bg: string }> = {
+    client:    { label: 'CLIENT WORK',       color: '#c8f060', bg: '#0a1a0a' },
+    personal:  { label: 'PERSONAL BUILD',    color: '#555555', bg: '#111111' },
+    technical: { label: 'TECHNICAL PROJECT', color: '#444444', bg: '#0a0a0a' },
+  }
+
   const projects = [
     {
       id: 1,
-      title: "AR&CO Law Associates — Full-Stack Platform",
-      description: "Full-stack platform built for AR&CO Law Associates, a premier law firm in Islamabad. Delivered a custom frontend with scroll animations, a client portal with authentication and dashboard, an admin dashboard for managing consultations and users, and integrated payment gateways covering consultation booking, monthly retainer and one-time service payments.",
-      tech: ["Next.js", "NestJS", "PostgreSQL", "AWS"],
+      title: "AR&CO Law Associates",
+      description:
+        "A law firm that ran entirely on phone calls and WhatsApp forwards. We built the infrastructure that lets them operate like a modern firm - client portal, case tracking, appointment booking, and a payment system that handles three different billing models.",
+      tech: ["Next.js", "NestJS", "PostgreSQL", "AWS", "Stripe"],
       year: "2025",
       category: "Full-Stack Platform",
-      impact: "Client Project",
-      details: "Delivered a custom frontend, client portal with authentication, admin dashboard, and integrated payment gateways for consultation booking.",
-      link: "https://ar-co-web.vercel.app",
-      liveLink: "https://ar-co-web.vercel.app",
+      tier: "client",
+      impact: "Live — arandcolaw.com",
+      details: "Delivered in 8 weeks. Live at arandcolaw.com",
+      link: "https://arandcolaw.com",
+      liveLink: "https://arandcolaw.com",
       caseStudy: {
-        problem: "AR&CO, a premier law firm, relied on manual processes for consultation bookings and retainer payments. They lacked a centralized digital presence to onboard clients efficiently, manage legal documents securely, and process multi-tier payments.",
-        solution: "Architected a full-stack platform featuring a public-facing dynamic frontend, an authenticated client portal, and a powerful admin dashboard. Integrated Stripe for hybrid payment flows (one-time bookings vs. monthly subscription retainers).",
-        results: ["Automated 100% of consultation bookings", "Enabled secure document sharing", "Established a premium digital brand identity"]
-      }
+        problem:
+          "AR&CO relied entirely on phone calls for consultation bookings and manual bank transfers for payments. No digital presence to onboard clients at scale or process three distinct payment types - one-time, retainer, and per-service.",
+        solution:
+          "Built three interconnected systems: a public-facing site, an authenticated client portal for document uploads and case tracking, and a full admin dashboard. Stripe handles hybrid payment flows with automated invoice generation.",
+        results: [
+          "100% of consultation bookings now self-serve",
+          "Secure client document sharing live at launch",
+          "Firm established a digital identity matching its in-person reputation",
+        ],
+      },
     },
     {
       id: 2,
-      title: "AI-Powered Assessment Platform",
-      description: "Leading a 4-person team building a comprehensive SaaS assessment platform for the Asian tech market. Features multi-tenant architecture, AI-powered plagiarism detection, and integrated proctoring.",
-      tech: ["Next.js", "NestJS", "PostgreSQL", "AWS", "Kubernetes", "OpenAI GPT-4"],
+      title: "The New Home Architectures",
+      description:
+        "Their work was exceptional. Their digital presence was a WhatsApp number. We built a portfolio platform with a [content management system] - they can add services, publish new projects, and update content without touching a developer. New clients now mention the site the first time they call.",
+      tech: ["Next.js", "NestJS", "Supabase", "WhatsApp API"],
       year: "2025",
-      category: "Full-Stack SaaS",
-      impact: "Multi-tenant SaaS Platform",
-      details: "Architected scalable microservices with Kubernetes deployment, Auth0 integration, Judge0 code execution, and role-based access control with AI-powered features.",
-      link: "https://github.com/Schwifty101/AI-Assessment-Platform",
+      category: "Portfolio + CMS",
+      tier: "client",
+      impact: "Live — client enquiry platform",
+      details:
+        "Portfolio platform with full CMS. Services, projects, and content all self-managed by the client.",
+      link: "https://thenewhome.pk",
+      liveLink: "https://thenewhome.pk",
       caseStudy: {
-        problem: "Tech recruiters in the Asian market faced high drop-off rates due to clunky assessment tools, while dealing with increasingly sophisticated candidate plagiarism that traditional tools couldn't catch.",
-        solution: "Built a microservices-based SaaS platform with Kubernetes. Integrated Judge0 for secure remote code execution and implemented an AI agent using GPT-4 to analyze coding patterns and flag AI-generated submissions.",
-        results: ["Multi-tenant architecture supporting discrete agency silos", "Seamless remote code execution", "Advanced AI anti-cheat mechanisms"]
-      }
+        problem:
+          "The firm's portfolio of high-end interior work was being shared only via WhatsApp images. Prospective clients had no way to evaluate quality before reaching out, and the team had no way to update their own content without calling a developer.",
+        solution:
+          "Built a portfolio-led site with a curated project gallery, service category pages, and a WhatsApp-first enquiry flow. Added a full content management system so the client owns their content completely.",
+        results: [
+          "New clients cite the website unprompted at first contact",
+          "Client manages all content independently post-launch",
+          "Enquiry quality improved - leads arrive pre-qualified",
+        ],
+      },
     },
     {
       id: 3,
-      title: "Multi-Commerce Admin Dashboard",
-      description: "Full-stack e-commerce management system with AWS integration, user authentication, and comprehensive order management. Built for scalability and performance.",
-      tech: ["React.js", "Node.js", "MongoDB", "AWS", "ShadCN UI", "Authentication"],
-      year: "2024",
-      category: "Full-Stack Development",
-      impact: "Complete E-commerce Solution",
-      details: "MERN stack dashboard with cloud integration, secure authentication, inventory management, and modern UI components for optimal user experience.",
-      link: "https://github.com/Schwifty101/MultiCommerce-Admin-Dashboard",
+      title: "AI Assessment Platform",
+      description:
+        "Built for the problem that keeps tech recruiters up at night - candidates submitting AI-generated code. A multi-tenant SaaS with sandboxed remote code execution and a GPT-4 engine that flags AI submissions with reasoning, not just a score.",
+      tech: [
+        "Next.js", "NestJS", "PostgreSQL",
+        "Kubernetes", "Auth0", "GPT-4", "Judge0",
+      ],
+      year: "2025",
+      category: "Full-Stack SaaS",
+      tier: "personal",
+      impact: "Personal build — in progress",
+      details:
+        "Multi-tenant. Kubernetes-managed. Architected for 10,000+ concurrent users.",
+      link: "https://github.com/Schwifty101",
       caseStudy: {
-        problem: "Managing multiple storefronts required fragmented tools, leading to inventory desync, delayed order processing, and a lack of centralized oversight.",
-        solution: "Developed a centralized MERN stack admin dashboard with AWS cloud integration, providing unified real-time inventory management and secure multi-role authentication.",
-        results: ["Centralized multi-channel inventory control", "Scalable cloud integration for peak traffic", "Streamlined order management workflow"]
-      }
+        problem:
+          "Tech recruiters in Asian markets face high candidate drop-off on clunky tools and sophisticated plagiarism that simpler detectors miss entirely.",
+        solution:
+          "Microservices on Kubernetes with Auth0 multi-tenancy, Judge0 for sandboxed code execution across 40+ languages, and a GPT-4 agent that analyses coding patterns and flags AI-generated submissions with explainable reasoning.",
+        results: [
+          "Multi-tenant architecture with discrete agency data silos",
+          "Sandboxed remote code execution across 40+ languages",
+          "AI anti-cheat engine with explainable flagging",
+        ],
+      },
     },
     {
       id: 4,
-      title: "Traffic Sign Classification using CNN",
-      description: "Built a deep learning system achieving 98.75% accuracy in recognizing 43 different traffic sign types. Expanded training data from 39K to 162K images using advanced data augmentation techniques.",
-      tech: ["Python", "TensorFlow", "Keras", "OpenCV", "CNN"],
+      title: "Secure Messaging System",
+      description:
+        "An end-to-end encrypted messaging system built without touching a single E2EE library. Custom key exchange protocol, AES-256-GCM encryption, and three independent layers of replay attack protection. The server has no access to plaintext at any point.",
+      tech: [
+        "Next.js", "Node.js", "MongoDB",
+        "Web Crypto API", "AES-256-GCM", "ECDH/ECDSA",
+      ],
       year: "2024",
-      category: "Machine Learning",
-      impact: "98.75% Accuracy",
-      details: "Implemented convolutional neural network with image preprocessing, data augmentation, and model optimization techniques for robust traffic sign detection.",
-      link: "https://github.com/Schwifty101/TrafficSignClassificationCNN",
+      category: "Security / Cryptography",
+      tier: "technical",
+      impact: "Custom cryptographic protocol",
+      details:
+        "Academic information security project. Custom AECDH-ECDSA key exchange protocol from scratch.",
+      link: "https://github.com/Schwifty101",
       caseStudy: {
-        problem: "Autonomous driving systems struggle to reliably parse traffic signs under varying lighting, weather, and motion blur conditions, impacting safety.",
-        solution: "Engineered a custom Convolutional Neural Network (CNN) in TensorFlow. Implemented robust data augmentation strategies to expand the dataset from 39K to 162K images, effectively teaching the model to handle edge cases.",
-        results: ["Achieved 98.75% classification accuracy", "Robust detection across 43 different sign classifications", "Pre-processed data for rapid real-time inference"]
-      }
-    }
+        problem:
+          "Building real E2EE from scratch means designing key exchange, preventing MITM and replay attacks, and ensuring nothing sensitive ever touches the server.",
+        solution:
+          "Designed a custom 3-message AECDH-ECDSA key exchange protocol. AES-256-GCM encrypts all messages client-side. Three-layer replay protection: unique nonces, 5-minute timestamp window, and sequence number enforcement.",
+        results: [
+          "Server has no access to plaintext at any point",
+          "MITM attacks prevented via ECDSA digital signatures",
+          "Replay attacks blocked by nonce + timestamp + sequence",
+        ],
+      },
+    },
   ]
 
   // Check for large screen breakpoint
@@ -101,91 +149,68 @@ export const Project = () => { // Changed to named export
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
-  // Pin the left column using ScrollTrigger (works with ScrollSmoother)
+  // GSAP-based pinning and scroll tracking (optimized for ScrollSmoother)
   useEffect(() => {
-    if (!isLgScreen || !leftColumnRef.current || !gridRef.current) return
+    if (!isLgScreen || !leftColumnRef.current || !gridRef.current || !containerRef.current) return
 
-    const timer = requestAnimationFrame(() => {
-      const trigger = ScrollTrigger.create({
+    let pinTrigger: globalThis.ScrollTrigger | null = null
+    let progressTrigger: globalThis.ScrollTrigger | null = null
+
+    // Delay initialization strictly to ensure ScrollSmoother creates its wrapper first
+    const timer = setTimeout(() => {
+      // 1. Pin the left column
+      pinTrigger = ScrollTrigger.create({
         trigger: leftColumnRef.current,
         start: "top top+=128",
         endTrigger: gridRef.current,
-        end: () => `bottom top+=${128 + (leftColumnRef.current?.offsetHeight || 0)}`,
+        end: () => `bottom top+=${128 + ((leftColumnRef.current as HTMLElement).offsetHeight || 0)}`,
         pin: true,
         pinSpacing: false,
       })
 
-      ScrollTrigger.refresh()
+      // 2. Track scroll progress and update project index/numbers
+      progressTrigger = ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top center",
+        end: "bottom center",
+        onUpdate: (self) => {
+          if (!projectRefs.current.length) return
 
-      return () => trigger.kill()
-    })
+          // Map scroll progress to number position
+          const maxMovement = window.innerHeight * 0.15
+          const calculatedPosition = self.progress * maxMovement - maxMovement / 2
+          setNumberPosition(calculatedPosition)
 
-    return () => cancelAnimationFrame(timer)
-  }, [isLgScreen])
+          // Find the currently visible project based on viewport visual center
+          let visibleProject = 0
+          let minDistance = Number.POSITIVE_INFINITY
 
-  // Optimized scroll handling with throttling (only on large screens)
-  useEffect(() => {
-    if (!isLgScreen) return
+          projectRefs.current.slice(0, projects.length).forEach((ref, index) => {
+            if (!ref) return
 
-    let ticking = false
-    let lastScrollY = window.scrollY
+            const rect = (ref as HTMLElement).getBoundingClientRect()
+            const projectCenter = rect.top + rect.height / 2
+            const viewportCenter = window.innerHeight / 2
+            const distance = Math.abs(projectCenter - viewportCenter)
 
-    const handleScroll = () => {
-      lastScrollY = window.scrollY
+            if (distance < minDistance) {
+              minDistance = distance
+              visibleProject = index
+            }
+          })
 
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateProjectState(lastScrollY)
-          ticking = false
-        })
-
-        ticking = true
-      }
-    }
-
-    const updateProjectState = (scrollY: number) => {
-      if (!containerRef.current || projectRefs.current.length === 0) return
-
-      // Get the container bounds
-      const containerTop = containerRef.current.offsetTop
-      const containerHeight = containerRef.current.offsetHeight
-
-      // Calculate scroll progress through the projects section (0 to 1)
-      const scrollProgress = Math.max(
-        0,
-        Math.min(1, (scrollY - containerTop + window.innerHeight / 2) / containerHeight),
-      )
-
-      // Map scroll progress to number position
-      const maxMovement = window.innerHeight * 0.15
-      const calculatedPosition = scrollProgress * maxMovement - maxMovement / 2
-      setNumberPosition(calculatedPosition)
-
-      // Find the currently visible project based on viewport center
-      let visibleProject = 0
-      let minDistance = Number.POSITIVE_INFINITY
-
-      projectRefs.current.slice(0, projects.length).forEach((ref, index) => {
-        if (!ref) return
-
-        const rect = ref.getBoundingClientRect()
-        const projectCenter = rect.top + rect.height / 2
-        const viewportCenter = window.innerHeight / 2
-        const distance = Math.abs(projectCenter - viewportCenter)
-
-        if (distance < minDistance) {
-          minDistance = distance
-          visibleProject = index
+          setCurrentProject(visibleProject)
         }
       })
 
-      setCurrentProject(visibleProject)
+      ScrollTrigger.refresh()
+    }, 100)
+
+    return () => {
+      clearTimeout(timer)
+      if (pinTrigger) pinTrigger.kill()
+      if (progressTrigger) progressTrigger.kill()
     }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll() // Initial calculation
-
-    return () => window.removeEventListener("scroll", handleScroll)
   }, [isLgScreen])
 
   // Animation variants for just the changing number
@@ -213,22 +238,23 @@ export const Project = () => { // Changed to named export
   }
 
   return (
-    <div id="project" className="min-h-screen bg-black text-white">
+    <div id="project" className="min-h-screen bg-[#0a0a0a] text-white border-b border-[#1a1a1a]">
       {/* Header */}
       <div className="pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-8">
           <motion.div
+            className="eyebrow-label mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-gray-400 text-sm uppercase tracking-[0.2em] mb-8"
           >
-            (Case Studies)
+            <span className="eyebrow-bar" />
+            SELECTED WORK
           </motion.div>
 
           <motion.h2
-            className="text-6xl md:text-8xl font-black tracking-tighter text-white mb-8"
+            className="text-6xl md:text-8xl font-barlow font-black tracking-[-2px] text-[#f0f0ea] mb-8"
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
@@ -236,16 +262,6 @@ export const Project = () => { // Changed to named export
           >
             CASE STUDIES
           </motion.h2>
-
-          <motion.p
-            className="text-xl text-gray-300 leading-relaxed font-light max-w-2xl"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            A curated collection of client solutions showcasing strategic problem solving and bottom-line impact.
-          </motion.p>
         </div>
       </div>
 
@@ -265,7 +281,7 @@ export const Project = () => { // Changed to named export
                     transition: "transform 0.025s ease-out",
                   }}
                 >
-                  <div className="text-[6rem] md:text-[8rem] lg:text-[10rem] font-black text-gray-900 leading-none opacity-80 select-none text-center flex items-start">
+                  <div className="text-[6rem] md:text-[8rem] lg:text-[10rem] font-black text-[#111111] leading-none opacity-100 select-none text-center flex items-start">
                     <span>0</span>
                     <AnimatePresence mode="wait">
                       <motion.span
@@ -282,7 +298,7 @@ export const Project = () => { // Changed to named export
                   </div>
 
                   {/* Project Counter */}
-                  <div className="absolute bottom-0 left-10 text-gray-500 text-sm font-mono">
+                  <div className="absolute bottom-0 left-10 font-mono-custom text-[11px] text-[#444444]">
                     {String(currentProject + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
                   </div>
                 </div>
@@ -305,39 +321,61 @@ export const Project = () => { // Changed to named export
                     viewport={{ once: true, margin: "-50px" }}
                     whileHover={{ y: -5 }}
                   >
-                    <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl lg:rounded-2xl card-padding-fluid hover:border-gray-600 transition-all duration-500 hover:shadow-2xl">
+                    <div 
+                      className="bg-[#0d0d0d] border border-[#1a1a1a] card-padding-fluid transition-all duration-300 hover:border-[#c8f060]"
+                      style={{ borderRadius: 0 }}
+                    >
                       {/* Project Header */}
                       <div className="flex justify-between items-start mb-4 lg:mb-6">
-                        <div className="text-gray-500 text-sm font-mono">{String(index + 1).padStart(2, "0")}</div>
+                        <div className="font-mono-custom text-[11px] text-[#444444]">{String(index + 1).padStart(2, "0")}</div>
                         <div className="text-right">
-                          <div className="text-gray-400 text-sm">{project.year}</div>
-                          <div className="text-gray-500 text-xs uppercase tracking-wider mt-1">{project.category}</div>
+                          <div className="font-mono-custom text-[11px] text-[#444444] uppercase tracking-[2px]">{project.year}</div>
+                          <div className="font-mono-custom text-[11px] text-[#444444] uppercase tracking-[2px] mt-1">{project.category}</div>
+                          {(project as any).tier && tierConfig[(project as any).tier] && (
+                            <div style={{
+                              marginTop: '4px',
+                              display: 'inline-block',
+                              padding: '3px 8px',
+                              background: tierConfig[(project as any).tier].bg,
+                              border: `1px solid ${tierConfig[(project as any).tier].color}`,
+                              borderRadius: 0,
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '10px',
+                              fontWeight: 700,
+                              letterSpacing: '2px',
+                              textTransform: 'uppercase',
+                              color: tierConfig[(project as any).tier].color,
+                            }}>
+                              {tierConfig[(project as any).tier].label}
+                            </div>
+                          )}
                         </div>
                       </div>
 
                       {/* Project Content */}
                       <div className="space-y-4 lg:space-y-6">
                         <div className="space-y-3">
-                          <h3 className="text-2xl lg:text-4xl xl:text-5xl font-bold text-white group-hover:text-gray-300 transition-colors duration-300">
+                          <h3 className="text-2xl lg:text-4xl xl:text-5xl font-barlow font-black uppercase text-[#f0f0ea] group-hover:text-[#c8f060] transition-colors duration-300">
                             {project.title}
                           </h3>
 
                           <div className="flex items-center space-x-3 lg:space-x-4">
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <span className="text-green-400 text-sm font-medium">{project.impact}</span>
+                            <div className="w-2 h-2 bg-[#c8f060]" style={{ borderRadius: 0 }}></div>
+                            <span className="font-mono-custom text-[11px] tracking-[2px] uppercase text-[#c8f060]">{project.impact}</span>
                           </div>
                         </div>
 
-                        <p className="text-gray-400 leading-relaxed text-base lg:text-lg">{project.description}</p>
+                        <p className="text-[15px] leading-relaxed text-[#aaaaaa]">{project.description}</p>
 
-                        <p className="text-gray-500 leading-relaxed text-sm lg:text-base">{project.details}</p>
+                        <p className="text-[13px] text-[#555555]">{project.details}</p>
 
                         {/* Tech Stack */}
                         <div className="flex flex-wrap gap-2 pt-3 lg:pt-4">
                           {project.tech.map((tech, techIndex) => (
                             <span
                               key={techIndex}
-                              className="px-3 py-1.5 lg:px-4 lg:py-2 bg-gray-800 text-gray-300 text-xs lg:text-sm rounded-full font-light hover:bg-gray-700 transition-colors duration-300"
+                              className="px-3 py-1.5 lg:px-4 lg:py-2 bg-[#111111] border border-[#1a1a1a] text-[#555555] font-mono-custom text-[11px] tracking-[2px] uppercase hover:border-[#c8f060] hover:text-[#f0f0ea] transition-colors duration-300"
+                              style={{ borderRadius: 0 }}
                             >
                               {tech}
                             </span>
@@ -346,30 +384,33 @@ export const Project = () => { // Changed to named export
 
                         {/* Case Study Details */}
                         {project.caseStudy && (
-                          <div className="mt-8 p-6 bg-gray-950/50 rounded-xl border border-gray-800 space-y-6">
+                          <div 
+                            className="mt-8 p-6 bg-[#0a0a0a] border border-[#1a1a1a] space-y-6"
+                            style={{ borderRadius: 0 }}
+                          >
                             <div>
                               <h4 className="text-gray-300 font-semibold mb-2 flex items-center">
-                                <span className="w-1.5 h-1.5 bg-red-500 rounded-full mr-2"></span>
-                                The Problem
+                                <span className="w-1.5 h-1.5 bg-[#cc4444] mr-2" style={{ borderRadius: 0 }}></span>
+                                <span className="font-mono-custom text-[11px] uppercase tracking-[2px] text-[#cc4444]">Problem</span>
                               </h4>
-                              <p className="text-gray-400 text-sm lg:text-base leading-relaxed">{project.caseStudy.problem}</p>
+                              <p className="text-[#aaaaaa] text-[14px] leading-relaxed">{project.caseStudy.problem}</p>
                             </div>
                             <div>
                               <h4 className="text-gray-300 font-semibold mb-2 flex items-center">
-                                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
-                                The Solution
+                                <span className="w-1.5 h-1.5 bg-[#555555] mr-2" style={{ borderRadius: 0 }}></span>
+                                <span className="font-mono-custom text-[11px] uppercase tracking-[2px] text-[#555555]">Approach</span>
                               </h4>
-                              <p className="text-gray-400 text-sm lg:text-base leading-relaxed">{project.caseStudy.solution}</p>
+                              <p className="text-[#aaaaaa] text-[14px] leading-relaxed">{project.caseStudy.solution}</p>
                             </div>
                             <div>
                               <h4 className="text-gray-300 font-semibold mb-2 flex items-center">
-                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
-                                The Impact
+                                <span className="w-1.5 h-1.5 bg-[#c8f060] mr-2" style={{ borderRadius: 0 }}></span>
+                                <span className="font-mono-custom text-[11px] uppercase tracking-[2px] text-[#c8f060]">Outcome</span>
                               </h4>
-                              <ul className="space-y-2">
+                              <ul className="space-y-2 mt-3">
                                 {project.caseStudy.results.map((result, i) => (
-                                  <li key={i} className="text-gray-400 text-sm lg:text-base flex items-start">
-                                    <span className="text-green-500 mr-2">✓</span>
+                                  <li key={i} className="text-[#aaaaaa] text-[14px] flex items-start">
+                                    <span className="text-[#c8f060] mr-2">✓</span>
                                     {result}
                                   </li>
                                 ))}
@@ -385,9 +426,10 @@ export const Project = () => { // Changed to named export
                               href={project.liveLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center bg-white text-black px-4 lg:px-6 py-2 lg:py-2.5 rounded-full hover:bg-gray-200 transition-colors duration-300 group/livelink"
+                              className="flex items-center bg-[#c8f060] text-[#0a0a0a] font-barlow font-black text-[11px] tracking-[3px] uppercase px-6 py-3 hover:bg-transparent border border-transparent hover:border-[#c8f060] hover:text-[#c8f060] transition-colors duration-300 group/livelink"
+                              style={{ borderRadius: 0 }}
                             >
-                              <span className="text-sm lg:text-base font-semibold tracking-wide">Live Demo</span>
+                              <span>Live Demo</span>
                               <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
                             </a>
                           )}
@@ -395,7 +437,7 @@ export const Project = () => { // Changed to named export
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center text-gray-400 hover:text-white transition-colors duration-300 group/link"
+                            className="flex items-center text-[#555555] font-mono-custom hover:text-[#c8f060] transition-colors duration-300 group/link"
                           >
                             <span className="text-sm lg:text-base font-medium tracking-wide">View Project</span>
                             <span className="ml-2 text-base lg:text-lg"><ArrowUpRight className="w-4 h-4" /></span>
@@ -421,39 +463,61 @@ export const Project = () => { // Changed to named export
                 viewport={{ once: true, margin: "-50px" }}
                 whileHover={{ y: -5 }}
               >
-                <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl card-padding-fluid hover:border-gray-600 transition-all duration-500 hover:shadow-2xl">
+                <div 
+                  className="bg-[#0d0d0d] border border-[#1a1a1a] card-padding-fluid transition-all duration-300 hover:border-[#c8f060]"
+                  style={{ borderRadius: 0 }}
+                >
                   {/* Project Header */}
                   <div className="flex justify-between items-start mb-4 md:mb-6">
-                    <div className="text-gray-500 text-sm font-mono">{String(index + 1).padStart(2, "0")}</div>
+                    <div className="font-mono-custom text-[11px] text-[#444444]">{String(index + 1).padStart(2, "0")}</div>
                     <div className="text-right">
-                      <div className="text-gray-400 text-sm">{project.year}</div>
-                      <div className="text-gray-500 text-xs uppercase tracking-wider mt-1">{project.category}</div>
+                      <div className="font-mono-custom text-[11px] text-[#444444] uppercase tracking-[2px]">{project.year}</div>
+                      <div className="font-mono-custom text-[11px] text-[#444444] uppercase tracking-[2px] mt-1">{project.category}</div>
+                      {(project as any).tier && tierConfig[(project as any).tier] && (
+                        <div style={{
+                          marginTop: '4px',
+                          display: 'inline-block',
+                          padding: '3px 8px',
+                          background: tierConfig[(project as any).tier].bg,
+                          border: `1px solid ${tierConfig[(project as any).tier].color}`,
+                          borderRadius: 0,
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '10px',
+                          fontWeight: 700,
+                          letterSpacing: '2px',
+                          textTransform: 'uppercase',
+                          color: tierConfig[(project as any).tier].color,
+                        }}>
+                          {tierConfig[(project as any).tier].label}
+                        </div>
+                      )}
                     </div>
                   </div>
 
                   {/* Project Content */}
                   <div className="space-y-4 md:space-y-6">
                     <div className="space-y-3">
-                      <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-gray-300 transition-colors duration-300">
+                      <h3 className="text-2xl md:text-3xl font-barlow font-black uppercase text-[#f0f0ea] group-hover:text-[#c8f060] transition-colors duration-300">
                         {project.title}
                       </h3>
 
                       <div className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span className="text-green-400 text-sm font-medium">{project.impact}</span>
+                        <div className="w-2 h-2 bg-[#c8f060]" style={{ borderRadius: 0 }}></div>
+                        <span className="font-mono-custom text-[11px] tracking-[2px] uppercase text-[#c8f060]">{project.impact}</span>
                       </div>
                     </div>
 
-                    <p className="text-gray-400 leading-relaxed text-base">{project.description}</p>
+                    <p className="text-[15px] leading-relaxed text-[#aaaaaa]">{project.description}</p>
 
-                    <p className="text-gray-500 leading-relaxed text-sm">{project.details}</p>
+                    <p className="text-[13px] text-[#555555]">{project.details}</p>
 
                     {/* Tech Stack */}
                     <div className="flex flex-wrap gap-2 pt-3">
                       {project.tech.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1.5 bg-gray-800 text-gray-300 text-xs rounded-full font-light hover:bg-gray-700 transition-colors duration-300"
+                          className="px-3 py-1.5 bg-[#111111] border border-[#1a1a1a] text-[#555555] font-mono-custom text-[11px] tracking-[2px] uppercase hover:border-[#c8f060] hover:text-[#f0f0ea] transition-colors duration-300"
+                          style={{ borderRadius: 0 }}
                         >
                           {tech}
                         </span>
@@ -462,30 +526,33 @@ export const Project = () => { // Changed to named export
 
                     {/* Case Study Details */}
                     {project.caseStudy && (
-                      <div className="mt-6 p-4 md:p-6 bg-gray-950/50 rounded-xl border border-gray-800 space-y-5">
+                      <div 
+                        className="mt-6 p-4 md:p-6 bg-[#0a0a0a] border border-[#1a1a1a] space-y-5"
+                        style={{ borderRadius: 0 }}
+                      >
                         <div>
                           <h4 className="text-gray-300 font-semibold text-sm md:text-base mb-2 flex items-center">
-                            <span className="w-1.5 h-1.5 bg-red-500 rounded-full mr-2"></span>
-                            The Problem
+                            <span className="w-1.5 h-1.5 bg-[#cc4444] mr-2" style={{ borderRadius: 0 }}></span>
+                            <span className="font-mono-custom text-[11px] uppercase tracking-[2px] text-[#cc4444]">Problem</span>
                           </h4>
-                          <p className="text-gray-400 text-sm md:text-base leading-relaxed">{project.caseStudy.problem}</p>
+                          <p className="text-[#aaaaaa] text-[14px] leading-relaxed">{project.caseStudy.problem}</p>
                         </div>
                         <div>
                           <h4 className="text-gray-300 font-semibold text-sm md:text-base mb-2 flex items-center">
-                            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
-                            The Solution
+                            <span className="w-1.5 h-1.5 bg-[#555555] mr-2" style={{ borderRadius: 0 }}></span>
+                            <span className="font-mono-custom text-[11px] uppercase tracking-[2px] text-[#555555]">Approach</span>
                           </h4>
-                          <p className="text-gray-400 text-sm md:text-base leading-relaxed">{project.caseStudy.solution}</p>
+                          <p className="text-[#aaaaaa] text-[14px] leading-relaxed">{project.caseStudy.solution}</p>
                         </div>
                         <div>
                           <h4 className="text-gray-300 font-semibold text-sm md:text-base mb-2 flex items-center">
-                            <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
-                            The Impact
+                            <span className="w-1.5 h-1.5 bg-[#c8f060] mr-2" style={{ borderRadius: 0 }}></span>
+                            <span className="font-mono-custom text-[11px] uppercase tracking-[2px] text-[#c8f060]">Outcome</span>
                           </h4>
-                          <ul className="space-y-2">
+                          <ul className="space-y-2 mt-3">
                             {project.caseStudy.results.map((result, i) => (
-                              <li key={i} className="text-gray-400 text-sm md:text-base flex items-start">
-                                <span className="text-green-500 mr-2 mt-0.5">✓</span>
+                              <li key={i} className="text-[#aaaaaa] text-[14px] flex items-start">
+                                <span className="text-[#c8f060] mr-2 mt-0.5">✓</span>
                                 <span className="flex-1">{result}</span>
                               </li>
                             ))}
@@ -501,9 +568,10 @@ export const Project = () => { // Changed to named export
                           href={project.liveLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-colors duration-300 group/livelink"
+                          className="flex items-center bg-[#c8f060] text-[#0a0a0a] font-barlow font-black text-[11px] tracking-[3px] uppercase px-6 py-3 hover:bg-transparent border border-transparent hover:border-[#c8f060] hover:text-[#c8f060] transition-colors duration-300 group/livelink"
+                          style={{ borderRadius: 0 }}
                         >
-                          <span className="text-sm font-semibold tracking-wide">Live Demo</span>
+                          <span>Live Demo</span>
                           <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
                         </a>
                       )}
@@ -511,7 +579,7 @@ export const Project = () => { // Changed to named export
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center text-gray-400 hover:text-white transition-colors duration-300 group/link"
+                        className="flex items-center text-[#555555] font-mono-custom hover:text-[#c8f060] transition-colors duration-300 group/link"
                       >
                         <span className="text-sm font-medium tracking-wide">View Project</span>
                         <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
@@ -531,8 +599,9 @@ export const Project = () => { // Changed to named export
               <button
                 key={index}
                 aria-label={`Go to project ${index + 1}: ${projects[index].title}`}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${currentProject === index ? "bg-white scale-125" : "bg-gray-600 hover:bg-gray-500"
+                className={`w-3 h-3 transition-all duration-300 ${currentProject === index ? "bg-[#c8f060] scale-125" : "bg-[#222222] hover:bg-gray-600"
                   }`}
+                style={{ borderRadius: 0 }}
                 onClick={() => {
                   const el = projectRefs.current[index]
                   if (el) {
@@ -548,26 +617,7 @@ export const Project = () => { // Changed to named export
           </div>
         )}
 
-        {/* Call to Action */}
-        <motion.div
-          className="text-center pb-20"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <button
-            className="mt-6 md:mt-8 inline-flex items-center space-x-1 md:space-x-2 bg-gray-800 hover:bg-gray-700 text-white px-6 md:px-12 py-3 md:py-6 rounded-full font-medium text-sm md:text-base tracking-wide md:tracking-wider uppercase transition-all duration-300 transform hover:scale-105 group"
-          >
-            <a
-              href="https://github.com/Schwifty101"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center transition-colors duration-300 group/link"
-            >VIEW ALL PROJECTS</a>
-            <span className=""><ArrowUpRight className="w-4 h-4" /></span>
-          </button>
-        </motion.div>
+
       </div>
     </div>
   )

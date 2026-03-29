@@ -1,23 +1,12 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef } from "react"
 import { motion } from "framer-motion"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Quote } from 'lucide-react'
 import Image from 'next/image'
 
 const Testimonials = () => {
     const sectionRef = useRef(null)
     const headerRef = useRef(null)
-
-    useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger)
-
-        return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-        }
-    }, [])
 
     const testimonials = [
         {
@@ -37,28 +26,19 @@ const Testimonials = () => {
     ]
 
     return (
-        <section id="testimonials" ref={sectionRef} className="section-padding bg-black text-white relative overflow-hidden py-32 border-t border-gray-900">
+        <section id="testimonials" ref={sectionRef} className="section-padding bg-[#0d0d0d] text-white relative overflow-hidden py-32 border-b border-[#1a1a1a]">
 
             <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-20">
                 <div className="text-center mb-20">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="text-gray-400 text-sm uppercase tracking-[0.2em] mb-4"
-                    >
-                        (Client Impact)
-                    </motion.div>
                     <motion.h2
                         ref={headerRef}
-                        className="text-4xl md:text-6xl font-black tracking-tighter text-white"
+                        className="text-4xl md:text-6xl font-barlow font-black tracking-[-1px] text-[#f0f0ea]"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         viewport={{ once: true }}
                     >
-                        TRUSTED BY PARTNERS
+                        IN THEIR WORDS.
                     </motion.h2>
                 </div>
 
@@ -70,13 +50,17 @@ const Testimonials = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 + index * 0.2 }}
                             viewport={{ once: true }}
-                            className="bg-gray-900/40 border border-gray-800 p-8 md:p-12 rounded-2xl relative group hover:bg-gray-900/80 hover:border-gray-700 transition-all duration-500"
+                            className="bg-[#111111] border border-[#1a1a1a] p-8 md:p-12 relative group hover:border-[#c8f060] transition-colors duration-200"
+                            style={{ borderRadius: 0 }}
                         >
-                            <Quote className="w-12 h-12 text-gray-800 absolute top-8 right-8 group-hover:text-gray-700 transition-colors duration-500" />
+                            <div style={{
+                              position:'absolute', top:'32px', right:'32px',
+                              width:'20px', height:'1px', background:'#c8f060'
+                            }} />
 
                             <div className="relative z-10 space-y-8">
-                                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light italic">
-                                    "{testimonial.content}"
+                                <p className="text-[15px] leading-[1.7] text-[#aaaaaa]">
+                                    {testimonial.content}
                                 </p>
 
                                 <div className="flex items-center space-x-4">
@@ -86,22 +70,46 @@ const Testimonials = () => {
                                             alt={testimonial.name}
                                             width={48}
                                             height={48}
-                                            className="w-12 h-12 rounded-full object-cover"
+                                            className="w-12 h-12 object-cover border border-[#1a1a1a]"
+                                            style={{ borderRadius: 0 }}
                                         />
                                     ) : (
-                                        <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 font-bold uppercase">
+                                        <div 
+                                            className="w-12 h-12 bg-[#111111] flex items-center justify-center text-[#c8f060] font-bold uppercase border border-[#1a1a1a]"
+                                            style={{ borderRadius: 0 }}
+                                        >
                                             {testimonial.name.charAt(0)}
                                         </div>
                                     )}
                                     <div>
-                                        <div className="text-white font-semibold text-lg">{testimonial.name}</div>
-                                        <div className="text-gray-500 text-sm">{testimonial.role}</div>
+                                        <div className="font-barlow font-black text-[18px] uppercase tracking-[2px] text-[#f0f0ea]">{testimonial.name}</div>
+                                        <div className="font-mono-custom text-[11px] uppercase tracking-[2px] text-[#555555]">{testimonial.role}</div>
                                     </div>
                                 </div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  style={{
+                    marginTop: '48px',
+                    textAlign: 'center',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    letterSpacing: '3px',
+                    textTransform: 'uppercase',
+                    color: '#333333',
+                  }}
+                >
+                  <span style={{color: '#c8f060'}}>$2M+</span> in combined revenue outcomes across client 
+                  platforms — most results visible within six months.
+                </motion.div>
             </div>
         </section>
     )
