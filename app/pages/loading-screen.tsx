@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
+import { useMobile } from "@/hooks/useMobile"
 
 interface LoadingScreenProps {
   onComplete: () => void
@@ -12,6 +13,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const [isComplete, setIsComplete] = useState(false)
   const [isExiting, setIsExiting] = useState(false)
   const prefersReducedMotion = useReducedMotion()
+  const isMobile = useMobile()
 
   useEffect(() => {
     const startTime = Date.now()
@@ -92,30 +94,31 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
               scale: isExiting ? [1, 1.1, 1] : 1,
             }}
             transition={{
-              duration: isExiting ? 0.6 : 1,
-              repeat: isExiting ? 0 : Number.POSITIVE_INFINITY,
+              duration: isExiting ? 0.6 : 0,
+              // Removed: repeat: POSITIVE_INFINITY while not exiting — unnecessary rAF loop.
+              // Keep only the exit scale pulse.
+              repeat: 0,
               ease: "easeInOut",
             }}
           >
             {counter.toString().padStart(2, "0")}
           </motion.div>
 
-          {/*
-            Glow div: removed scale animation, kept only opacity.
-            bg-gradient + blur + scale was causing triple repaint on every frame.
-          */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-radial from-white/10 via-transparent to-transparent blur-xl"
-            animate={{
-              // Removed: scale animation — bg-gradient + blur + scale = triple repaint
-              opacity: isExiting ? [0.3, 0.6, 0] : [0, 0.3, 0],
-            }}
-            transition={{
-              duration: isExiting ? 0.8 : 3,
-              repeat: isExiting ? 0 : Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-            }}
-          />
+          {/* Glow div: hidden on mobile — blur-xl (filter: blur(24px)) on an animating
+              element forces a software render path on most mobile GPUs. */}
+          {!isMobile && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-radial from-white/10 via-transparent to-transparent blur-xl"
+              animate={{
+                opacity: isExiting ? [0.3, 0.6, 0] : [0, 0.3, 0],
+              }}
+              transition={{
+                duration: isExiting ? 0.8 : 3,
+                repeat: isExiting ? 0 : Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
+            />
+          )}
         </div>
 
         {/* Loading Text */}

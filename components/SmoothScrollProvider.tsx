@@ -18,18 +18,30 @@ export function SmoothScrollProvider({ children, isReady }: SmoothScrollProvider
     useEffect(() => {
         if (!isReady) return
 
-        // Small delay to ensure DOM is fully rendered before initializing
+        // Detect mobile: skip ScrollSmoother entirely on touch/mobile devices.
+        // ScrollSmoother intercepts native scroll on touch and re-renders on every
+        // frame, guaranteeing jitter on iOS Safari and mid-range Android.
+        const isMobile =
+            window.matchMedia("(max-width: 768px)").matches ||
+            "ontouchstart" in window
+
+        if (isMobile) {
+            // On mobile just refresh triggers — no smoother, native scroll only
+            ScrollTrigger.refresh()
+            return
+        }
+
+        // Desktop only: create ScrollSmoother with reduced inertia
         const timer = requestAnimationFrame(() => {
             smootherRef.current = ScrollSmoother.create({
                 wrapper: "#smooth-wrapper",
                 content: "#smooth-content",
-                smooth: 2.5,          // Higher = more glide/inertia
+                smooth: 1.8,           // Reduced from 2.5 — less positional lag on slower machines
                 effects: true,
-                normalizeScroll: true, // Normalizes scroll deltas → eliminates jitter across trackpads/mice
-                smoothTouch: 0.01,     // Slightly more inertia on touch/mobile
+                normalizeScroll: true, // Desktop only: normalizes scroll deltas across trackpads/mice
+                smoothTouch: 0,        // 0 instead of 0.01 — even 0.01 breaks iOS Safari momentum scroll
             })
 
-            // Refresh ScrollTrigger after smoother is created
             ScrollTrigger.refresh()
         })
 
@@ -53,3 +65,4 @@ export function SmoothScrollProvider({ children, isReady }: SmoothScrollProvider
         </div>
     )
 }
+

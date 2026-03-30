@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ArrowUpRight } from 'lucide-react'
 import gsap from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
+import { useMobile } from "@/hooks/useMobile"
 
 gsap.registerPlugin(ScrollToPlugin)
 import { getCalApi } from "@calcom/embed-react"
@@ -16,6 +17,7 @@ const Navigation = () => {
   const [currentTime, setCurrentTime] = useState("")
   const [hasAnimated, setHasAnimated] = useState(false)
   const [currentDate, setCurrentDate] = useState({ month: '', year: '' })
+  const isMobile = useMobile()
 
   const navItems = useMemo(() => [
     { id: "hero", label: "Home" },
@@ -105,6 +107,9 @@ const Navigation = () => {
       if (containerRef.current) {
         const letters = containerRef.current.querySelectorAll(".letter")
         letters.forEach((letter, index) => {
+          // Set willChange just before animating, clear in onComplete — prevents
+          // 60-100 permanently promoted compositor layers sitting in VRAM.
+          gsap.set(letter, { willChange: "transform" })
           gsap.to(letter, {
             y: -20,
             duration: 0.08,
@@ -117,6 +122,7 @@ const Navigation = () => {
                 duration: 0.15,
                 ease: "back.out(1.2)",
                 onComplete: () => {
+                  gsap.set(letter, { willChange: "auto" })
                   if (index === letters.length - 1) {
                     setTimeout(() => setIsAnimating(false), 100)
                   }
@@ -142,7 +148,7 @@ const Navigation = () => {
         {text.split("").map((char, index) => (
           <span
             key={index}
-            className={`letter inline-block transition-colors duration-300 will-change-transform ${isActive ? "text-[#f0f0ea]" : "text-inherit"}`}
+            className={`letter inline-block transition-colors duration-300 ${isActive ? "text-[#f0f0ea]" : "text-inherit"}`}
           >
             {char === " " ? "\u00A0" : char}
           </span>
@@ -158,7 +164,11 @@ const Navigation = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-700 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-[#1a1a1a]`}
+        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-700 border-b border-[#1a1a1a] ${
+          isMobile
+            ? "bg-[rgba(10,10,10,0.95)]" // Solid bg on mobile — backdrop-filter blur is very expensive on mid-range Android
+            : "bg-[#0a0a0a]/90 backdrop-blur-md"
+        }`}
       >
         <div className="w-full px-[clamp(1rem,5vw,6rem)] py-6">
           <div className="flex justify-between items-center min-h-[48px]">

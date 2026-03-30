@@ -3,11 +3,13 @@
 import { useRef } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import Image from 'next/image'
+import { useMobile } from "@/hooks/useMobile"
 
 const Testimonials = () => {
     const sectionRef = useRef(null)
     const headerRef = useRef(null)
     const prefersReducedMotion = useReducedMotion()
+    const isMobile = useMobile()
 
     const testimonials = [
         {
@@ -37,7 +39,7 @@ const Testimonials = () => {
                         {...(prefersReducedMotion
                           ? { initial: false }
                           : {
-                              initial: { opacity: 0, y: 20 },
+                              initial: { opacity: 0, y: isMobile ? 16 : 20 },
                               whileInView: { opacity: 1, y: 0 },
                               transition: { duration: 0.8, delay: 0.2 },
                               viewport: { once: true, amount: 0.15 },

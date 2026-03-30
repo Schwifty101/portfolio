@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import { useRef, useEffect } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useMobile } from "@/hooks/useMobile"
 
 type ServiceItem = {
   num: string
@@ -49,11 +50,19 @@ const About = () => {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
   const progressRef = useRef<HTMLDivElement>(null)
   const prefersReducedMotion = useReducedMotion()
+  const isMobile = useMobile()
 
   useEffect(() => {
     // Only run pinned GSAP animation on desktop (≥ 1024px)
     const isDesktop = window.matchMedia("(min-width: 1024px)").matches
     if (!isDesktop) return
+
+    // willChange on desktop only: on mobile a full-screen section with willChange forces
+    // the browser to allocate a GPU layer for its entire height, causing dropped frames
+    // on devices with limited VRAM.
+    if (sectionRef.current) {
+      sectionRef.current.style.willChange = "transform"
+    }
 
     gsap.registerPlugin(ScrollTrigger)
 
@@ -116,7 +125,7 @@ const About = () => {
       id="about"
       ref={sectionRef}
       className="bg-[#0d0d0d] text-white relative overflow-visible flex flex-col justify-center border-b border-[#1a1a1a] lg:min-h-screen"
-      style={{ willChange: "transform" }}
+      style={{ /* willChange set conditionally in useEffect — desktop only */ }}
     >
       {/* Ambient background text */}
       <div className="absolute top-[15%] left-[-2%] opacity-[0.02] pointer-events-none z-0 select-none hidden lg:block">

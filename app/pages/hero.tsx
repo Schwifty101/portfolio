@@ -1,10 +1,11 @@
 "use client"
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
-import { ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import { useEffect, useRef, useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import { ArrowUpRight } from 'lucide-react'
 import { gsap } from "gsap"
 import { getCalApi } from "@calcom/embed-react"
+import { useMobile } from "@/hooks/useMobile"
 
 interface HeroProps {
   onReady?: () => void
@@ -17,12 +18,11 @@ const Hero = ({ onReady }: HeroProps = {}) => {
   const rightContentRef = useRef(null)
   const imageRef = useRef(null)
   const statusRef = useRef(null)
-  const fitContainerRef = useRef<HTMLDivElement | null>(null)
-  const nameRef = useRef<HTMLSpanElement | null>(null)
   const [isReady, setIsReady] = useState(false)
   const [currentDate, setCurrentDate] = useState({ month: '', year: '' })
   const [currentTime, setCurrentTime] = useState('')
   const prefersReducedMotion = useReducedMotion()
+  const isMobile = useMobile()
 
   useEffect(() => {
     const update = () => {
@@ -63,59 +63,34 @@ const Hero = ({ onReady }: HeroProps = {}) => {
     return () => clearTimeout(readyTimer)
   }, [onReady])
 
-  // Ensure the name always stays on a single line with the maximum size that fits the viewport width
-  useLayoutEffect(() => {
-    const container = fitContainerRef.current
-    const nameEl = nameRef.current
-    if (!container || !nameEl) return
-
-    const ro = new ResizeObserver(() => {
-      // Reset scale to measure natural width
-      nameEl.style.transform = "scale(1)"
-      nameEl.style.transformOrigin = "left center"
-      const containerWidth = container.clientWidth
-      const nameWidth = nameEl.scrollWidth
-      if (nameWidth > 0 && containerWidth > 0) {
-        // Fit-to-width. Allow upscaling a bit to maximize presence, capped for safety.
-        const scale = Math.min(2, Math.max(0.5, containerWidth / nameWidth))
-        nameEl.style.transformOrigin = "left center"
-        nameEl.style.transform = `scale(${scale})`
-      }
-    })
-    ro.observe(container)
-    ro.observe(nameEl)
-    return () => ro.disconnect()
-  }, [])
+  // Name sizing is handled by CSS clamp() — no JS ResizeObserver needed.
+  // The old ResizeObserver fired on every iOS Safari scroll (viewport chrome hide/show),
+  // causing constant style recalculation. CSS clamp is compositor-free and instant.
 
   useEffect(() => {
     if (!isReady) return
 
-    // Check if all required refs are available
     if (!titleRef.current || !leftContentRef.current || !rightContentRef.current || !imageRef.current || !statusRef.current) {
       return
     }
 
-    gsap.defaults({ ease: "power2.out", duration: 1.2 })
+    // On mobile: cap all durations at 0.6s max — long entrances feel sluggish not premium
+    const d = (desktop: number) => isMobile ? Math.min(desktop, 0.6) : desktop
 
-    const tl = gsap.timeline({ delay: 0.15 })
+    gsap.defaults({ ease: "power2.out" })
 
-    // Set will-change only on the actively animating element (title first)
+    const tl = gsap.timeline({ delay: isMobile ? 0 : 0.15 })
+
     gsap.set(titleRef.current, { willChange: "transform, opacity" })
 
     tl.fromTo(
       titleRef.current,
-      {
-        opacity: 0,
-        y: 80,
-        scale: 0.95,
-        // Removed: filter: "blur(8px)" — forces layer repaint every frame
-      },
+      { opacity: 0, y: isMobile ? 30 : 80, scale: 0.95 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        // Removed: filter: "blur(0px)"
-        duration: 1.6,
+        duration: d(1.6),
         ease: "power3.out",
         onComplete: () => {
           gsap.set(titleRef.current, { willChange: "auto" })
@@ -125,56 +100,48 @@ const Hero = ({ onReady }: HeroProps = {}) => {
     )
       .fromTo(
         leftContentRef.current,
-        { opacity: 0, x: -60 },
-        // Removed: filter: "blur(4px)" / "blur(0px)"
+        { opacity: 0, x: isMobile ? 0 : -60 },
         {
           opacity: 1,
           x: 0,
-          duration: 1.3,
+          duration: d(1.3),
           ease: "power2.out",
           onComplete: () => {
             gsap.set(leftContentRef.current, { willChange: "auto" })
             gsap.set(imageRef.current, { willChange: "transform, opacity" })
           },
         },
-        "-=1.35",
+        isMobile ? undefined : "-=1.35",
       )
       .fromTo(
         imageRef.current,
-        {
-          opacity: 0,
-          scale: 0.8,
-          rotation: -5,
-          // Removed: filter: "blur(6px)"
-        },
+        { opacity: 0, scale: 0.8, rotation: isMobile ? 0 : -5 },
         {
           opacity: 1,
           scale: 1,
           rotation: 0,
-          // Removed: filter: "blur(0px)"
-          duration: 1.5,
+          duration: d(1.5),
           ease: "back.out(1.2)",
           onComplete: () => {
             gsap.set(imageRef.current, { willChange: "auto" })
             gsap.set(rightContentRef.current, { willChange: "transform, opacity" })
           },
         },
-        "-=1.15",
+        isMobile ? undefined : "-=1.15",
       )
       .fromTo(
         rightContentRef.current,
-        { opacity: 0, x: 60 },
-        // Removed: filter: "blur(4px)" / "blur(0px)"
+        { opacity: 0, x: isMobile ? 0 : 60 },
         {
           opacity: 1,
           x: 0,
-          duration: 1.3,
+          duration: d(1.3),
           ease: "power2.out",
           onComplete: () => {
             gsap.set(rightContentRef.current, { willChange: "auto" })
           },
         },
-        "-=1.35",
+        isMobile ? undefined : "-=1.35",
       )
       .fromTo(
         statusRef.current,
@@ -183,27 +150,29 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 1.1,
+          duration: d(1.1),
           ease: "power2.out"
         },
-        "-=0.9",
+        isMobile ? undefined : "-=0.9",
       )
 
-    gsap.to(imageRef.current, {
-      y: -12,
-      duration: 3.5,
-      ease: "sine.inOut",
-      yoyo: true,
-      repeat: -1,
-      delay: 1.8,
-    })
-
-    // Removed: bulk gsap.set([...4 elements...], { willChange }) — now set per-element above
+    // Floating image animation: skip on mobile — runs infinitely even when off-screen,
+    // wasting a rAF loop on devices with the least headroom.
+    if (!isMobile) {
+      gsap.to(imageRef.current, {
+        y: -12,
+        duration: 3.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: 1.8,
+      })
+    }
 
     return () => {
       tl.kill()
     }
-  }, [isReady])
+  }, [isReady, isMobile])
 
 
   return (
@@ -238,12 +207,14 @@ const Hero = ({ onReady }: HeroProps = {}) => {
         </motion.div>
 
         {/* Main Title */}
-        <div ref={fitContainerRef} className="mb-8">
+        {/* Name uses CSS clamp() for sizing — no JS ResizeObserver needed.
+             The old observer fired on every iOS Safari viewport resize (browser chrome show/hide). */}
+        <div className="mb-8">
           <h1 ref={titleRef}
-            className="fluid-text-hero font-barlow font-black leading-none text-white tracking-normal block w-full text-left"
-            style={{ fontSize: "clamp(3rem, 12vw, 8rem)" }}
+            className="font-barlow font-black leading-none text-white tracking-normal block w-full text-left"
+            style={{ fontSize: "clamp(2rem, 10vw, 8rem)" }}
           >
-            <span ref={nameRef} className="inline-flex items-baseline whitespace-nowrap will-change-transform">
+            <span className="inline-flex items-baseline whitespace-nowrap">
               <span>SOBAN AHMAD</span>
             </span>
           </h1>

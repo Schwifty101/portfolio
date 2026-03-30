@@ -2,11 +2,13 @@
 
 import { motion, useReducedMotion } from "framer-motion"
 import { useRef } from "react"
+import { useMobile } from "@/hooks/useMobile"
 
 const Experience = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
   const prefersReducedMotion = useReducedMotion()
+  const isMobile = useMobile()
 
   const experiences = [
     {
@@ -63,7 +65,7 @@ const Experience = () => {
               {...(prefersReducedMotion
                 ? { initial: false }
                 : {
-                    initial: { opacity: 0, y: 30 },
+                    initial: { opacity: 0, y: isMobile ? 16 : 30 },
                     whileInView: { opacity: 1, y: 0 },
                     transition: { duration: 0.8, delay: 0.2 },
                     viewport: { once: true, amount: 0.15 },
@@ -79,9 +81,9 @@ const Experience = () => {
               {...(prefersReducedMotion
                 ? { initial: false }
                 : {
-                    initial: { opacity: 0, x: -100 },
+                    initial: { opacity: 0, x: isMobile ? 0 : -100 },
                     whileInView: { opacity: 1, x: 0 },
-                    transition: { duration: 1.2, ease: "easeOut" },
+                    transition: { duration: isMobile ? 0.6 : 1.2, ease: "easeOut" },
                     viewport: { once: true, amount: 0.15 },
                   })}
             >
@@ -93,7 +95,7 @@ const Experience = () => {
               {...(prefersReducedMotion
                 ? { initial: false }
                 : {
-                    initial: { opacity: 0, y: 30 },
+                    initial: { opacity: 0, y: isMobile ? 16 : 30 },
                     whileInView: { opacity: 1, y: 0 },
                     transition: { duration: 0.8, delay: 0.4 },
                     viewport: { once: true, amount: 0.15 },
@@ -112,9 +114,14 @@ const Experience = () => {
                 {...(prefersReducedMotion
                   ? { initial: false }
                   : {
-                      initial: { opacity: 0, y: 100 },
+                      initial: { opacity: 0, y: isMobile ? 20 : 100 },
                       whileInView: { opacity: 1, y: 0 },
-                      transition: { duration: 0.3, ease: "backOut", delay: 0.1 + index * 0.15 },
+                      transition: {
+                        duration: 0.3,
+                        ease: "backOut",
+                        // Cap delay at 0.2s on mobile — prevents late pop-in on fast scrollers
+                        delay: isMobile ? Math.min(0.2, 0.1 + index * 0.15) : 0.1 + index * 0.15,
+                      },
                       viewport: { once: true, amount: 0.15 },
                     })}
                 whileHover={{ x: 20 }}

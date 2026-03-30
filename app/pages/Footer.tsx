@@ -18,22 +18,25 @@ const SlotMachineText = ({ text, className = "" }: { text: string; className?: s
     if (containerRef.current) {
       const letters = containerRef.current.querySelectorAll(".letter")
       letters.forEach((letter, index) => {
+        // Set willChange just before animating — prevents 60-100 permanently promoted
+        // compositor layers in VRAM (6-8 links × 8-12 letters each = massive overhead).
+        gsap.set(letter, { willChange: "transform" })
         gsap.to(letter, {
           y: -20,
           duration: 0.08,
           delay: index * 0.015,
           ease: "power2.out",
-          overwrite: "auto",  // Prevent stacking tweens on rapid hover
+          overwrite: "auto",
           onComplete: () => {
             gsap.set(letter, { y: 20 })
             gsap.to(letter, {
               y: 0,
               duration: 0.15,
               ease: "back.out(1.2)",
-              overwrite: "auto",  // Prevent stacking tweens on rapid hover
+              overwrite: "auto",
               onComplete: () => {
+                gsap.set(letter, { willChange: "auto" }) // Release compositor layer
                 if (index === letters.length - 1) {
-                  // Reset animation state when last letter completes
                   setTimeout(() => setIsAnimating(false), 100)
                 }
               }
@@ -53,7 +56,7 @@ const SlotMachineText = ({ text, className = "" }: { text: string; className?: s
       {text.split("").map((char, index) => (
         <span
           key={index}
-          className="letter inline-block transition-colors duration-300 will-change-transform text-[#555555] group-hover:text-[#f0f0ea]"
+          className="letter inline-block transition-colors duration-300 text-[#555555] group-hover:text-[#f0f0ea]"
         >
           {char === " " ? "\u00A0" : char}
         </span>

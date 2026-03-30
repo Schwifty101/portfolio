@@ -3,12 +3,14 @@
 import { motion, useReducedMotion } from "framer-motion"
 import { useRef, useState } from "react"
 import { AnimatePresence } from "framer-motion"
+import { useMobile } from "@/hooks/useMobile"
 
 const Skills = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
   const [expandedCategory, setExpandedCategory] = useState<number | null>(null)
   const prefersReducedMotion = useReducedMotion()
+  const isMobile = useMobile()
 
   const skillCategories = [
     {
@@ -83,7 +85,7 @@ const Skills = () => {
             {...(prefersReducedMotion
               ? { initial: false }
               : {
-                  initial: { opacity: 0, y: 30 },
+                  initial: { opacity: 0, y: isMobile ? 16 : 30 },
                   whileInView: { opacity: 1, y: 0 },
                   transition: { duration: 0.8, delay: 0.2 },
                   viewport: { once: true, amount: 0.15 },
@@ -99,9 +101,9 @@ const Skills = () => {
             {...(prefersReducedMotion
               ? { initial: false }
               : {
-                  initial: { opacity: 0, x: -100 },
+                  initial: { opacity: 0, x: isMobile ? 0 : -100 },
                   whileInView: { opacity: 1, x: 0 },
-                  transition: { duration: 1.2, ease: "easeOut" },
+                  transition: { duration: isMobile ? 0.6 : 1.2, ease: "easeOut" },
                   viewport: { once: true, amount: 0.15 },
                 })}
           >
@@ -113,7 +115,7 @@ const Skills = () => {
             {...(prefersReducedMotion
               ? { initial: false }
               : {
-                  initial: { opacity: 0, y: 30 },
+                  initial: { opacity: 0, y: isMobile ? 16 : 30 },
                   whileInView: { opacity: 1, y: 0 },
                   transition: { duration: 0.8, delay: 0.4 },
                   viewport: { once: true, amount: 0.15 },
@@ -132,9 +134,13 @@ const Skills = () => {
               {...(prefersReducedMotion
                 ? { initial: false }
                 : {
-                    initial: { opacity: 0, y: 50 },
+                    initial: { opacity: 0, y: isMobile ? 16 : 50 },
                     whileInView: { opacity: 1, y: 0 },
-                    transition: { duration: 0.8, delay: 0.6 + index * 0.1 },
+                    transition: {
+                      duration: 0.8,
+                      // Cap delay at 0.2s on mobile — fast scrollers see last items pop in late otherwise
+                      delay: isMobile ? Math.min(0.2, 0.6 + index * 0.1) : 0.6 + index * 0.1,
+                    },
                     viewport: { once: true, amount: 0.15 },
                   })}
             >
