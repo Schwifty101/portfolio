@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { useEffect, useRef } from "react"
 import { getCalApi } from "@calcom/embed-react"
 import { ArrowUpRight } from 'lucide-react'
@@ -8,6 +8,7 @@ import { ArrowUpRight } from 'lucide-react'
 const Contact = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
     // Initialize Cal.com embed
@@ -26,19 +27,27 @@ const Contact = () => {
           <motion.h2
             ref={titleRef}
             className="section-title font-barlow font-black tracking-[-2px] text-[#f0f0ea] mb-8 md:mb-16 leading-tight md:leading-none uppercase"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            viewport={{ once: true }}
+            {...(prefersReducedMotion
+              ? { initial: false }
+              : {
+                  initial: { opacity: 0, y: 100 },
+                  whileInView: { opacity: 1, y: 0 },
+                  transition: { duration: 1.2, ease: "easeOut" },
+                  viewport: { once: true, amount: 0.15 },
+                })}
           >
             LET&apos;S TALK.
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
+            {...(prefersReducedMotion
+              ? { initial: false }
+              : {
+                  initial: { opacity: 0, y: 20 },
+                  whileInView: { opacity: 1, y: 0 },
+                  transition: { duration: 0.8, delay: 0.4 },
+                  viewport: { once: true, amount: 0.15 },
+                })}
             style={{
               fontSize: '15px',
               lineHeight: '1.7',
@@ -53,24 +62,32 @@ const Contact = () => {
             conversation about what you are building.
           </motion.p>
 
+          {/*
+            Replaced whileHover={{ scale: 1.05 }} with CSS scale(1.03) via className.
+            CSS compositor handles transform cheaper than Framer Motion.
+          */}
           <motion.button
             data-cal-namespace="30min"
             data-cal-link="soban-ahmad/30min"
             data-cal-config='{"layout":"month_view"}'
-            className="mt-6 md:mt-12 inline-flex items-center space-x-2 md:space-x-3 bg-[#c8f060] text-[#0a0a0a] font-barlow font-black text-[13px] tracking-[3px] uppercase px-10 py-4 transition-all duration-200 hover:bg-transparent border border-transparent hover:border-[#c8f060] hover:text-[#c8f060] group min-h-[44px]"
+            className="mt-6 md:mt-12 inline-flex items-center space-x-2 md:space-x-3 bg-[#c8f060] text-[#0a0a0a] font-barlow font-black text-[13px] tracking-[3px] uppercase px-10 py-4 transition-all duration-200 hover:bg-transparent border border-transparent hover:border-[#c8f060] hover:text-[#c8f060] hover:[transform:scale(1.03)] group min-h-[44px]"
             style={{ borderRadius: 0 }}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05 }}
+            {...(prefersReducedMotion
+              ? { initial: false }
+              : {
+                  initial: { opacity: 0, y: 50 },
+                  whileInView: { opacity: 1, y: 0 },
+                  transition: { duration: 0.8, delay: 0.6 },
+                  viewport: { once: true, amount: 0.15 },
+                })}
             whileTap={{ scale: 0.95 }}
+            // Removed: whileHover={{ scale: 1.05 }} — replaced with CSS hover:scale(1.03)
           >
             <span>BOOK 15 MINUTES</span>
             <motion.span
               className="text-lg md:text-xl"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+              animate={prefersReducedMotion ? undefined : { x: [0, 5, 0] }}
+              transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY }}
             >
               <ArrowUpRight className="w-4 h-4" />
             </motion.span>
@@ -79,10 +96,14 @@ const Contact = () => {
           {/* Mobile-specific additional content */}
           <motion.div
             className="mt-8 md:mt-12 space-y-8 md:hidden"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            viewport={{ once: true }}
+            {...(prefersReducedMotion
+              ? { initial: false }
+              : {
+                  initial: { opacity: 0, y: 30 },
+                  whileInView: { opacity: 1, y: 0 },
+                  transition: { duration: 0.8, delay: 0.8 },
+                  viewport: { once: true, amount: 0.15 },
+                })}
           >
 
             {/* Mobile contact info */}
@@ -110,10 +131,14 @@ const Contact = () => {
       <motion.div
         className="hidden md:flex absolute bottom-6 md:bottom-8 left-4 md:left-8 items-center space-x-3 md:space-x-4 bg-[#111111] border border-[#1a1a1a] px-4 md:px-6 py-3 md:py-4"
         style={{ borderRadius: 0 }}
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        viewport={{ once: true }}
+        {...(prefersReducedMotion
+          ? { initial: false }
+          : {
+              initial: { opacity: 0, x: -50 },
+              whileInView: { opacity: 1, x: 0 },
+              transition: { duration: 0.8, delay: 0.8 },
+              viewport: { once: true, amount: 0.15 },
+            })}
       >
         <div className="w-6 h-6 md:w-8 md:h-8 bg-[#222222] flex items-center justify-center" style={{ borderRadius: 0 }}>
           <div className="w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full animate-pulse"></div>
@@ -126,10 +151,14 @@ const Contact = () => {
       {/* Desktop Contact Info */}
       <motion.div
         className="hidden md:block absolute bottom-6 md:bottom-8 right-4 md:right-8 text-right font-mono-custom text-[13px] text-[#aaaaaa] hover:text-[#c8f060] transition-colors duration-200 cursor-pointer"
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        viewport={{ once: true }}
+        {...(prefersReducedMotion
+          ? { initial: false }
+          : {
+              initial: { opacity: 0, x: 50 },
+              whileInView: { opacity: 1, x: 0 },
+              transition: { duration: 0.8, delay: 0.8 },
+              viewport: { once: true, amount: 0.15 },
+            })}
       >
         soban@sobanahmad.dev
       </motion.div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { useRef, useEffect } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -48,6 +48,7 @@ const About = () => {
   const headerRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
   const progressRef = useRef<HTMLDivElement>(null)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
     // Only run pinned GSAP animation on desktop (≥ 1024px)
@@ -69,8 +70,10 @@ const About = () => {
           pin: true,
           pinType: "transform",
           pinSpacing: true,
-          scrub: 0.8,
+          scrub: 1,           // Changed from 0.8 → smoother deferred scrubbing
           anticipatePin: 1,
+          fastScrollEnd: true,       // Added: release pin faster on rapid scroll
+          preventOverlaps: true,     // Added: prevent overlapping ScrollTrigger conflicts
           onUpdate: (self) => {
             if (progressRef.current) {
               gsap.set(progressRef.current, {
@@ -179,10 +182,14 @@ const About = () => {
             {services.map((service, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.55, ease: "easeOut", delay: index * 0.08 }}
+                {...(prefersReducedMotion
+                  ? { initial: false }
+                  : {
+                      initial: { opacity: 0, y: 24 },
+                      whileInView: { opacity: 1, y: 0 },
+                      viewport: { once: true, amount: 0.15, margin: "-60px" },
+                      transition: { duration: 0.55, ease: "easeOut", delay: index * 0.08 },
+                    })}
                 className="border-b border-[#1a1a1a] py-6"
               >
                 <div className="flex items-start gap-4 mb-3">
@@ -246,7 +253,7 @@ const About = () => {
                 }}
                 className="border-b border-[#1a1a1a] pb-4 group cursor-pointer"
                 whileHover={{ x: 20 }}
-                transition={{ duration: 0.3 }}
+                transition={{ type: "tween", duration: 0.2 }}
               >
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6 pt-4">
                   <div className="md:col-span-5 flex items-start gap-6">

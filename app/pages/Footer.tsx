@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { useEffect, useState, useCallback, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
@@ -23,12 +23,14 @@ const SlotMachineText = ({ text, className = "" }: { text: string; className?: s
           duration: 0.08,
           delay: index * 0.015,
           ease: "power2.out",
+          overwrite: "auto",  // Prevent stacking tweens on rapid hover
           onComplete: () => {
             gsap.set(letter, { y: 20 })
             gsap.to(letter, {
               y: 0,
               duration: 0.15,
               ease: "back.out(1.2)",
+              overwrite: "auto",  // Prevent stacking tweens on rapid hover
               onComplete: () => {
                 if (index === letters.length - 1) {
                   // Reset animation state when last letter completes
@@ -69,6 +71,7 @@ const scrollToSection = (sectionId: string) => {
 }
 
 const Footer = () => {
+  const prefersReducedMotion = useReducedMotion()
   const [currentTime, setCurrentTime] = useState("")
 
   useEffect(() => {
@@ -158,10 +161,14 @@ const Footer = () => {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          {...(prefersReducedMotion
+            ? { initial: false }
+            : {
+                initial: { opacity: 0, y: 20 },
+                whileInView: { opacity: 1, y: 0 },
+                transition: { duration: 0.8 },
+                viewport: { once: true, amount: 0.15 },
+              })}
           style={{
             fontFamily: 'var(--font-barlow)',
             fontWeight: 900,
@@ -184,10 +191,14 @@ const Footer = () => {
           <div className="w-full md:w-1/2">
             <motion.h3
               className="font-barlow font-black text-[11px] tracking-[3px] uppercase text-[#444444] mb-4 border-b border-[#1a1a1a] pb-2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              viewport={{ once: true }}
+              {...(prefersReducedMotion
+                ? { initial: false }
+                : {
+                    initial: { opacity: 0, y: 20 },
+                    whileInView: { opacity: 1, y: 0 },
+                    transition: { duration: 0.8, delay: 0.1 },
+                    viewport: { once: true, amount: 0.15 },
+                  })}
             >
               Navigate
             </motion.h3>
@@ -197,10 +208,14 @@ const Footer = () => {
                   key={index}
                   onClick={() => scrollToSection(item.href)}
                   className="block font-light text-[#555555] transition-colors duration-300 text-left py-1 group"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 + index * 0.05 }}
-                  viewport={{ once: true }}
+                  {...(prefersReducedMotion
+                    ? { initial: false }
+                    : {
+                        initial: { opacity: 0, x: -20 },
+                        whileInView: { opacity: 1, x: 0 },
+                        transition: { duration: 0.6, delay: 0.2 + index * 0.05 },
+                        viewport: { once: true, amount: 0.15 },
+                      })}
                 >
                   <SlotMachineText text={item.name} />
                 </motion.button>
@@ -214,10 +229,14 @@ const Footer = () => {
             <div className="w-full md:w-1/2 md:px-4">
               <motion.h3
                 className="font-barlow font-black text-[11px] tracking-[3px] uppercase text-[#444444] mb-4 border-b border-[#1a1a1a] pb-2"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true }}
+                {...(prefersReducedMotion
+                  ? { initial: false }
+                  : {
+                      initial: { opacity: 0, y: 20 },
+                      whileInView: { opacity: 1, y: 0 },
+                      transition: { duration: 0.8, delay: 0.3 },
+                      viewport: { once: true, amount: 0.15 },
+                    })}
               >
                 Follow
               </motion.h3>
@@ -229,10 +248,14 @@ const Footer = () => {
                     target={item.href.startsWith("http") ? "_blank" : "_self"}
                     rel={item.href.startsWith("http") ? "noopener noreferrer" : ""}
                     className="block font-light text-[#555555] transition-colors duration-300 py-1 group"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                    viewport={{ once: true }}
+                    {...(prefersReducedMotion
+                      ? { initial: false }
+                      : {
+                          initial: { opacity: 0, x: -20 },
+                          whileInView: { opacity: 1, x: 0 },
+                          transition: { duration: 0.6, delay: 0.4 + index * 0.1 },
+                          viewport: { once: true, amount: 0.15 },
+                        })}
                   >
                     <SlotMachineText text={item.name} />
                   </motion.a>
@@ -244,10 +267,14 @@ const Footer = () => {
             <div className="w-full md:w-1/2">
               <motion.h3
                 className="font-barlow font-black text-[11px] tracking-[3px] uppercase text-[#444444] mb-4 border-b border-[#1a1a1a] pb-2"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                viewport={{ once: true }}
+                {...(prefersReducedMotion
+                  ? { initial: false }
+                  : {
+                      initial: { opacity: 0, y: 20 },
+                      whileInView: { opacity: 1, y: 0 },
+                      transition: { duration: 0.8, delay: 0.5 },
+                      viewport: { once: true, amount: 0.15 },
+                    })}
               >
                 Download
               </motion.h3>
@@ -260,10 +287,14 @@ const Footer = () => {
                     target={item.href.startsWith("#") ? "_self" : "_blank"}
                     rel={item.href.startsWith("http") ? "noopener noreferrer" : ""}
                     className="block font-light text-[#555555] transition-colors duration-300 py-1 group"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                    viewport={{ once: true }}
+                    {...(prefersReducedMotion
+                      ? { initial: false }
+                      : {
+                          initial: { opacity: 0, x: -20 },
+                          whileInView: { opacity: 1, x: 0 },
+                          transition: { duration: 0.6, delay: 0.6 + index * 0.1 },
+                          viewport: { once: true, amount: 0.15 },
+                        })}
                   >
                     <SlotMachineText text={item.name} />
                   </motion.a>
@@ -279,10 +310,14 @@ const Footer = () => {
 
           {/* Left — identity */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            viewport={{ once: true }}
+            {...(prefersReducedMotion
+              ? { initial: false }
+              : {
+                  initial: { opacity: 0, y: 20 },
+                  whileInView: { opacity: 1, y: 0 },
+                  transition: { duration: 0.8, delay: 0.7 },
+                  viewport: { once: true, amount: 0.15 },
+                })}
           >
             <div style={{
               fontFamily: 'var(--font-mono)',
@@ -309,10 +344,14 @@ const Footer = () => {
 
           {/* Right — time */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            viewport={{ once: true }}
+            {...(prefersReducedMotion
+              ? { initial: false }
+              : {
+                  initial: { opacity: 0, y: 20 },
+                  whileInView: { opacity: 1, y: 0 },
+                  transition: { duration: 0.8, delay: 0.9 },
+                  viewport: { once: true, amount: 0.15 },
+                })}
             style={{ textAlign: 'right' }}
           >
             <div style={{

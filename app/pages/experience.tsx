@@ -1,11 +1,12 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { useRef } from "react"
 
 const Experience = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
+  const prefersReducedMotion = useReducedMotion()
 
   const experiences = [
     {
@@ -59,10 +60,14 @@ const Experience = () => {
           <div className="space-y-6 lg:space-y-8">
             <motion.div
               className="eyebrow-label"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
+              {...(prefersReducedMotion
+                ? { initial: false }
+                : {
+                    initial: { opacity: 0, y: 30 },
+                    whileInView: { opacity: 1, y: 0 },
+                    transition: { duration: 0.8, delay: 0.2 },
+                    viewport: { once: true, amount: 0.15 },
+                  })}
             >
               <span className="eyebrow-bar" />
               EXPERIENCE
@@ -71,20 +76,28 @@ const Experience = () => {
             <motion.h2
               ref={titleRef}
               className="section-title font-barlow font-black uppercase text-[#f0f0ea]"
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              viewport={{ once: true }}
+              {...(prefersReducedMotion
+                ? { initial: false }
+                : {
+                    initial: { opacity: 0, x: -100 },
+                    whileInView: { opacity: 1, x: 0 },
+                    transition: { duration: 1.2, ease: "easeOut" },
+                    viewport: { once: true, amount: 0.15 },
+                  })}
             >
               Experience
             </motion.h2>
 
             <motion.p
               className="text-[15px] leading-relaxed text-[#aaaaaa] max-w-3xl"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
+              {...(prefersReducedMotion
+                ? { initial: false }
+                : {
+                    initial: { opacity: 0, y: 30 },
+                    whileInView: { opacity: 1, y: 0 },
+                    transition: { duration: 0.8, delay: 0.4 },
+                    viewport: { once: true, amount: 0.15 },
+                  })}
             >
               Building impactful solutions across diverse industries and cutting-edge technologies.
             </motion.p>
@@ -96,12 +109,18 @@ const Experience = () => {
               <motion.div
                 key={index}
                 className="border-b border-[#1a1a1a] pb-8 lg:pb-12 group cursor-pointer"
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, ease: "backOut", delay: 0.1 + index * 0.15 }}
-                viewport={{ once: true }}
+                {...(prefersReducedMotion
+                  ? { initial: false }
+                  : {
+                      initial: { opacity: 0, y: 100 },
+                      whileInView: { opacity: 1, y: 0 },
+                      transition: { duration: 0.3, ease: "backOut", delay: 0.1 + index * 0.15 },
+                      viewport: { once: true, amount: 0.15 },
+                    })}
                 whileHover={{ x: 20 }}
+                // tween transition prevents spring physics overhead on hover
               >
+                {/* Wrap whileHover transition as separate prop to avoid conflict with whileInView transition */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
                   {/* Timeline & Status */}
                   <div className="lg:col-span-3 space-y-4">
@@ -123,7 +142,7 @@ const Experience = () => {
                       <h3 className="text-2xl lg:text-3xl font-barlow font-black uppercase text-[#f0f0ea] group-hover:text-[#c8f060] transition-colors duration-300">
                         {exp.title}
                       </h3>
-                      <div className="font-mono-custom text-[13px] tracking-[2px] uppercase text-[#555555]">{exp.company}</div> {/* Fixed missing closing tag */}
+                      <div className="font-mono-custom text-[13px] tracking-[2px] uppercase text-[#555555]">{exp.company}</div>
                     </div>
 
                     <p className="text-[15px] leading-relaxed text-[#aaaaaa] max-w-3xl">

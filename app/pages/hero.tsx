@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react'
 import { gsap } from "gsap"
 import { getCalApi } from "@calcom/embed-react"
@@ -22,6 +22,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
   const [isReady, setIsReady] = useState(false)
   const [currentDate, setCurrentDate] = useState({ month: '', year: '' })
   const [currentTime, setCurrentTime] = useState('')
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
     const update = () => {
@@ -98,32 +99,43 @@ const Hero = ({ onReady }: HeroProps = {}) => {
 
     const tl = gsap.timeline({ delay: 0.15 })
 
+    // Set will-change only on the actively animating element (title first)
+    gsap.set(titleRef.current, { willChange: "transform, opacity" })
+
     tl.fromTo(
       titleRef.current,
       {
         opacity: 0,
         y: 80,
         scale: 0.95,
-        filter: "blur(8px)",
+        // Removed: filter: "blur(8px)" — forces layer repaint every frame
       },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        filter: "blur(0px)",
+        // Removed: filter: "blur(0px)"
         duration: 1.6,
         ease: "power3.out",
+        onComplete: () => {
+          gsap.set(titleRef.current, { willChange: "auto" })
+          gsap.set(leftContentRef.current, { willChange: "transform, opacity" })
+        },
       },
     )
       .fromTo(
         leftContentRef.current,
-        { opacity: 0, x: -60, filter: "blur(4px)" },
+        { opacity: 0, x: -60 },
+        // Removed: filter: "blur(4px)" / "blur(0px)"
         {
           opacity: 1,
           x: 0,
-          filter: "blur(0px)",
           duration: 1.3,
-          ease: "power2.out"
+          ease: "power2.out",
+          onComplete: () => {
+            gsap.set(leftContentRef.current, { willChange: "auto" })
+            gsap.set(imageRef.current, { willChange: "transform, opacity" })
+          },
         },
         "-=1.35",
       )
@@ -133,27 +145,34 @@ const Hero = ({ onReady }: HeroProps = {}) => {
           opacity: 0,
           scale: 0.8,
           rotation: -5,
-          filter: "blur(6px)",
+          // Removed: filter: "blur(6px)"
         },
         {
           opacity: 1,
           scale: 1,
           rotation: 0,
-          filter: "blur(0px)",
+          // Removed: filter: "blur(0px)"
           duration: 1.5,
           ease: "back.out(1.2)",
+          onComplete: () => {
+            gsap.set(imageRef.current, { willChange: "auto" })
+            gsap.set(rightContentRef.current, { willChange: "transform, opacity" })
+          },
         },
         "-=1.15",
       )
       .fromTo(
         rightContentRef.current,
-        { opacity: 0, x: 60, filter: "blur(4px)" },
+        { opacity: 0, x: 60 },
+        // Removed: filter: "blur(4px)" / "blur(0px)"
         {
           opacity: 1,
           x: 0,
-          filter: "blur(0px)",
           duration: 1.3,
-          ease: "power2.out"
+          ease: "power2.out",
+          onComplete: () => {
+            gsap.set(rightContentRef.current, { willChange: "auto" })
+          },
         },
         "-=1.35",
       )
@@ -179,11 +198,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
       delay: 1.8,
     })
 
-    if (heroRef.current) {
-      gsap.set([titleRef.current, leftContentRef.current, rightContentRef.current, imageRef.current], {
-        willChange: "transform, opacity"
-      })
-    }
+    // Removed: bulk gsap.set([...4 elements...], { willChange }) — now set per-element above
 
     return () => {
       tl.kill()
@@ -199,9 +214,11 @@ const Hero = ({ onReady }: HeroProps = {}) => {
     >
       <div className="w-full px-[clamp(1rem,5vw,4rem)] relative z-10">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isReady ? 1 : 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
+          {...(prefersReducedMotion ? { initial: false } : {
+            initial: { opacity: 0 },
+            animate: { opacity: isReady ? 1 : 0 },
+            transition: { delay: 1.2, duration: 0.8 },
+          })}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -287,12 +304,14 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                   color: '#c8f060',
                 }}
                 whileTap={{ scale: 0.98 }}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{
-                  opacity: isReady ? 1 : 0,
-                  y: isReady ? 0 : 10
-                }}
-                transition={{ delay: 0.02, duration: 0.02 }}
+                {...(prefersReducedMotion ? { initial: false } : {
+                  initial: { opacity: 0, y: 10 },
+                  animate: {
+                    opacity: isReady ? 1 : 0,
+                    y: isReady ? 0 : 10
+                  },
+                  transition: { delay: 0.02, duration: 0.02 },
+                })}
               >
                 <span>BOOK A CALL</span>
                 <ArrowUpRight style={{ width: '14px', height: '14px' }} />
@@ -310,15 +329,17 @@ const Hero = ({ onReady }: HeroProps = {}) => {
               <motion.div
                 className="w-full h-full overflow-hidden relative shadow-2xl"
                 style={{ borderRadius: 0, border: "1px solid #1a1a1a" }}
-                whileHover={{
-                  scale: 1.015,
-                  rotate: 0.5,
-                  boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
-                }}
-                transition={{
-                  duration: 0.4,
-                  ease: [0.25, 0.46, 0.45, 0.94]
-                }}
+                {...(prefersReducedMotion ? {} : {
+                  whileHover: {
+                    scale: 1.015,
+                    rotate: 0.5,
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+                  },
+                  transition: {
+                    duration: 0.4,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  },
+                })}
               >
                 <img
                   src="/myPhoto-optimized.jpg"
@@ -392,16 +413,18 @@ const Hero = ({ onReady }: HeroProps = {}) => {
 
         {/* Contact Info */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{
-            opacity: isReady ? 1 : 0,
-            y: isReady ? 0 : 15
-          }}
-          transition={{
-            delay: 2.5,
-            duration: 1.0,
-            ease: [0.25, 0.46, 0.45, 0.94]
-          }}
+          {...(prefersReducedMotion ? { initial: false } : {
+            initial: { opacity: 0, y: 15 },
+            animate: {
+              opacity: isReady ? 1 : 0,
+              y: isReady ? 0 : 15
+            },
+            transition: {
+              delay: 2.5,
+              duration: 1.0,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            },
+          })}
           className="absolute bottom-0 right-[clamp(1rem,5vw,4rem)] text-right hidden sm:block"
         >
           <div style={{
@@ -429,27 +452,31 @@ const Hero = ({ onReady }: HeroProps = {}) => {
         <motion.div
           className="w-6 h-10 border-2 rounded-full flex justify-center"
           style={{ borderColor: "#1a1a1a" }}
-          animate={{
-            borderColor: isReady ? ["#1a1a1a", "#c8f060", "#1a1a1a"] : "#1a1a1a",
-          }}
-          transition={{
-            duration: 3,
-            repeat: isReady ? Number.POSITIVE_INFINITY : 0,
-            delay: 2.5,
-          }}
+          {...(prefersReducedMotion ? { initial: false } : {
+            animate: {
+              borderColor: isReady ? ["#1a1a1a", "#c8f060", "#1a1a1a"] : "#1a1a1a",
+            },
+            transition: {
+              duration: 3,
+              repeat: isReady ? Number.POSITIVE_INFINITY : 0,
+              delay: 2.5,
+            },
+          })}
         >
           <motion.div
             className="w-1 h-2 bg-[#c8f060] mt-2"
             style={{ borderRadius: 0 }}
-            animate={{
-              y: isReady ? [0, 16, 0] : 0,
-              opacity: isReady ? [1, 0.3, 1] : 1,
-            }}
-            transition={{
-              duration: 2,
-              repeat: isReady ? Number.POSITIVE_INFINITY : 0,
-              delay: 2.5,
-            }}
+            {...(prefersReducedMotion ? { initial: false } : {
+              animate: {
+                y: isReady ? [0, 16, 0] : 0,
+                opacity: isReady ? [1, 0.3, 1] : 1,
+              },
+              transition: {
+                duration: 2,
+                repeat: isReady ? Number.POSITIVE_INFINITY : 0,
+                delay: 2.5,
+              },
+            })}
           />
         </motion.div>
       </motion.div>

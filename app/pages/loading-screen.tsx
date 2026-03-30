@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 interface LoadingScreenProps {
   onComplete: () => void
@@ -11,6 +11,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const [counter, setCounter] = useState(0)
   const [isComplete, setIsComplete] = useState(false)
   const [isExiting, setIsExiting] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
     const startTime = Date.now()
@@ -63,9 +64,13 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
     >
       <div className="text-center relative">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          {...(prefersReducedMotion
+            ? { initial: false }
+            : {
+                initial: { opacity: 0 },
+                animate: { opacity: 1 },
+                transition: { duration: 0.6 },
+              })}
           style={{ 
             marginBottom: '48px', 
             fontFamily: 'var(--font-barlow)',
@@ -95,12 +100,15 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
             {counter.toString().padStart(2, "0")}
           </motion.div>
 
-          {/* Subtle glow effect */}
+          {/*
+            Glow div: removed scale animation, kept only opacity.
+            bg-gradient + blur + scale was causing triple repaint on every frame.
+          */}
           <motion.div
             className="absolute inset-0 bg-gradient-radial from-white/10 via-transparent to-transparent blur-xl"
             animate={{
+              // Removed: scale animation — bg-gradient + blur + scale = triple repaint
               opacity: isExiting ? [0.3, 0.6, 0] : [0, 0.3, 0],
-              scale: isExiting ? [0.8, 1.4, 0.8] : [0.8, 1.2, 0.8],
             }}
             transition={{
               duration: isExiting ? 0.8 : 3,

@@ -23,9 +23,10 @@ export function SmoothScrollProvider({ children, isReady }: SmoothScrollProvider
             smootherRef.current = ScrollSmoother.create({
                 wrapper: "#smooth-wrapper",
                 content: "#smooth-content",
-                smooth: 1.2,
+                smooth: 2.5,          // Higher = more glide/inertia
                 effects: true,
-                smoothTouch: 0.1,
+                normalizeScroll: true, // Normalizes scroll deltas → eliminates jitter across trackpads/mice
+                smoothTouch: 0.01,     // Slightly more inertia on touch/mobile
             })
 
             // Refresh ScrollTrigger after smoother is created

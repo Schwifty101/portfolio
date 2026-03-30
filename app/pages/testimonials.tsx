@@ -1,12 +1,13 @@
 "use client"
 
 import { useRef } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import Image from 'next/image'
 
 const Testimonials = () => {
     const sectionRef = useRef(null)
     const headerRef = useRef(null)
+    const prefersReducedMotion = useReducedMotion()
 
     const testimonials = [
         {
@@ -33,10 +34,14 @@ const Testimonials = () => {
                     <motion.h2
                         ref={headerRef}
                         className="text-4xl md:text-6xl font-barlow font-black tracking-[-1px] text-[#f0f0ea]"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        viewport={{ once: true }}
+                        {...(prefersReducedMotion
+                          ? { initial: false }
+                          : {
+                              initial: { opacity: 0, y: 20 },
+                              whileInView: { opacity: 1, y: 0 },
+                              transition: { duration: 0.8, delay: 0.2 },
+                              viewport: { once: true, amount: 0.15 },
+                            })}
                     >
                         IN THEIR WORDS.
                     </motion.h2>
@@ -46,10 +51,14 @@ const Testimonials = () => {
                     {testimonials.map((testimonial, index) => (
                         <motion.div
                             key={testimonial.id}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 + index * 0.2 }}
-                            viewport={{ once: true }}
+                            {...(prefersReducedMotion
+                              ? { initial: false }
+                              : {
+                                  initial: { opacity: 0, y: 50 },
+                                  whileInView: { opacity: 1, y: 0 },
+                                  transition: { duration: 0.6, delay: 0.2 + index * 0.2 },
+                                  viewport: { once: true, amount: 0.15 },
+                                })}
                             className="bg-[#111111] border border-[#1a1a1a] p-8 md:p-12 relative group hover:border-[#c8f060] transition-colors duration-200"
                             style={{ borderRadius: 0 }}
                         >
@@ -92,10 +101,14 @@ const Testimonials = () => {
                 </div>
 
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  viewport={{ once: true }}
+                  {...(prefersReducedMotion
+                    ? { initial: false }
+                    : {
+                        initial: { opacity: 0 },
+                        whileInView: { opacity: 1 },
+                        transition: { duration: 0.8, delay: 0.4 },
+                        viewport: { once: true, amount: 0.15 },
+                      })}
                   style={{
                     marginTop: '48px',
                     textAlign: 'center',

@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { useRef, useState } from "react"
 import { AnimatePresence } from "framer-motion"
 
@@ -8,6 +8,7 @@ const Skills = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
   const [expandedCategory, setExpandedCategory] = useState<number | null>(null)
+  const prefersReducedMotion = useReducedMotion()
 
   const skillCategories = [
     {
@@ -74,15 +75,19 @@ const Skills = () => {
   return (
     <section id="skills" ref={sectionRef} className="section-padding bg-[#0a0a0a] text-white relative overflow-hidden border-b border-[#1a1a1a]">
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-20"> {/* Increased z-index for text content */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-20">
         {/* Header */}
         <div className="mb-16 lg:mb-24">
           <motion.div
             className="eyebrow-label mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
+            {...(prefersReducedMotion
+              ? { initial: false }
+              : {
+                  initial: { opacity: 0, y: 30 },
+                  whileInView: { opacity: 1, y: 0 },
+                  transition: { duration: 0.8, delay: 0.2 },
+                  viewport: { once: true, amount: 0.15 },
+                })}
           >
             <span className="eyebrow-bar" />
             CAPABILITIES
@@ -91,20 +96,28 @@ const Skills = () => {
           <motion.h2
             ref={titleRef}
             className="section-title font-barlow uppercase text-[#f0f0ea] mb-8"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            viewport={{ once: true }}
+            {...(prefersReducedMotion
+              ? { initial: false }
+              : {
+                  initial: { opacity: 0, x: -100 },
+                  whileInView: { opacity: 1, x: 0 },
+                  transition: { duration: 1.2, ease: "easeOut" },
+                  viewport: { once: true, amount: 0.15 },
+                })}
           >
             Capabilities
           </motion.h2>
 
           <motion.p
             className="text-[15px] leading-relaxed text-[#aaaaaa] max-w-3xl"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
+            {...(prefersReducedMotion
+              ? { initial: false }
+              : {
+                  initial: { opacity: 0, y: 30 },
+                  whileInView: { opacity: 1, y: 0 },
+                  transition: { duration: 0.8, delay: 0.4 },
+                  viewport: { once: true, amount: 0.15 },
+                })}
           >
             A comprehensive toolkit for building modern, scalable applications across the full technology stack.
           </motion.p>
@@ -116,15 +129,20 @@ const Skills = () => {
             <motion.div
               key={index}
               className="border-b border-[#1a1a1a] last:border-b-0"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
-              viewport={{ once: true }}
+              {...(prefersReducedMotion
+                ? { initial: false }
+                : {
+                    initial: { opacity: 0, y: 50 },
+                    whileInView: { opacity: 1, y: 0 },
+                    transition: { duration: 0.8, delay: 0.6 + index * 0.1 },
+                    viewport: { once: true, amount: 0.15 },
+                  })}
             >
               <motion.button
                 onClick={() => toggleCategory(index)}
                 className="w-full py-8 flex items-center justify-between text-left transition-colors duration-300 group"
                 whileHover={{ x: 20 }}
+                transition={{ type: "tween", duration: 0.2 }}
               >
                 <div className="flex items-center space-x-8">
                   <span className="font-mono-custom text-[11px] text-[#444444]">({String(index + 1).padStart(2, "0")})</span>
