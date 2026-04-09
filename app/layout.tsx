@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: 'Soban Ahmad Portfolio',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image-1.png',
         width: 1200,
         height: 630,
         alt: 'Soban Ahmad - Software Engineer & Developer',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Soban Ahmad - Software Engineer & Developer',
     description: 'Portfolio of Soban Ahmad - Full-stack developer. I turn business problems into production-ready software.',
-    images: ['/og-image.png'],
+    images: ['/og-image-1.png'],
   },
   robots: {
     index: true,
