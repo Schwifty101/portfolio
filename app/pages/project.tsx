@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowUpRight } from 'lucide-react'
+import Link from "next/link"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
@@ -39,6 +40,7 @@ export const Project = () => { // Changed to named export
       details: "Delivered in 8 weeks. Live at arandcolaw.com",
       link: "https://arandcolaw.com",
       liveLink: "https://arandcolaw.com",
+      caseStudyLink: "/case-study/arco-law",
       caseStudy: {
         problem:
           "AR&CO relied entirely on phone calls for consultation bookings and manual bank transfers for payments. No digital presence to onboard clients at scale or process three distinct payment types - one-time, retainer, and per-service.",
@@ -433,6 +435,16 @@ export const Project = () => { // Changed to named export
                               <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
                             </a>
                           )}
+                          {(project as any).caseStudyLink && (
+                            <Link
+                              href={(project as any).caseStudyLink}
+                              className="flex items-center bg-transparent text-[#c8f060] font-barlow font-black text-[11px] tracking-[3px] uppercase px-6 py-3 border border-[#c8f060] hover:bg-[#c8f060] hover:text-[#0a0a0a] transition-colors duration-300"
+                              style={{ borderRadius: 0 }}
+                            >
+                              <span>Read Case Study</span>
+                              <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
+                            </Link>
+                          )}
                           <a
                             href={project.link}
                             target="_blank"
@@ -574,6 +586,16 @@ export const Project = () => { // Changed to named export
                           <span>Live Demo</span>
                           <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
                         </a>
+                      )}
+                      {(project as any).caseStudyLink && (
+                        <Link
+                          href={(project as any).caseStudyLink}
+                          className="flex items-center bg-transparent text-[#c8f060] font-barlow font-black text-[11px] tracking-[3px] uppercase px-6 py-3 border border-[#c8f060] hover:bg-[#c8f060] hover:text-[#0a0a0a] transition-colors duration-300"
+                          style={{ borderRadius: 0 }}
+                        >
+                          <span>Read Case Study</span>
+                          <span className="ml-2 text-base"><ArrowUpRight className="w-4 h-4" /></span>
+                        </Link>
                       )}
                       <a
                         href={project.link}
