@@ -124,7 +124,7 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="bg-[#0d0d0d] text-white relative overflow-visible flex flex-col justify-center border-b border-[#1a1a1a] lg:min-h-screen"
+      className="bg-[#0d0d0d] text-white relative overflow-visible flex flex-col justify-center lg:justify-start border-b border-[#1a1a1a] lg:min-h-screen"
       style={{ /* willChange set conditionally in useEffect — desktop only */ }}
     >
       {/* Ambient background text */}
@@ -160,7 +160,7 @@ const About = () => {
         />
       </div>
 
-      <div className="container-full py-16 lg:py-0 relative z-10 w-full max-w-screen">
+      <div className="container-full py-16 lg:pt-24 lg:pb-4 relative z-10 w-full max-w-screen">
         {/* ── Mobile layout: header on top, services stacked below ── */}
         <div className="lg:hidden">
           {/* Mobile header */}
@@ -260,11 +260,11 @@ const About = () => {
                 ref={(el) => {
                   itemRefs.current[index] = el
                 }}
-                className="border-b border-[#1a1a1a] pb-4 group cursor-pointer"
+                className="border-b border-[#1a1a1a] pb-4 lg:pb-3 group cursor-pointer"
                 whileHover={{ x: 20 }}
                 transition={{ type: "tween", duration: 0.2 }}
               >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6 pt-4">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6 lg:gap-3 pt-4 lg:pt-3">
                   <div className="md:col-span-5 flex items-start gap-6">
                     <span className="font-mono-custom text-[11px] text-[#555555] tracking-[4px] mt-1">
                       {service.num}
