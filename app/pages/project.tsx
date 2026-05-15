@@ -28,6 +28,32 @@ export const Project = () => { // Changed to named export
 
   const projects = [
     {
+      id: 5,
+      title: "Automated Pre-Call Brief Generator",
+      description:
+        "An AI-powered prospect intelligence pipeline that automates pre-call research for marketing agency sales teams. Given just a prospect's website URL, the system orchestrates a complex data collection and AI analysis pipeline to deliver a structured, actionable intelligence brief straight to the sales rep's inbox before the call.",
+      tech: ["Python", "FastAPI", "Next.js", "Playwright", "Gemini API", "Celery", "PostgreSQL"],
+      year: "2026",
+      category: "AI & Automation",
+      tier: "client",
+      impact: "Internal Automation",
+      details:
+        "6-stage asynchronous pipeline delivering comprehensive PDF research briefs in 60-180 seconds.",
+      link: "https://github.com/Schwifty101",
+      caseStudyLink: "/case-study/automated-pre-call-brief-generator",
+      caseStudy: {
+        problem:
+          "Marketing agency sales reps typically spend 20–40 minutes manually researching a prospect. This research often gets skipped due to time constraints, resulting in generic discovery calls and lost deals.",
+        solution:
+          "A robust Python/FastAPI async pipeline that concurrently scrapes web/LinkedIn data, queries APIs (Meta Ads, PageSpeed), and uses Google Gemini to extract a structured profile and synthesize a customized brief.",
+        results: [
+          "Saves 25 hours of senior staff time monthly (for 40 calls/mo)",
+          "100% preparation consistency for discovery calls",
+          "Fault-tolerant scraping with graceful degradation on blocks",
+        ],
+      },
+    },
+    {
       id: 1,
       title: "AR&CO Law Associates",
       description:
@@ -50,32 +76,6 @@ export const Project = () => { // Changed to named export
           "100% of consultation bookings now self-serve",
           "Secure client document sharing live at launch",
           "Firm established a digital identity matching its in-person reputation",
-        ],
-      },
-    },
-    {
-      id: 2,
-      title: "The New Home Architectures",
-      description:
-        "Their work was exceptional. Their digital presence was a WhatsApp number. We built a portfolio platform with a [content management system] - they can add services, publish new projects, and update content without touching a developer. New clients now mention the site the first time they call.",
-      tech: ["Next.js", "NestJS", "Supabase", "WhatsApp API"],
-      year: "2025",
-      category: "Portfolio + CMS",
-      tier: "client",
-      impact: "Live — client enquiry platform",
-      details:
-        "Portfolio platform with full CMS. Services, projects, and content all self-managed by the client.",
-      link: "https://thenewhome.pk",
-      liveLink: "https://thenewhome.pk",
-      caseStudy: {
-        problem:
-          "The firm's portfolio of high-end interior work was being shared only via WhatsApp images. Prospective clients had no way to evaluate quality before reaching out, and the team had no way to update their own content without calling a developer.",
-        solution:
-          "Built a portfolio-led site with a curated project gallery, service category pages, and a WhatsApp-first enquiry flow. Added a full content management system so the client owns their content completely.",
-        results: [
-          "New clients cite the website unprompted at first contact",
-          "Client manages all content independently post-launch",
-          "Enquiry quality improved - leads arrive pre-qualified",
         ],
       },
     },
