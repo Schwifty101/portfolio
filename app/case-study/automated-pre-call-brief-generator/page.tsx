@@ -86,21 +86,21 @@ export default function AutomatedPreCallBriefGeneratorCaseStudy() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    ;(async function () {
-      const cal = await getCalApi({ namespace: "30min" })
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view" })
-    })()
+      ; (async function () {
+        const cal = await getCalApi({ namespace: "30min" })
+        cal("ui", { hideEventTypeDetails: false, layout: "month_view" })
+      })()
   }, [])
 
   const fadeProps = (delay = 0) =>
     prefersReducedMotion
       ? { initial: false as const }
       : {
-          initial: { opacity: 0, y: 24 } as const,
-          whileInView: { opacity: 1, y: 0 } as const,
-          transition: { duration: 0.7, delay, ease: "easeOut" } as const,
-          viewport: { once: true, amount: 0.15 } as const,
-        }
+        initial: { opacity: 0, y: 24 } as const,
+        whileInView: { opacity: 1, y: 0 } as const,
+        transition: { duration: 0.7, delay, ease: "easeOut" } as const,
+        viewport: { once: true, amount: 0.15 } as const,
+      }
 
   return (
     <>
@@ -120,7 +120,7 @@ export default function AutomatedPreCallBriefGeneratorCaseStudy() {
                   SOBAN AHMAD
                 </span>
                 <span className="font-mono-custom text-[10px] font-bold text-[#333333] tracking-[3px] uppercase hidden md:block">
-                  (Silicon Studio)
+                  (KodoAI)
                 </span>
               </div>
             </Link>
@@ -185,7 +185,7 @@ export default function AutomatedPreCallBriefGeneratorCaseStudy() {
               </div>
               <div className="flex items-center gap-2 px-4 py-2 bg-[#0d0d0d] border border-[#1a1a1a]">
                 <span className="font-mono-custom text-[11px] tracking-[2px] uppercase text-[#555555]">By</span>
-                <span className="font-mono-custom text-[11px] tracking-[2px] uppercase text-[#f0f0ea]">Soban Ahmad, Silicon.Studio</span>
+                <span className="font-mono-custom text-[11px] tracking-[2px] uppercase text-[#f0f0ea]">Soban Ahmad, KodoAI</span>
               </div>
             </motion.div>
 

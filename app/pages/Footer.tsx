@@ -341,7 +341,7 @@ const Footer = () => {
               textTransform: 'uppercase',
               color: '#1a1a1a',
             }}>
-              (Engineering + building — Silicon Studio)
+              (Engineering + building — KodoAI)
             </div>
           </motion.div>
 

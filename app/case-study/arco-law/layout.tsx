@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AR&CO Law Associates — Case Study | Soban Ahmad',
     description:
-      'Full-stack law firm platform with client portal, workflow automation, and AI-ready infrastructure. Delivered by Silicon.Studio.',
+      'Full-stack law firm platform with client portal, workflow automation, and AI-ready infrastructure. Delivered by KodoAI.',
     url: 'https://sobanahmad.dev/case-study/arco-law',
     images: [
       {

@@ -183,7 +183,7 @@ const Navigation = () => {
                 SOBAN AHMAD
               </div>
               <div className="font-mono-custom text-[10px] font-bold text-[#333333] tracking-[3px] uppercase hidden md:block">
-                (Silicon Studio)
+                (KodoAI)
               </div>
             </motion.div>
 
@@ -332,7 +332,7 @@ const Navigation = () => {
                   SOBAN AHMAD
                 </div>
                 <div className="font-mono-custom text-[10px] font-bold text-[#333333] tracking-[3px] uppercase">
-                  (Silicon Studio)
+                  (KodoAI)
                 </div>
               </div>
 

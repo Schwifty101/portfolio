@@ -246,7 +246,7 @@ textarea:focus,
 }
 
 :root {
-  /* Silicon Studio Design System */
+  /* KodoAI Design System */
   --si-bg-base:      #0a0a0a;
   --si-bg-raised:    #0d0d0d;
   --si-bg-surface:   #111111;
@@ -523,7 +523,7 @@ p {
   margin: 0;
 }
 
-/* Silicon Studio Font Utilities */
+/* KodoAI Font Utilities */
 .font-barlow {
   font-family: var(--font-barlow), 'Arial Narrow', Arial, sans-serif;
 }
