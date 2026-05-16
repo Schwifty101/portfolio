@@ -313,7 +313,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                 })}
               >
                 <img
-                  src="/myPhoto-optimized.jpg"
+                  src="/my_photo2.jpeg"
                   alt="Soban Ahmad - Professional Photo"
                   className="w-full h-full object-cover relative z-10"
                   width={557}
@@ -322,7 +322,7 @@ const Hero = ({ onReady }: HeroProps = {}) => {
                   decoding="async"
                   style={{
                     objectPosition: "center center",
-                    filter: "grayscale(100%)"
+                    // filter: "grayscale(100%)"
                   }}
                 />
               </motion.div>
