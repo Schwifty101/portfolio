@@ -5,10 +5,10 @@ import { LoadingScreen } from './pages/loading-screen'
 import { Navigation } from './pages/navigation'
 import { Hero } from './pages/hero'
 import { About } from './pages/about'
-import { Skills } from './pages/skills'
-import { Experience } from './pages/experience'
-import { Project } from './pages/project' // Ensure this is a named import
-import { Testimonials } from './pages/testimonials'
+import { Work } from './pages/work'
+import { Process } from './pages/process'
+import { Services } from './pages/services'
+import { Resources } from './pages/resources'
 import { Contact } from './pages/contact'
 import { Footer } from './pages/Footer'
 import { SmoothScrollProvider } from '@/components/SmoothScrollProvider'
@@ -34,10 +34,10 @@ export default function Home() {
         <main className="w-full">
           <Hero />
           <About />
-          <Skills />
-          <Experience />
-          <Testimonials />
-          <Project />
+          <Work />
+          <Process />
+          <Services />
+          <Resources />
           <Contact />
         </main>
         <Footer />

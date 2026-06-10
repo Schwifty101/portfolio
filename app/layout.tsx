@@ -12,11 +12,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Soban Ahmad - Software Engineer & Developer',
+    default: 'Soban Ahmad — Engineering Digital Platforms',
     template: '%s | Soban Ahmad'
   },
-  description: 'Portfolio of Soban Ahmad - Full-stack developer. I turn business problems into production-ready software. Explore my projects and technical expertise.',
-  keywords: ['software engineer', 'full-stack developer', 'React', 'Next.js', 'Node.js', 'TypeScript', 'AI', 'machine learning', 'web development', 'portfolio', 'JavaScript', 'Python', 'cloud architecture'],
+  description: 'Soban Ahmad — Full-stack engineer building production-grade platforms, AI-powered systems, and SaaS applications for founders who need someone who can actually build it.',
+  keywords: ['software engineer', 'full-stack developer', 'React', 'Next.js', 'Node.js', 'TypeScript', 'AI', 'machine learning', 'web development', 'SaaS', 'personal brand', 'technical consulting', 'Python', 'cloud architecture'],
   authors: [{ name: 'Soban Ahmad', url: 'https://sobanahmad.dev' }],
   creator: 'Soban Ahmad',
   publisher: 'Soban Ahmad',
@@ -33,22 +33,22 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://sobanahmad.dev',
-    title: 'Soban Ahmad - Software Engineer & Developer',
-    description: 'Portfolio of Soban Ahmad - Full-stack developer. I turn business problems into production-ready software.',
-    siteName: 'Soban Ahmad Portfolio',
+    title: 'Soban Ahmad — Engineering Digital Platforms',
+    description: 'Full-stack engineer building production-grade platforms, AI-powered systems, and SaaS applications.',
+    siteName: 'Soban Ahmad',
     images: [
       {
         url: '/og-image-1.png',
         width: 1200,
         height: 630,
-        alt: 'Soban Ahmad - Software Engineer & Developer',
+        alt: 'Soban Ahmad — Engineering Digital Platforms',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Soban Ahmad - Software Engineer & Developer',
-    description: 'Portfolio of Soban Ahmad - Full-stack developer. I turn business problems into production-ready software.',
+    title: 'Soban Ahmad — Engineering Digital Platforms',
+    description: 'Full-stack engineer building production-grade platforms, AI-powered systems, and SaaS applications.',
     images: ['/og-image-1.png'],
   },
   robots: {
@@ -92,28 +92,22 @@ export default function RootLayout({
         <JsonLd />
         <noscript>
           <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: 'system-ui, sans-serif' }}>
-            <h1>Soban Ahmad - Software Engineer &amp; Developer</h1>
-            <p>Full-stack developer. I turn business problems into production-ready software.</p>
-            <h2>Skills</h2>
-            <p>React, Next.js, Node.js, TypeScript, Python, JavaScript, Cloud Architecture, Machine Learning, AI</p>
-            <h2>Experience</h2>
+            <h1>Soban Ahmad — Engineering Digital Platforms</h1>
+            <p>Full-stack engineer building production-grade platforms, AI-powered systems, and SaaS applications for founders who need someone who can actually build it.</p>
+            <h2>Services</h2>
             <ul>
-              <li>Team Lead – AI-Powered Assessment Platform</li>
-              <li>PK Delivery Management Intern</li>
-              <li>Fullstack &amp; QA Intern</li>
-              <li>Frontend Development Intern</li>
+              <li>Full-Stack Development</li>
+              <li>AI &amp; Automation</li>
+              <li>SaaS Platforms</li>
+              <li>Technical Consulting</li>
             </ul>
-            <h2>Projects</h2>
+            <h2>Selected Work</h2>
             <ul>
-              <li>Traffic Sign Classification using CNN</li>
-              <li>AI-Powered Assessment Platform</li>
-              <li>Chess AI Engine</li>
-              <li>IMDB Backend Clone</li>
-              <li>Multi-Commerce Admin Dashboard</li>
-              <li>Weather Forecast Chatbot</li>
+              <li>Automated Pre-Call Brief Generator</li>
+              <li>AR&amp;CO Law Associates</li>
+              <li>AI Assessment Platform</li>
+              <li>Secure Messaging System</li>
             </ul>
-            <h2>Education</h2>
-            <p>Bachelor of Science in Software Engineering</p>
             <h2>Contact</h2>
             <p>Visit <a href="https://sobanahmad.dev">sobanahmad.dev</a> | <a href="https://www.linkedin.com/in/soban-ahmad-malik/">LinkedIn</a> | <a href="https://github.com/Schwifty101">GitHub</a></p>
           </div>

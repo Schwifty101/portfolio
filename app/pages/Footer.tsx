@@ -99,12 +99,13 @@ const Footer = () => {
   }, [])
 
   const menuItems = [
-    { name: "Home",         href: "hero" },
-    { name: "Services",     href: "about" },
-    { name: "Experience",   href: "experience" },
-    { name: "Testimonials", href: "testimonials" },
-    { name: "Work",         href: "project" },
-    { name: "Contact",      href: "contact" },
+    { name: "Home",       href: "hero" },
+    { name: "About",      href: "about" },
+    { name: "Work",       href: "work" },
+    { name: "Process",    href: "process" },
+    { name: "Services",   href: "services" },
+    { name: "Resources",  href: "resources" },
+    { name: "Contact",    href: "contact" },
   ]
 
   const socialItems = [

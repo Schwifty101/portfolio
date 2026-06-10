@@ -21,10 +21,11 @@ const Navigation = () => {
 
   const navItems = useMemo(() => [
     { id: "hero", label: "Home" },
-    { id: "about", label: "Services" },
-    { id: "experience", label: "Experience" },
-    { id: "testimonials", label: "Testimonials" },
-    { id: "project", label: "Case Studies" },
+    { id: "about", label: "About" },
+    { id: "work", label: "Work" },
+    { id: "process", label: "Process" },
+    { id: "services", label: "Services" },
+    { id: "resources", label: "Resources" },
     { id: "contact", label: "Contact" },
   ], [])
 
@@ -370,7 +371,7 @@ const Navigation = () => {
             {/* Nav links — full width, left aligned */}
             <div className="flex-1 flex flex-col px-[clamp(1rem,5vw,6rem)] justify-between min-h-0">
 
-              <nav className="flex-1 flex flex-col min-h-0 pt-4 md:pt-8 pb-4">
+              <nav className="flex-1 flex flex-col min-h-0 pt-4 md:pt-8 pb-4 gap-2">
                 {navItems.map((item, index) => (
                   <motion.button
                     key={item.id}

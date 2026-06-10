@@ -6,7 +6,7 @@ export function JsonLd() {
         url: "https://sobanahmad.dev",
         jobTitle: "Software Engineer",
         description:
-            "Full-stack developer. I turn business problems into production-ready software.",
+            "Full-stack engineer building production-grade platforms, AI-powered systems, and SaaS applications for founders who need someone who can actually build it.",
         sameAs: [
             "https://www.linkedin.com/in/soban-ahmad-malik/",
             "https://github.com/Schwifty101",
@@ -14,14 +14,14 @@ export function JsonLd() {
         knowsAbout: [
             "Software Engineering",
             "Full-Stack Development",
+            "AI & Automation",
+            "SaaS Platforms",
+            "Technical Consulting",
             "React",
             "Next.js",
             "Node.js",
             "TypeScript",
             "Python",
-            "Artificial Intelligence",
-            "Machine Learning",
-            "Cloud Architecture",
         ],
         alumniOf: {
             "@type": "EducationalOrganization",
@@ -32,10 +32,10 @@ export function JsonLd() {
     const websiteSchema = {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        name: "Soban Ahmad Portfolio",
+        name: "Soban Ahmad",
         url: "https://sobanahmad.dev",
         description:
-            "Portfolio of Soban Ahmad - Full-stack developer. I turn business problems into production-ready software.",
+            "Soban Ahmad — Full-stack engineer building production-grade platforms, AI-powered systems, and SaaS applications.",
         author: {
             "@type": "Person",
             name: "Soban Ahmad",

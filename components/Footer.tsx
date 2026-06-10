@@ -89,14 +89,15 @@ const Footer = () => {
  }
  }, [])
 
- const menuItems = [
- { name: "Home", href: "hero" },
- { name: "About", href: "about" },
- { name: "Skills", href: "skills" },
- { name: "Works", href: "experience" },
- { name: "Projects", href: "project" },
- { name: "Contact", href: "contact" },
- ]
+  const menuItems = [
+    { name: "Home", href: "hero" },
+    { name: "About", href: "about" },
+    { name: "Work", href: "work" },
+    { name: "Process", href: "process" },
+    { name: "Services", href: "services" },
+    { name: "Resources", href: "resources" },
+    { name: "Contact", href: "contact" },
+  ]
 
  const socialItems = [
  { name: "LinkedIn", href: "https://linkedin.com/in/soban-ahmad-malik" },

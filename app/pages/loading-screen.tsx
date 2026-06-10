@@ -133,7 +133,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
             ease: "easeInOut",
           }}
         >
-          {isExiting ? "Welcome" : "Loading Portfolio"}
+          {isExiting ? "Welcome" : "Initializing"}
         </motion.div>
 
         {/* Enhanced Progress Bar */}
