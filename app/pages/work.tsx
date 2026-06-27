@@ -13,6 +13,28 @@ const tierConfig: Record<string, { label: string; color: string; bg: string }> =
 const projects = [
   {
     id: 1,
+    title: "AI Voice Receptionist for Med Spas",
+    year: "2026",
+    category: "Voice AI & Automation",
+    tier: "client",
+    tech: ["Twilio", "Vapi", "Deepgram", "Claude 3.5", "Fastify", "Supabase", "Next.js"],
+    description:
+      "A production-grade voice AI receptionist for med spas that answers calls, checks real-time availability, and books appointments 24/7.",
+    caseStudyLink: "/case-study/ai-voice-receptionist",
+  },
+  {
+    id: 2,
+    title: "AI Google Ads Co-Pilot",
+    year: "2026",
+    category: "AI & Marketing Automation",
+    tier: "client",
+    tech: ["LangChain", "Python", "Next.js", "Node.js", "Supabase", "Google Ads API"],
+    description:
+      "An automated research-to-launch system that distills competitive intelligence into policy-safe, highly optimized Google Ads campaigns.",
+    caseStudyLink: "/case-study/ai-google-ads-automation",
+  },
+  {
+    id: 3,
     title: "Automated Pre-Call Brief Generator",
     year: "2026",
     category: "AI & Automation",
@@ -23,7 +45,7 @@ const projects = [
     caseStudyLink: "/case-study/automated-pre-call-brief-generator",
   },
   {
-    id: 2,
+    id: 4,
     title: "AR&CO Law Associates",
     year: "2025",
     category: "Full-Stack Platform",
@@ -35,7 +57,7 @@ const projects = [
     liveLink: "https://arandcolaw.com",
   },
   {
-    id: 3,
+    id: 5,
     title: "AI Assessment Platform",
     year: "2025",
     category: "Full-Stack SaaS",
@@ -45,7 +67,7 @@ const projects = [
       "End-to-end SaaS platform for AI-powered coding assessments with real-time code execution, automated grading, and comprehensive analytics.",
   },
   {
-    id: 4,
+    id: 6,
     title: "Secure Messaging System",
     year: "2024",
     category: "Security / Cryptography",
@@ -64,7 +86,7 @@ const cardVariants = {
     transition: {
       duration: 0.7,
       delay: i * 0.12,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   }),
 }
