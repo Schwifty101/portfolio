@@ -344,6 +344,17 @@ const Footer = () => {
             }}>
               (Engineering + building — KodoAI)
             </div>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              fontWeight: 700,
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+              color: '#1a1a1a',
+              marginTop: '8px',
+            }}>
+              Associated with <a href="https://www.bluegile.xyz" target="_blank" rel="noopener noreferrer" className="hover:text-[#c8f060] transition-colors duration-300">www.bluegile.xyz</a>
+            </div>
           </motion.div>
 
           {/* Right — time */}
