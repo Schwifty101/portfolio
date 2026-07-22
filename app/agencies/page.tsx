@@ -17,7 +17,7 @@ import { SITE_URL } from '@/lib/site'
 
 const TITLE = 'Scale a Paid-Ads Agency Without Hiring'
 const DESCRIPTION =
-  'AI automation for paid-ads agencies that want to scale without hiring. I design, build and deploy systems for ad operations, pre-sales research and client onboarding.'
+  'AI automation for paid-ads agencies that scale without hiring. I design, build and deploy systems for ad operations, pre-sales research and onboarding.'
 
 export const metadata: Metadata = pageMetadata({
   title: TITLE,

@@ -17,7 +17,7 @@ import { SITE_URL } from '@/lib/site'
 
 const TITLE = 'Discovery Call Research Automation'
 const DESCRIPTION =
-  'Discovery call research automation for agencies: an agent builds a pre-call brief for every prospect, grounded in scraped source data, so no rep opens a call on guesswork.'
+  'Discovery call research automation: an agent builds a pre-call brief for every prospect, grounded in scraped source data, so no rep opens a call on guesswork.'
 
 export const metadata: Metadata = pageMetadata({
   title: TITLE,

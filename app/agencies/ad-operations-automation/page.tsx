@@ -17,7 +17,7 @@ import { SITE_URL } from '@/lib/site'
 
 const TITLE = 'Ad Operations Automation for Agencies'
 const DESCRIPTION =
-  'Ad operations automation for paid-ads agencies: an AI agent drafts research, campaigns and creative while a human keeps budgets and the publish button. Scale accounts without hiring.'
+  'Ad operations automation for agencies: an AI agent drafts research, campaigns and creative while a human keeps budgets and the publish button.'
 
 export const metadata: Metadata = pageMetadata({
   title: TITLE,

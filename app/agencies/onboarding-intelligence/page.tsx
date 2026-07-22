@@ -17,7 +17,7 @@ import { SITE_URL } from '@/lib/site'
 
 const TITLE = 'Client Onboarding Automation for Agencies'
 const DESCRIPTION =
-  'Client onboarding automation for agencies: turn the first weeks of every engagement into a system that runs the same way each time, so a new client never waits on a busy account manager.'
+  'Client onboarding automation for agencies: turn the first weeks of every engagement into a repeatable system, so a client never waits on a busy account manager.'
 
 export const metadata: Metadata = pageMetadata({
   title: TITLE,
