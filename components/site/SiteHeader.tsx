@@ -14,7 +14,7 @@ const NAV_LINKS = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-[rgba(12,12,11,0.7)] backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-[color-mix(in_srgb,var(--bg)_70%,transparent)] backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-6">
         <Link href="/" className="flex items-baseline gap-3">
           <span className="font-display text-xl font-semibold uppercase tracking-tight text-ink">

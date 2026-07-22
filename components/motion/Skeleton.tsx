@@ -35,16 +35,13 @@ export function Skeleton({
       )}
     >
       {!reduced && (
-        <>
-          <style>{"@keyframes kodo-scan{from{transform:translateY(0)}to{transform:translateY(100%)}}"}</style>
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{ animation: "kodo-scan 1.8s linear infinite" }}
-          >
-            <div className="h-px w-full bg-border" />
-          </div>
-        </>
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{ animation: "kodo-scan 1.8s linear infinite" }}
+        >
+          <div className="h-px w-full bg-border" />
+        </div>
       )}
       <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-ink-3">
         {label}

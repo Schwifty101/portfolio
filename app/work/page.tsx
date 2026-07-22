@@ -8,7 +8,7 @@ import { PageCta } from '@/components/site/PageCta'
 import { JsonLd, breadcrumbSchema, pageMetadata } from '@/lib/schema'
 import { SITE_URL } from '@/lib/site'
 
-const TITLE = 'Work: AI Automation Systems I Design, Build and Deploy'
+const TITLE = 'Work: Systems I Design, Build and Deploy'
 const DESCRIPTION =
   'Case studies of AI systems Soban Ahmad designed, built and deployed: a law practice platform, an ad-ops agent, a research agent and a voice receptionist.'
 

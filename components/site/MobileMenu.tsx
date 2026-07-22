@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Btn } from '@/components/ui-kodo/Btn'
 
@@ -8,24 +8,59 @@ type NavLink = { label: string; href: string }
 
 export function MobileMenu({ links }: { links: NavLink[] }) {
   const [open, setOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!open) return
+
+    const overlay = overlayRef.current
+    const focusable = () =>
+      Array.from(
+        overlay?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled])'
+        ) ?? []
+      )
+
+    // Move focus into the overlay when it opens.
+    focusable()[0]?.focus()
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') {
+        setOpen(false)
+        return
+      }
+      if (e.key !== 'Tab') return
+      // Trap focus inside the overlay.
+      const items = focusable()
+      if (items.length === 0) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      const active = document.activeElement
+      if (e.shiftKey && active === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault()
+        first.focus()
+      }
     }
+
     document.addEventListener('keydown', onKey)
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prev
+      // Return focus to the hamburger that opened the menu.
+      toggleRef.current?.focus()
     }
   }, [open])
 
   return (
     <div className="lg:hidden">
       <button
+        ref={toggleRef}
         type="button"
         aria-expanded={open}
         aria-controls="mobile-menu"
@@ -54,6 +89,7 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
 
       {open && (
         <div
+          ref={overlayRef}
           id="mobile-menu"
           className="fixed inset-0 z-[60] flex flex-col bg-bg"
         >

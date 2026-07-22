@@ -5,7 +5,6 @@ import {
   SITE_NAME,
   ORG_NAME,
   TAGLINE,
-  EMAIL,
   SAME_AS,
 } from '@/lib/site'
 
@@ -16,7 +15,10 @@ import {
 export function JsonLd({ data }: { data: object | object[] }) {
   return createElement('script', {
     type: 'application/ld+json',
-    dangerouslySetInnerHTML: { __html: JSON.stringify(data) },
+    // Escape "<" so the serialised JSON can never break out of the script tag.
+    dangerouslySetInnerHTML: {
+      __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+    },
   })
 }
 

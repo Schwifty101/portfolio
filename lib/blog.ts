@@ -17,6 +17,20 @@ export type PostMeta = {
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog')
 
+/** The valid pillar ids; anything else falls back with a build-time warning. */
+const PILLARS: readonly Pillar[] = ['manual-work', 'preparation', 'agency-economics', 'med-spa']
+
+/** Validate a raw frontmatter pillar, falling back to 'manual-work'. */
+function toPillar(raw: unknown, slug: string): Pillar {
+  if (typeof raw === 'string' && (PILLARS as readonly string[]).includes(raw)) {
+    return raw as Pillar
+  }
+  console.warn(
+    `[blog] "${slug}" has an invalid or missing pillar (${JSON.stringify(raw)}); falling back to "manual-work".`
+  )
+  return 'manual-work'
+}
+
 /** Files that are scaffolding, not articles. */
 function isArticleFile(filename: string): boolean {
   return filename.endsWith('.mdx') && !filename.startsWith('_')
@@ -28,7 +42,7 @@ function toPostMeta(slug: string, data: Record<string, unknown>): PostMeta {
     slug,
     title: String(data.title ?? ''),
     description: String(data.description ?? ''),
-    pillar: (data.pillar as Pillar) ?? 'manual-work',
+    pillar: toPillar(data.pillar, slug),
     datePublished: String(data.datePublished ?? ''),
     dateModified: String(data.dateModified ?? data.datePublished ?? ''),
     takeaways: Array.isArray(data.takeaways) ? data.takeaways.map(String) : [],

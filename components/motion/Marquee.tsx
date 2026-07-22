@@ -27,7 +27,6 @@ export function Marquee({ children, speed = 40 }: MarqueeProps) {
 
   return (
     <div className="overflow-hidden">
-      <style>{"@keyframes kodo-marquee{to{transform:translateX(-50%)}}"}</style>
       <div
         className="flex w-max"
         style={{ animation: `kodo-marquee ${speed}s linear infinite` }}

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { SmoothScroll } from '@/components/motion'
 import { PageCta } from '@/components/site/PageCta'
 import { JsonLd, serviceSchema, pageMetadata } from '@/lib/schema'
 import { SITE_URL } from '@/lib/site'
@@ -27,15 +26,22 @@ export default function HomePage() {
           serviceType: 'AI automation systems for marketing agencies',
         })}
       />
-      <SmoothScroll>
-        <main>
-          <Hero />
-          <PainSection />
-          <MechanismSection />
-          <ProofSection />
-          <PageCta />
-        </main>
-      </SmoothScroll>
+      {/*
+        ScrollSmoother is intentionally not mounted here. It pins #smooth-wrapper
+        as position:fixed, which pulls the page out of normal flow; because the
+        global footer lives outside the wrapper it jumped ~65px on load, causing a
+        ~0.56 cumulative layout shift (a CWV/no-layout-shift hard-rule violation).
+        The correct full-page fix (footer inside #smooth-content) conflicts with
+        the lg:sticky sidebars on the resource pages, so native scroll is used and
+        the ScrollTrigger reveals below run on it unchanged.
+      */}
+      <main>
+        <Hero />
+        <PainSection />
+        <MechanismSection />
+        <ProofSection />
+        <PageCta />
+      </main>
     </>
   )
 }

@@ -6,7 +6,7 @@ import { JsonLd, breadcrumbSchema, pageMetadata } from '@/lib/schema'
 import { SITE_URL, EMAIL } from '@/lib/site'
 import { CalEmbed } from './CalEmbed'
 
-const TITLE = 'Book a 15-Minute Call with Soban Ahmad'
+const TITLE = 'Book a 15-Minute Fit Call'
 const DESCRIPTION =
   'Book a 15-minute fit call with Soban Ahmad (KodoAI) to find where automation can remove a manual bottleneck in your agency. No slides, no pitch, no obligation.'
 

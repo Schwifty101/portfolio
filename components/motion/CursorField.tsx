@@ -43,7 +43,11 @@ export function CursorField({ className }: { className?: string }) {
     const pointer = { x: -9999, y: -9999 }
     let cols = 0
     let rows = 0
-    let running = true
+    // The loop runs only while BOTH conditions hold; each source toggles its
+    // own flag and sync() derives the single running state from their AND.
+    let visible = !document.hidden
+    let onscreen = true
+    let running = false
     let raf = 0
 
     const resize = () => {
@@ -94,14 +98,16 @@ export function CursorField({ className }: { className?: string }) {
       raf = requestAnimationFrame(loop)
     }
 
-    const start = () => {
-      if (running) return
-      running = true
-      loop()
-    }
-    const stop = () => {
-      running = false
-      cancelAnimationFrame(raf)
+    // Single source of truth: run iff visible AND on-screen.
+    const sync = () => {
+      const shouldRun = visible && onscreen
+      if (shouldRun && !running) {
+        running = true
+        loop()
+      } else if (!shouldRun && running) {
+        running = false
+        cancelAnimationFrame(raf)
+      }
     }
 
     const onMove = (e: PointerEvent) => {
@@ -113,23 +119,31 @@ export function CursorField({ className }: { className?: string }) {
       pointer.x = -9999
       pointer.y = -9999
     }
-    const onVisibility = () => (document.hidden ? stop() : start())
+    const onVisibility = () => {
+      visible = !document.hidden
+      sync()
+    }
 
     resize()
-    loop()
     window.addEventListener("resize", resize)
     window.addEventListener("pointermove", onMove)
     window.addEventListener("pointerout", onLeave)
     document.addEventListener("visibilitychange", onVisibility)
 
     const io = new IntersectionObserver(
-      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      ([entry]) => {
+        onscreen = entry.isIntersecting
+        sync()
+      },
       { threshold: 0 }
     )
     io.observe(canvas)
 
+    sync()
+
     return () => {
-      stop()
+      running = false
+      cancelAnimationFrame(raf)
       window.removeEventListener("resize", resize)
       window.removeEventListener("pointermove", onMove)
       window.removeEventListener("pointerout", onLeave)

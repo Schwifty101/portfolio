@@ -15,7 +15,7 @@ import {
 } from '@/lib/schema'
 import { SITE_URL } from '@/lib/site'
 
-const TITLE = 'AR&CO Law: the client platform that replaced inbox ops'
+const TITLE = 'AR&CO Law: platform that replaced inbox ops'
 const DESCRIPTION =
   'How I designed, built and deployed a three-portal client platform for AR&CO Law Associates, a referral build that streamlined operations and case management.'
 

@@ -22,6 +22,14 @@ export function generateStaticParams() {
 /** Only prerendered slugs resolve; unknown /blog/<slug> requests 404 at the routing layer. */
 export const dynamicParams = false
 
+/** Short, human-readable eyebrow label for each pillar id. */
+const PILLAR_LABEL: Record<Pillar, string> = {
+  'manual-work': 'Manual work',
+  preparation: 'Preparation',
+  'agency-economics': 'Agency economics',
+  'med-spa': 'Med spas',
+}
+
 /** Closing next-step link and intro, chosen by the post's pillar. */
 const PILLAR_CTA: Record<Pillar, { href: string; label: string; intro: string }> = {
   'manual-work': {
@@ -115,7 +123,7 @@ export default async function BlogPostPage({
         <section className="border-b border-border">
           <Container className="py-20 md:py-28">
             <div className="max-w-3xl">
-              <SectionLabel>{meta.pillar.toUpperCase()}</SectionLabel>
+              <SectionLabel>{PILLAR_LABEL[meta.pillar]}</SectionLabel>
               <KineticHeadline
                 as="h1"
                 className="mt-6 font-display text-4xl font-semibold uppercase leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-6xl"
