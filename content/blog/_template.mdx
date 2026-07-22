@@ -1,0 +1,116 @@
+---
+# ---------------------------------------------------------------------------
+# Article frontmatter. Every field below is required (it maps to PostMeta in
+# lib/blog.ts). Copy this file, rename it to your slug (e.g. cpa-drift.mdx),
+# and fill every field. Files starting with an underscore are ignored, so this
+# template never appears in the index or as a route.
+# ---------------------------------------------------------------------------
+
+# The article title. This becomes the H1 and the <title>. Make it a real
+# question a buyer would type. Keep it to 46 characters or fewer so that, with
+# the " | Soban Ahmad" suffix, the rendered <title> stays within 60 characters.
+title: 'How much manual work hides in agency ad ops?'
+
+# Meta description. Measured length 140 to 160 characters. Earns the click and
+# doubles as the schema description. Answer-shaped, British English.
+description: 'A direct look at the manual work buried in agency ad operations, how much margin it quietly costs, and where an automation system pays for itself.'
+
+# One of: manual-work | preparation | agency-economics | med-spa
+# This decides which lane the post is grouped under on /blog and which offer
+# page the closing next-step link points to.
+pillar: 'manual-work'
+
+# ISO dates (YYYY-MM-DD). datePublished is fixed on release. Bump dateModified
+# whenever you make a real content change, and keep it in sync with the sitemap.
+datePublished: '2026-07-22'
+dateModified: '2026-07-22'
+
+# Three to five one-line, self-contained facts. These render as the bordered
+# "key takeaways" block near the top and are the units AI answers lift verbatim.
+# Each should stand alone without the surrounding article. Carry a number where
+# you can. No absolute claims, no em dashes.
+takeaways:
+  - 'Around 87% of agencies still pace ad budgets by hand, which is where most of the hidden manual work lives.'
+  - 'The cost never hits an invoice, so it stays invisible until a strategist is hired to absorb it.'
+  - 'A monitoring system pays for itself the first time it catches CPA drift before the client does.'
+---
+
+{/*
+  ARTICLE SHAPE (from the master brief, section 8). Follow it in order. Delete
+  every instruction comment like this one before publishing. British English,
+  no em dashes, no absolute claims, P&L framing, name the outcome before the
+  technology.
+*/}
+
+{/*
+  1. DIRECT ANSWER. The very first paragraph must be a self-contained answer of
+  40 to 60 words, quotable with no surrounding context. Lead with the
+  conclusion, then support it. Do NOT open with a preamble. The H1 (the title
+  above) is the question; this paragraph is the answer.
+*/}
+
+Most agencies underestimate their manual ad operations by half. Budget pacing, cross-platform QA and CPA checks are still done by hand at roughly 87% of agencies, and because the cost never appears on an invoice it stays invisible until a strategist is hired to absorb it. That hidden work is where margin quietly leaks.
+
+{/*
+  2. QUESTION H2s. One idea each, answer-first. Most sections should carry a
+  statistic or a named source (ppc.land, Fluency, SparkToro, Focus Digital, or
+  your own build data). End each section with one bolded takeaway sentence.
+*/}
+
+## Where does the manual work actually hide?
+
+{/* INSTRUCTION: open with the answer, then include one cited statistic. */}
+It hides in the work nobody schedules: the daily budget check, the pacing spreadsheet, the manual note that a campaign drifted. According to ppc.land, about 87% of agencies pace budgets by hand, and 71% of ad-ops teams say that manual work puts campaigns at risk.
+
+**The work that never gets scheduled is the work that never gets measured, and it is the first place margin leaks.**
+
+## What does it cost when you add it up?
+
+{/* INSTRUCTION: convert the hours into P&L language, never "time saved". */}
+Framed as capacity rather than hours, a senior strategist can lose the better part of a week each month to tasks a system could hold. That is billable capacity spent on maintenance instead of on winning the next account.
+
+**Every hour of manual pacing is an hour of senior capacity you are paying for twice.**
+
+{/*
+  3. FIRST-HAND EXPERIENCE PASSAGE (the E-E-A-T lever). One honest passage about
+  what you actually saw building or deploying the relevant system. This is the
+  experience lookalike content cannot fake. Keep it specific and plain.
+*/}
+
+## What I saw when I built the ad-ops agent
+
+When I built and deployed the ad-ops agent, the first thing that surfaced was not a technical limit, it was how much judgement lived in one operator's head. The system had to be taught the checks a good strategist ran without thinking. Once it held them, the team could carry more accounts without another salary.
+
+{/*
+  4. CONTEXTUAL PROOF LINE. One line linking to the matched build or case study.
+  Ad-ops article cites the ad-ops build, discovery article cites the pre-call
+  agent, ops article cites AR&CO.
+*/}
+
+You can read the full mechanism in the [ad operations agent case study](/work/ad-ops-agent).
+
+{/*
+  5. FAQ SECTION. Three to six real buyer questions, each as an H3 with a short
+  answer beneath. On the live template this is written inline as headings and
+  paragraphs; when a post carries an FAQ you may also render a FaqBlock in the
+  page for FAQPage schema. Keep questions to how buyers actually phrase them.
+*/}
+
+## Common questions
+
+### Is manual ad ops really that expensive?
+
+The expense is hidden because it never lands on an invoice, but it shows up as the extra strategist you hire to keep pace. That is the cost.
+
+### Does automation replace the strategist?
+
+No. It removes the maintenance so the strategist spends their hours on the judgement calls that actually move accounts.
+
+{/*
+  6. CLOSING CTA NOTE. End with one next step down to the relevant offer page,
+  framed as a next step, not a hard sell. The page template already renders a
+  pillar-matched next-step link and the standard call CTA below the body, so a
+  single closing line here is enough. Match the tone to the pillar.
+*/}
+
+If the manual work above sounds like your week, the ad operations build shows exactly where a system takes it off your team's hands.
