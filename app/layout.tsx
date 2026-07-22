@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: 'Soban Ahmad',
     images: [
       {
-        url: '/og-image-1.png',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: DEFAULT_TITLE,
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
-    images: ['/og-image-1.png'],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
