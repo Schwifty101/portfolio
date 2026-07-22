@@ -19,23 +19,34 @@ export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }))
 }
 
-/** Closing next-step link, chosen by the post's pillar. */
-const PILLAR_CTA: Record<Pillar, { href: string; label: string }> = {
+/** Only prerendered slugs resolve; unknown /blog/<slug> requests 404 at the routing layer. */
+export const dynamicParams = false
+
+/** Closing next-step link and intro, chosen by the post's pillar. */
+const PILLAR_CTA: Record<Pillar, { href: string; label: string; intro: string }> = {
   'manual-work': {
     href: '/agencies/ad-operations-automation',
     label: 'See the ad operations automation build',
+    intro:
+      'If this is the kind of manual work eating your margin, the matching build shows the mechanism in full.',
   },
   preparation: {
     href: '/agencies/pre-sales-research-automation',
     label: 'See the pre-sales research automation build',
+    intro:
+      'If pre-sales prep is quietly draining hours your P&L never bills for, the matching build shows the mechanism in full.',
   },
   'agency-economics': {
     href: '/agencies',
     label: 'See how the agency systems fit together',
+    intro:
+      'If your margins are thinner than the work deserves, the matching build shows how the economics tighten up.',
   },
   'med-spa': {
     href: '/med-spas/ai-receptionist',
     label: 'See the AI receptionist build',
+    intro:
+      'If missed calls are leaking bookings straight off your P&L, the matching build shows the mechanism in full.',
   },
 }
 
@@ -174,8 +185,7 @@ export default async function BlogPostPage({
             <div className="max-w-3xl">
               <SectionLabel>NEXT STEP</SectionLabel>
               <p className="mt-4 max-w-2xl font-sans text-[18px] leading-relaxed text-ink-2">
-                If this is the kind of manual work eating your margin, the matching build shows the
-                mechanism in full.
+                {cta.intro}
               </p>
               <div className="mt-6">
                 <Btn href={cta.href} variant="default">

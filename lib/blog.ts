@@ -60,6 +60,11 @@ export function getAllPosts(): PostMeta[] {
  * not resolve to an article file. Underscore-prefixed files never resolve.
  */
 export function getPost(slug: string): { meta: PostMeta; content: string } | null {
+  // Reject path-traversal and any slug outside the safe charset before touching fs.
+  if (slug.includes('/') || slug.includes('\\') || slug.includes('.') || !/^[a-z0-9-]+$/i.test(slug)) {
+    return null
+  }
+
   const filename = `${slug}.mdx`
   if (!isArticleFile(filename)) return null
 
