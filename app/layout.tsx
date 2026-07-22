@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Barlow_Condensed, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { JsonLd } from '@/components/JsonLd'
 
-const inter = Inter({ subsets: ['latin'] })
+const display = Barlow_Condensed({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'], variable: '--display' })
+const sans = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--sans' })
+const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['300', '400', '500', '600'], variable: '--mono' })
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -75,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <head>
         <meta name="google-site-verification" content="3vRG8sFEkda-o8fvds2MUaj9wvTXlLrrW_8mz6vuAyM" />
         <link rel="icon" href="/favicon.JPG" type="image/jpeg" />
@@ -88,7 +90,7 @@ export default function RootLayout({
           }
         `}</style>
       </head>
-      <body className={`${inter.className} antialiased`} suppressHydrationWarning>
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <JsonLd />
         <noscript>
           <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: 'system-ui, sans-serif' }}>
