@@ -45,7 +45,7 @@ export function PinnedSequence({ steps, className }: PinnedSequenceProps) {
       // Stack every step in the same box; only the first is visible to start.
       gsap.set(inner, { position: "relative", minHeight: "100vh" })
       gsap.set(stepEls, { position: "absolute", inset: 0 })
-      gsap.set(stepEls.slice(1), { opacity: 0, yPercent: 8 })
+      gsap.set(stepEls.slice(1), { opacity: 0, yPercent: 6 })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -53,14 +53,26 @@ export function PinnedSequence({ steps, className }: PinnedSequenceProps) {
           start: "top top",
           end: () => "+=" + window.innerHeight * stepEls.length,
           pin: inner,
-          scrub: 0.5,
+          anticipatePin: 1,
+          scrub: 0.6,
         },
       })
 
+      // Dwell on the first step so it settles before any transition.
+      tl.to({}, { duration: 1 })
+
+      // Sequential out -> in: the previous step is fully gone before the next
+      // appears (no "<" overlap), then hold so each step gets a stable,
+      // fully-opaque dwell for most of the scroll distance.
       stepEls.forEach((el, i) => {
         if (i === 0) return
-        tl.to(stepEls[i - 1], { opacity: 0, yPercent: -8, duration: 0.5, ease: "power2.out" })
-        tl.to(el, { opacity: 1, yPercent: 0, duration: 0.5, ease: "power2.out" }, "<")
+        tl.to(stepEls[i - 1], { opacity: 0, yPercent: -6, duration: 0.35, ease: "power2.in" })
+        tl.fromTo(
+          el,
+          { opacity: 0, yPercent: 6 },
+          { opacity: 1, yPercent: 0, duration: 0.35, ease: "power2.out" }
+        )
+        tl.to({}, { duration: 1 })
       })
     }, root)
 
