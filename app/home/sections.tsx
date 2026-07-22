@@ -63,10 +63,10 @@ export function Hero() {
               </div>
               <div>
                 <dt className="font-display text-3xl font-semibold text-accent md:text-4xl">
-                  100%
+                  <StatCounter value={0} />
                 </dt>
                 <dd className="mt-2 font-sans text-[15px] leading-relaxed text-ink-3">
-                  every system shipped into production, not left as a prototype
+                  demos or prototypes: every build listed here runs in production
                 </dd>
               </div>
             </dl>
