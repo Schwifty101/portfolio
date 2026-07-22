@@ -4,7 +4,7 @@ export const dynamic = "force-static"
 
 const body = `# Soban Ahmad (KodoAI)
 
-Soban Ahmad is an engineer who designs, builds and deploys AI automation systems, operating under the name KodoAI from Rawalpindi, Pakistan. He works with US paid-ads agencies and inbound-heavy local businesses such as med spas, building the systems that remove the manual operations eating into margin and response time, so a business can grow without adding headcount. The guiding idea is simple: if it is manual and measurable, it can be automated. Every system is designed around a real bottleneck, built to fit the existing workflow, and deployed into production rather than left as a prototype.
+Soban Ahmad is an engineer who designs, builds and deploys AI automation systems, operating under the name KodoAI. He works with paid-ads agencies and inbound-heavy local businesses such as med spas, building the systems that remove the manual operations eating into margin and response time, so a business can grow without adding headcount. The guiding idea is simple: if it is manual and measurable, it can be automated. Every system is designed around a real bottleneck, built to fit the existing workflow, and deployed into production rather than left as a prototype.
 
 ## Key pages
 

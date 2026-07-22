@@ -17,7 +17,7 @@ import { SITE_URL } from '@/lib/site'
 
 const TITLE = 'About Soban Ahmad: The AI Automation Engineer Behind KodoAI'
 const DESCRIPTION =
-  'Soban Ahmad is the AI automation engineer behind KodoAI, building systems from Rawalpindi that remove the manual ops eating margin for US paid-ads agencies.'
+  'Soban Ahmad is the AI automation engineer behind KodoAI, designing, building and deploying systems that remove manual ops eating margin for paid-ads agencies.'
 
 export const metadata: Metadata = {
   ...pageMetadata({ title: TITLE, description: DESCRIPTION, path: '/about' }),
@@ -74,8 +74,8 @@ export default function AboutPage() {
               <p className="mt-8 max-w-2xl font-sans text-[18px] leading-relaxed text-ink-2 md:text-[20px]">
                 I am Soban Ahmad, the engineer behind KodoAI. I design, build and deploy the AI
                 automation systems that take repetitive ops off an agency&apos;s P&amp;L, so paid-ads
-                teams add clients without adding salaries. I work from Rawalpindi, Pakistan, building
-                for agencies an ocean away.
+                teams add clients without adding salaries. Every system is built to fit an existing
+                workflow and deployed into production, not left as a prototype.
               </p>
             </div>
           </Container>
@@ -173,7 +173,7 @@ export default function AboutPage() {
               <div className="border border-border">
                 <Image
                   src="/myPhoto-optimized.jpg"
-                  alt="Soban Ahmad, AI automation engineer and founder of KodoAI, based in Rawalpindi, Pakistan"
+                  alt="Soban Ahmad, AI automation engineer and founder of KodoAI"
                   width={800}
                   height={600}
                   sizes="(max-width: 768px) 100vw, 300px"
@@ -183,9 +183,9 @@ export default function AboutPage() {
 
               <div className="space-y-6">
                 <p className="font-sans text-[17px] leading-relaxed text-ink-2 md:text-[19px]">
-                  I am a NUCES alumnus based in Rawalpindi, Pakistan, and I build for agencies in the
-                  United States, an ocean and several time zones away. The distance is the point: the
-                  work travels because the systems do, running in production long after a call ends.
+                  I am an engineer who designs, builds and deploys the systems, not just specs them.
+                  The work travels because the systems do, running in production long after a call
+                  ends.
                 </p>
                 <p className="font-sans text-[17px] leading-relaxed text-ink-2 md:text-[19px]">
                   My first paid client, in January 2026, was a law practice platform for AR&amp;CO,

@@ -62,11 +62,11 @@ export function Hero() {
                 </dd>
               </div>
               <div>
-                <dt className="font-display text-3xl font-semibold uppercase text-ink md:text-4xl">
-                  Rawalpindi
+                <dt className="font-display text-3xl font-semibold text-accent md:text-4xl">
+                  100%
                 </dt>
                 <dd className="mt-2 font-sans text-[15px] leading-relaxed text-ink-3">
-                  building for US agencies an ocean away
+                  every system shipped into production, not left as a prototype
                 </dd>
               </div>
             </dl>

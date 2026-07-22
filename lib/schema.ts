@@ -40,10 +40,6 @@ export function personSchema(): object {
       '@id': ORG_ID,
       name: ORG_NAME,
     },
-    alumniOf: {
-      '@type': 'CollegeOrUniversity',
-      name: 'NUCES',
-    },
     knowsAbout: [
       'AI automation for marketing agencies',
       'Ad operations automation',
@@ -105,10 +101,6 @@ export function serviceSchema(opts: {
       '@id': ORG_ID,
       name: ORG_NAME,
       url: SITE_URL,
-    },
-    areaServed: {
-      '@type': 'Country',
-      name: 'United States',
     },
   }
 }
