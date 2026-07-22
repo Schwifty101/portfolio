@@ -1,47 +1,41 @@
-"use client"
+import type { Metadata } from 'next'
+import { SmoothScroll } from '@/components/motion'
+import { PageCta } from '@/components/site/PageCta'
+import { JsonLd, serviceSchema, pageMetadata } from '@/lib/schema'
+import { SITE_URL } from '@/lib/site'
+import { Hero, PainSection, MechanismSection, ProofSection } from './home/sections'
 
-import { useState, useEffect } from 'react'
-import { LoadingScreen } from './pages/loading-screen'
-import { Navigation } from './pages/navigation'
-import { Hero } from './pages/hero'
-import { About } from './pages/about'
-import { Work } from './pages/work'
-import { Process } from './pages/process'
-import { Services } from './pages/services'
-import { Resources } from './pages/resources'
-import { Contact } from './pages/contact'
-import { Footer } from './pages/Footer'
-import { SmoothScrollProvider } from '@/components/SmoothScrollProvider'
+const TITLE = 'AI Automation Systems for Paid-Ads Agencies | Soban Ahmad'
+const DESCRIPTION =
+  'Soban Ahmad builds the AI automation systems that remove the manual ops eating agency margin, so paid-ads teams grow without hiring more strategists.'
 
-export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
+export const metadata: Metadata = {
+  ...pageMetadata({ title: TITLE, description: DESCRIPTION, path: '/' }),
+  // Home sets a full, self-contained title; override the layout's "%s | Soban
+  // Ahmad" template so the name is not appended twice.
+  title: { absolute: TITLE },
+}
 
-  const handleLoadingComplete = () => {
-    setIsLoading(false)
-  }
-
-  // Ensure page starts at top on mount/refresh
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
+export default function HomePage() {
   return (
     <>
-      {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
-
-      <Navigation />
-      <SmoothScrollProvider isReady={!isLoading}>
-        <main className="w-full">
+      <JsonLd
+        data={serviceSchema({
+          name: 'AI Automation Systems for Paid-Ads Agencies',
+          description: DESCRIPTION,
+          url: SITE_URL,
+          serviceType: 'AI automation systems for marketing agencies',
+        })}
+      />
+      <SmoothScroll>
+        <main>
           <Hero />
-          <About />
-          <Work />
-          <Process />
-          <Services />
-          <Resources />
-          <Contact />
+          <PainSection />
+          <MechanismSection />
+          <ProofSection />
+          <PageCta />
         </main>
-        <Footer />
-      </SmoothScrollProvider>
+      </SmoothScroll>
     </>
   )
 }
