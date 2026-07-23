@@ -1,0 +1,64 @@
+---
+title: 'Does faster prep win more discovery calls?'
+description: 'Why the agency that prepares fastest for a discovery call, not deepest, wins more of them, and how a research agent makes that speed repeatable.'
+pillar: 'preparation'
+datePublished: '2026-07-23'
+dateModified: '2026-07-23'
+takeaways:
+  - 'The agency that prepares fastest for a discovery call usually wins it, not the one that prepares the most.'
+  - 'Roughly 39.75 hours per strategist per month go to manual research and admin that a system could hold instead.'
+  - 'Under a full calendar, prep is the first thing that gets skipped, and it gets skipped for the prospects who matter most.'
+  - 'A grounded brief before every call means the same depth of prep on every prospect, not just the ones a rep had time for.'
+---
+
+Speed of preparation beats depth of preparation on a discovery call. A rep with a grounded brief pulled together in minutes outperforms one who spent an hour on a single prospect, because the calendar rarely allows that depth more than a handful of times a week. The agency that prepares fast wins more calls than the one that prepares deeply.
+
+## Why does prep speed matter more than prep depth?
+
+Discovery calls are lost at the prep stage more often than at the pitch stage. A rep with twenty minutes between calls cannot do an hour of research, so the depth a founder imagines rarely happens in practice. What actually happens is that the prospects who land on a quiet afternoon get real preparation, and the rest get a name and a guess. Speed is what makes consistent depth possible across every prospect, not a shortcut around it.
+
+**Prep depth that only happens sometimes is not a process, it is luck with a calendar.**
+
+## How much manual work sits inside pre-call research?
+
+Framed in capacity rather than hours, roughly 39.75 hours a strategist's month goes into work a system can hold, according to SparkToro-cited research, and most of it is repeatable: pulling the website, the LinkedIn profile, the ad activity, the tech stack. None of that is judgement, it is retrieval, and retrieval is exactly where the hours go.
+
+**Prep that used to eat a rep's morning is retrieval work, not judgement work, and retrieval is what a system can hold.**
+
+## What actually needs to happen before a call?
+
+A useful brief answers three things before the call starts: what the prospect's business actually does, what they are likely to push back on, and where the pricing conversation will probably go. None of that requires the rep in the room, it requires the data gathered and structured before they sit down, so the call itself can spend its minutes on the two things a rep is actually paid for, listening and judgement.
+
+**A brief that names what it could not find is more useful than one that guesses to fill the gap.**
+
+## What happens to the prospects who do not get proper prep?
+
+Under a full calendar, prep does not disappear evenly, it disappears selectively. The prospects a rep already recognises, or the ones who happen to book on a quiet afternoon, get the research. The rest get whatever a rep can recall from the CRM notes on the way into the call. That is not a talent gap, it is a calendar problem wearing a preparation costume, and it means the accounts that would have benefited most from a sharp opening line are often the ones that get the thinnest one.
+
+**The prospects who need the best prep are usually the ones a busy calendar gives the least of it to.**
+
+## What I saw building the pre-call brief agent
+
+When I designed and deployed the pre-call brief agent, the hardest part was never the writing, it was the scraping. Sources rate-limit you, a page changes its markup overnight, and the instinct is to make the pipeline try harder until it retrieves everything. That instinct is wrong. What matters to a rep is a brief that ships on time and is honest about what it does not know, not one that stalls chasing a source that will not answer, or worse, papers over the gap with a plausible sentence. Once the system was built to degrade honestly, prep stopped being the thing a rep only managed when the calendar allowed it.
+
+You can read the full build in the [pre-call brief agent case study](/work/pre-call-brief).
+
+## Common questions
+
+### Does faster prep mean shallower prep?
+
+No, it means the same depth applied consistently. A system pulling from several sources in parallel can gather in minutes what would take a rep the better part of an hour, without cutting any of the sources a thorough rep would check.
+
+### What should a pre-call brief actually contain?
+
+Talking points, pricing anchors and red flags, grounded in data the system actually retrieved from the prospect's site, LinkedIn and ad activity, not assumptions filled in to sound complete.
+
+### Can this replace a rep's judgement on the call?
+
+No. It removes the retrieval work that sits before the call so the rep's attention goes to reading the room and adapting the pitch, which is the part a system cannot do for them.
+
+### How is this different from a rep just using search or an AI chatbot before the call?
+
+A one-off search still depends on the rep having the spare minutes to run it, and it stops at whatever the rep thinks to ask. A system built for this runs the same set of sources on every prospect automatically, so the depth does not depend on how the rep's morning went.
+
+If pre-sales prep is quietly getting skipped under a full calendar, the pre-sales research build shows how to make it consistent instead of occasional.
