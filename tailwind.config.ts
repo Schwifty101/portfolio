@@ -5,7 +5,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        border: "hsl(var(--border))",
+        /* KodoAI Editorial Brutalism tokens (design-system.md Appendix B) */
+        bg: "var(--bg)",
+        surface: "var(--surface)",
+        "surface-2": "var(--surface-2)",
+        "surface-3": "var(--surface-3)",
+        border: "var(--border)",
+        "border-2": "var(--border-2)",
+        ink: "var(--ink)",
+        "ink-2": "var(--ink-2)",
+        "ink-3": "var(--ink-3)",
+        muted: "var(--muted)",
+        accent: "var(--accent)",
+        "accent-dim": "var(--accent-dim)",
+        green: "var(--green)",
+        "green-bg": "var(--green-bg)",
+        amber: "var(--amber)",
+        "amber-bg": "var(--amber-bg)",
+        red: "var(--red)",
+        "red-bg": "var(--red-bg)",
+        blue: "var(--blue)",
+        "blue-bg": "var(--blue-bg)",
+
+        /* shadcn/ui support keys (retained so components/ui/* keep compiling) */
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -18,14 +40,8 @@ const config: Config = {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
+        "muted-foreground": "hsl(var(--muted-foreground))",
+        "accent-foreground": "hsl(var(--accent-foreground))",
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -71,7 +87,9 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['var(--display)', 'Impact', 'sans-serif'],
+        sans: ['var(--sans)', '-apple-system', 'system-ui', 'sans-serif'],
+        mono: ['var(--mono)', 'ui-monospace', 'Menlo', 'monospace'],
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite',

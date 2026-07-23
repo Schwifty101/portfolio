@@ -1,2 +1,8 @@
 node_modules
 .next
+.superpowers/
+tsconfig.tsbuildinfo
+.playwright-mcp/
+.env
+.env*.local
+.vercel
