@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { Btn } from '@/components/ui-kodo/Btn'
 
@@ -87,54 +88,56 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
         </span>
       </button>
 
-      {open && (
-        <div
-          ref={overlayRef}
-          id="mobile-menu"
-          className="fixed inset-0 z-[60] flex flex-col bg-bg"
-        >
-          <div className="flex h-16 items-center justify-between border-b border-border px-4">
-            <span className="font-display text-xl font-semibold uppercase tracking-tight text-ink">
-              SOBAN AHMAD
-            </span>
-            <button
-              type="button"
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-              className="flex h-11 w-11 items-center justify-center border border-border text-ink transition-colors hover:border-accent"
-            >
-              <span className="relative block h-4 w-5" aria-hidden="true">
-                <span className="absolute left-0 top-1/2 block h-[2px] w-5 -translate-y-1/2 rotate-45 bg-current" />
-                <span className="absolute left-0 top-1/2 block h-[2px] w-5 -translate-y-1/2 -rotate-45 bg-current" />
+      {open &&
+        createPortal(
+          <div
+            ref={overlayRef}
+            id="mobile-menu"
+            className="fixed inset-0 z-[60] flex h-[100dvh] flex-col bg-bg"
+          >
+            <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-4">
+              <span className="font-display text-xl font-semibold uppercase tracking-tight text-ink">
+                SOBAN AHMAD
               </span>
-            </button>
-          </div>
-
-          <nav className="flex flex-1 flex-col gap-2 overflow-y-auto px-4 py-8">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
+              <button
+                type="button"
+                aria-label="Close menu"
                 onClick={() => setOpen(false)}
-                className="border-b border-border py-4 font-display text-3xl font-semibold uppercase tracking-tight text-ink transition-colors hover:text-accent"
+                className="flex h-11 w-11 items-center justify-center border border-border text-ink transition-colors hover:border-accent"
               >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+                <span className="relative block h-4 w-5" aria-hidden="true">
+                  <span className="absolute left-0 top-1/2 block h-[2px] w-5 -translate-y-1/2 rotate-45 bg-current" />
+                  <span className="absolute left-0 top-1/2 block h-[2px] w-5 -translate-y-1/2 -rotate-45 bg-current" />
+                </span>
+              </button>
+            </div>
 
-          <div className="border-t border-border px-4 py-6">
-            <Btn
-              href="/contact"
-              variant="primary"
-              className="w-full"
-              onClick={() => setOpen(false)}
-            >
-              Book a 15-minute call
-            </Btn>
-          </div>
-        </div>
-      )}
+            <nav className="flex flex-1 flex-col gap-2 overflow-y-auto px-4 py-8">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border py-4 font-display text-3xl font-semibold uppercase tracking-tight text-ink transition-colors hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="shrink-0 border-t border-border px-4 py-6">
+              <Btn
+                href="/contact"
+                variant="primary"
+                className="w-full"
+                onClick={() => setOpen(false)}
+              >
+                Book a 15-minute call
+              </Btn>
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   )
 }
