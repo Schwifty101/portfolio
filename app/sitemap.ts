@@ -23,6 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/resources/pre-call-research-checklist", priority: 0.7, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.6, changeFrequency: "monthly" },
     { path: "/blog", priority: 0.6, changeFrequency: "weekly" },
+    { path: "/blog/10-signals-your-ad-account-is-losing-money", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/blog/manual-ad-ops-margin-cost", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/blog/faster-prep-wins-discovery-calls", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/blog/does-hiring-shrink-agency-margin", priority: 0.6, changeFrequency: "monthly" },
   ]
 
   return routes.map((route) => ({

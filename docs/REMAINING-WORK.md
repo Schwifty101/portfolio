@@ -24,8 +24,8 @@ Updated 2026-07-23. Branch `redesign/kodoai` (22 commits) is build-green, review
 
 ## Content engine (brief phase two)
 
-- [ ] **Blog articles.** Structure/pipeline is live with zero posts. Brief cadence: one cornerstone or cluster article every 1–2 weeks. Start with the three pillar pages (manual-work, preparation, agency-economics) built from the validated stats (87% pacing, 71% risk, 39.75 hrs, 49% churn). Template at `content/blog/_template.mdx`.
-- [ ] **Ungated leak-audit article.** Brief section 9: publish the 10 signals as a crawlable article (citation asset) while the PDF stays gated.
+- [x] **Blog articles: three pillar cornerstones published.** `manual-ad-ops-margin-cost.mdx`, `faster-prep-wins-discovery-calls.mdx`, `does-hiring-shrink-agency-margin.mdx` (manual-work, preparation, agency-economics), built from the validated stats plus one new, independently-verified stat (Basis 2026 Advertising Agency Report, 87.3% believe the time-and-headcount model is broken or will be within 3-5 years). All three added to `app/sitemap.ts`. Next cornerstone/cluster article is the med-spa lane, still open, plus the brief's 1-2 week cadence going forward.
+- [x] **Ungated leak-audit article published.** `content/blog/10-signals-your-ad-account-is-losing-money.mdx`, brief section 9's crawlable citation asset, all 10 signals expanded with real explanatory paragraphs (not the resource page's one-liners), cross-linked to `/resources/ad-account-leak-audit` for the PDF and `/work/ad-ops-agent` as proof. Added to the sitemap.
 - [ ] **Quarterly refresh loop:** revisit cornerstone pages, keep `dateModified`/sitemap `lastmod` honest (currently lastmod = build date).
 
 ## Deferred / when it happens
