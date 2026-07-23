@@ -21,6 +21,7 @@ export const metadata: Metadata = pageMetadata({
 })
 
 const PATH = `${SITE_URL}/resources/pre-call-research-checklist`
+const DOWNLOAD_PATH = '/downloads/484272/pre-call-research-checklist.pdf'
 
 const SIGNALS = [
   {
@@ -193,7 +194,7 @@ export default function PreCallResearchChecklistPage() {
                   run before your next discovery call.
                 </p>
                 <div className="mt-6">
-                  <LeadForm resource="pre-call-research-checklist" />
+                  <LeadForm resource="pre-call-research-checklist" downloadPath={DOWNLOAD_PATH} />
                 </div>
               </div>
             </div>

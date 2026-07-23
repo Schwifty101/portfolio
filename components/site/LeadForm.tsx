@@ -19,6 +19,11 @@ const CTA_LABELS: Record<Resource, string> = {
   'pre-call-research-checklist': 'Get the Pre-Call Research Checklist',
 }
 
+const DOWNLOAD_LABELS: Record<Resource, string> = {
+  'ad-account-leak-audit': 'Download the Ad-Account Leak Audit',
+  'pre-call-research-checklist': 'Download the Pre-Call Research Checklist',
+}
+
 const inputClasses =
   'w-full bg-surface-2 border border-border px-4 py-3 font-sans text-[15px] text-ink placeholder:text-ink-3 transition-colors focus:outline-none focus:border-accent'
 
@@ -79,7 +84,7 @@ export function LeadForm({ resource, downloadPath }: LeadFormProps) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center border border-accent bg-accent px-5 py-3 font-mono text-[14px] font-semibold uppercase tracking-[0.15em] text-bg transition-all duration-200 hover:border-accent-dim hover:bg-accent-dim"
               >
-                Download the Ad-Account Leak Audit
+                {DOWNLOAD_LABELS[resource]}
               </a>
             </div>
           </div>
