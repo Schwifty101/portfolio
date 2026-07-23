@@ -10,9 +10,8 @@ Updated 2026-07-23. Branch `redesign/kodoai` (22 commits) is build-green, review
 
 - [ ] **Merge decision.** `redesign/kodoai` → `main` (local merge or PR), then deploy to Vercel and smoke-test the live site (redirects, fonts, Cal embed, PDF download).
 - [x] **Lead delivery rebuilt: direct Notion + Resend, no external webhook.** `app/api/lead/route.ts` no longer fires `LEAD_WEBHOOK_URL` (removed). It now logs every lead straight into the "Website Leads" Notion database and emails the requested resource via Resend, both fail-open. What's left is account setup, not code:
-  - [ ] Create a Notion internal integration at notion.so/my-integrations, share the "Website Leads" database with it, set `NOTION_API_KEY` in Vercel.
-  - [ ] Create a Resend account, verify a sending domain, set `RESEND_API_KEY` and `RESEND_FROM_EMAIL` in Vercel.
-  - [ ] Until those are set, leads still land safely (server-side `console.log`), they just aren't logged or emailed.
+  - [x] Notion internal integration ("website") created, shared with the "Website Leads" database, `NOTION_API_KEY` set in Vercel (Production/Preview/Development).
+  - [x] Resend account created, `RESEND_API_KEY` and `RESEND_FROM_EMAIL` (`soban@sobanahmad.dev`) set in Vercel. Awaiting a local end-to-end test (Notion row + email delivery) before trusting it in prod.
 - [x] **Pre-Call Research Checklist asset built.** PDF added at `public/downloads/484272/pre-call-research-checklist.pdf` (from the outreach asset library) and wired into the resource page as an instant download, same pattern as the leak audit, plus the Resend email above.
 
 ## Post-launch, near-term
