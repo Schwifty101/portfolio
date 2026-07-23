@@ -172,7 +172,7 @@ export default function AboutPage() {
             <Reveal className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-[300px_1fr] md:gap-14">
               <div className="border border-border">
                 <Image
-                  src="/myPhoto-optimized.jpg"
+                  src="/myPhoto2.jpeg"
                   alt="Soban Ahmad, AI automation engineer and founder of KodoAI"
                   width={800}
                   height={600}
