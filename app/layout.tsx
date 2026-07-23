@@ -4,6 +4,7 @@ import './globals.css'
 import { JsonLd, websiteSchema, organizationSchema } from '@/lib/schema'
 import { SiteHeader } from '@/components/site/SiteHeader'
 import { SiteFooter } from '@/components/site/SiteFooter'
+import { SmoothScroll } from '@/components/motion'
 import { SITE_URL } from '@/lib/site'
 
 const display = Barlow_Condensed({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'], variable: '--display' })
@@ -99,8 +100,10 @@ export default function RootLayout({
       <body className="font-sans antialiased" suppressHydrationWarning>
         <JsonLd data={[websiteSchema(), organizationSchema()]} />
         <SiteHeader />
-        {children}
-        <SiteFooter />
+        <SmoothScroll>
+          {children}
+          <SiteFooter />
+        </SmoothScroll>
       </body>
     </html>
   )
