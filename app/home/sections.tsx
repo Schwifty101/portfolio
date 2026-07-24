@@ -55,10 +55,10 @@ export function Hero() {
               </div>
               <div>
                 <dt className="font-display text-3xl font-semibold text-accent md:text-4xl">
-                  ~7,000 USD
+                  ~200,000 USD
                 </dt>
                 <dd className="mt-2 font-sans text-[15px] leading-relaxed text-ink-3">
-                  first paid build, a client platform won by referral
+                  Work generated for clients.
                 </dd>
               </div>
               <div>
