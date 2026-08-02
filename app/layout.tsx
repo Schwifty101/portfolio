@@ -1,15 +1,10 @@
 import type { Metadata, Viewport } from 'next'
-import { Barlow_Condensed, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { JsonLd, websiteSchema, organizationSchema } from '@/lib/schema'
 import { SiteHeader } from '@/components/site/SiteHeader'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { SmoothScroll } from '@/components/motion'
 import { SITE_URL } from '@/lib/site'
-
-const display = Barlow_Condensed({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'], variable: '--display' })
-const sans = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--sans' })
-const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['300', '400', '500', '600'], variable: '--mono' })
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -84,7 +79,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+    <html lang="en">
       <head>
         <meta name="google-site-verification" content="3vRG8sFEkda-o8fvds2MUaj9wvTXlLrrW_8mz6vuAyM" />
         <link rel="icon" href="/favicon.JPG" type="image/jpeg" />

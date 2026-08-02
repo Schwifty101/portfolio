@@ -4,10 +4,14 @@
 
 /* ==========================================================================
    KodoAI Editorial Brutalism token set (design-system.md Appendix B).
-   Font variables --display / --sans / --mono are provided by next/font
-   (see app/layout.tsx) and intentionally not redeclared here.
+   Local-safe font fallbacks so the site builds without depending on remote
+   Google Font fetches during CI or local builds.
    ========================================================================== */
 :root {
+  --display: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --sans: 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+
   /* Neutrals */
   --bg: #0c0c0b;
   --surface: #141412;
